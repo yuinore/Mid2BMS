@@ -2,9 +2,10 @@ Mid2BMS
 =======
 This is a tool to convert .mid to .bms.
 
-これは.midファイルを.bmsに変換するソフトです。
-いろいろと作成途中ですがとりあえず公開します。
+これは.midファイルを.bmsに変換するソフトです。  
+いろいろと作成途中ですがとりあえず公開します。  
 実行ファイルは **/Mid2BMS/Mid2BMS/bin/Release/Mid2BMS.exe** に置いてあります。  
+画面右のDownload ZIPからファイルをダウンロードするか、git cloneしてください。  
 使い方の詳細は、**/Mid2BMS/flowchart_bluemode_2.png** を参照してください。  
 **/Mid2BMS/Mid2BMS/_Docs** フォルダにpdfがいくつか置いてありますがかなり古いので当てにしないでください。  
 
