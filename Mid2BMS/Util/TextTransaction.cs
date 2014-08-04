@@ -8,7 +8,7 @@ namespace Mid2BMS
     static class TextTransaction
     {
         /// <summary>
-        /// 改行と空白とタブ文字だけの要素は空とみなされます。<br></br>
+        /// 改行だけの要素は空とみなされます。空白とタブ文字は空とは見なされません。<br></br>
         /// 使用例： SplitString("ABC\r\nDEF\r\n//\r\nGHI\r\n//\r\n\r\n//\r\n//\r\nJ\tK\tL\r\n\t\r\nMNO\r\n//\r\n", "\r\n", "\r\n//\r\n", StringSplitOptions.RemoveEmptyEntries)<br></br>
         /// 結果： {"ABC", "DEF"}, {"GHI"}, {"//", "J\tK\tL", "MNO"}
         /// </summary>
@@ -21,7 +21,7 @@ namespace Mid2BMS
                 {
                     for (int i = 0; i < r3.Count; i++)
                     {
-                        if (r3[i].Replace("\n", "").Replace("\r", "").Replace(" ", "").Replace("\t", "") == "")
+                        if (r3[i].Replace("\n", "").Replace("\r", "") /*.Replace(" ", "").Replace("\t", "")*/ == "")
                         {
                             r3.RemoveAt(i);
                             i--;
@@ -36,7 +36,7 @@ namespace Mid2BMS
                     {
                         for (int j = 0; j < s2i.Count; j++)  // 不要な要素の削除
                         {
-                            if (s2i[j].Replace("\n", "").Replace("\r", "").Replace(" ", "").Replace("\t", "") == "")
+                            if (s2i[j].Replace("\n", "").Replace("\r", "") /*.Replace(" ", "").Replace("\t", "")*/ == "")
                             {
                                 s2i.RemoveAt(j);
                                 j--;

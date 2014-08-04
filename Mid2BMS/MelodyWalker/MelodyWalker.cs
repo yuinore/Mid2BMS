@@ -59,6 +59,15 @@ namespace Mid2BMS
             text[5] += "#TITLE " + MidiTrackNames[0] + "\r\n";  // BMS header
             text[5] += "#BPM " + ((bpm == (Int64)bpm) ? ((Int64)bpm).ToString() : bpm.ToString()) + "\r\n";  // そこまでして小数bpmに対応したかったのか？
             text[5] += "#PLAYER 3\r\n\r\n";
+
+            if (bpm >= 300 || bpm < 50)
+            {
+                MessageBox.Show(
+                    "BPMが" + (bpm >= 300 ? "高い" : "低い") + "midiファイルを読み込んだようです。(BPM = " + bpm + ")\n" +
+                    "もし、次の段階で正常に音切りが出来なかった場合は、\n" +
+                    "[1]Mid2MMLタブにある、MarginTimeの項を、「 BPM / 10 」程度の値にしてみてください。",
+                    "Notice : BPM is very high");
+            }
             
             MidiStruct tanon_ms = new MidiStruct(3840);  // 15360は大きすぎるかな、と思いこの値に
             Frac midiTime = new Frac(4);
