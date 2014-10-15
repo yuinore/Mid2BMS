@@ -139,6 +139,13 @@
             this.textBox_BasePath4 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.button32 = new System.Windows.Forms.Button();
+            this.label48 = new System.Windows.Forms.Label();
+            this.textBox_velQuantInt = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBox_LimitLenBeats = new System.Windows.Forms.TextBox();
+            this.button31 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.textBox_newTimeBase = new System.Windows.Forms.TextBox();
@@ -191,6 +198,10 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
+            this.tabPage14 = new System.Windows.Forms.TabPage();
+            this.textBox_orderTextOut = new System.Windows.Forms.TextBox();
+            this.button29 = new System.Windows.Forms.Button();
+            this.listBox3 = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -216,6 +227,7 @@
             this.tabPage10.SuspendLayout();
             this.tabPage11.SuspendLayout();
             this.tabPage13.SuspendLayout();
+            this.tabPage14.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -233,6 +245,7 @@
             this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.Controls.Add(this.tabPage13);
+            this.tabControl1.Controls.Add(this.tabPage14);
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
@@ -518,6 +531,7 @@
             resources.ApplyResources(this.radioButton_purple, "radioButton_purple");
             this.radioButton_purple.Name = "radioButton_purple";
             this.radioButton_purple.TabStop = true;
+            this.toolTip1.SetToolTip(this.radioButton_purple, resources.GetString("radioButton_purple.ToolTip"));
             this.radioButton_purple.UseVisualStyleBackColor = true;
             // 
             // radioButton_red
@@ -525,6 +539,7 @@
             resources.ApplyResources(this.radioButton_red, "radioButton_red");
             this.radioButton_red.Name = "radioButton_red";
             this.radioButton_red.TabStop = true;
+            this.toolTip1.SetToolTip(this.radioButton_red, resources.GetString("radioButton_red.ToolTip"));
             this.radioButton_red.UseVisualStyleBackColor = true;
             // 
             // radioButton_blue
@@ -533,6 +548,7 @@
             this.radioButton_blue.Checked = true;
             this.radioButton_blue.Name = "radioButton_blue";
             this.radioButton_blue.TabStop = true;
+            this.toolTip1.SetToolTip(this.radioButton_blue, resources.GetString("radioButton_blue.ToolTip"));
             this.radioButton_blue.UseVisualStyleBackColor = true;
             // 
             // textBox_vacantWavidUpdated
@@ -545,6 +561,7 @@
             // 
             resources.ApplyResources(this.button11, "button11");
             this.button11.Name = "button11";
+            this.toolTip1.SetToolTip(this.button11, resources.GetString("button11.ToolTip"));
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -562,6 +579,7 @@
             // 
             resources.ApplyResources(this.textBox_vacantWavid, "textBox_vacantWavid");
             this.textBox_vacantWavid.Name = "textBox_vacantWavid";
+            this.toolTip1.SetToolTip(this.textBox_vacantWavid, resources.GetString("textBox_vacantWavid.ToolTip"));
             // 
             // label6
             // 
@@ -573,6 +591,7 @@
             this.textBox_MidiFileName.AllowDrop = true;
             resources.ApplyResources(this.textBox_MidiFileName, "textBox_MidiFileName");
             this.textBox_MidiFileName.Name = "textBox_MidiFileName";
+            this.toolTip1.SetToolTip(this.textBox_MidiFileName, resources.GetString("textBox_MidiFileName.ToolTip"));
             this.textBox_MidiFileName.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox_MidiFileName_DragDrop);
             this.textBox_MidiFileName.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox_MidiFileName_DragEnter);
             // 
@@ -591,6 +610,7 @@
             this.textBox_BasePath.AllowDrop = true;
             resources.ApplyResources(this.textBox_BasePath, "textBox_BasePath");
             this.textBox_BasePath.Name = "textBox_BasePath";
+            this.toolTip1.SetToolTip(this.textBox_BasePath, resources.GetString("textBox_BasePath.ToolTip"));
             this.textBox_BasePath.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox_BasePath_DragDrop);
             this.textBox_BasePath.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox_BasePath_DragEnter);
             // 
@@ -982,6 +1002,13 @@
             // 
             // tabPage8
             // 
+            this.tabPage8.Controls.Add(this.button32);
+            this.tabPage8.Controls.Add(this.label48);
+            this.tabPage8.Controls.Add(this.textBox_velQuantInt);
+            this.tabPage8.Controls.Add(this.label18);
+            this.tabPage8.Controls.Add(this.textBox_LimitLenBeats);
+            this.tabPage8.Controls.Add(this.button31);
+            this.tabPage8.Controls.Add(this.button30);
             this.tabPage8.Controls.Add(this.button28);
             this.tabPage8.Controls.Add(this.button14);
             this.tabPage8.Controls.Add(this.textBox_newTimeBase);
@@ -995,6 +1022,47 @@
             resources.ApplyResources(this.tabPage8, "tabPage8");
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // button32
+            // 
+            resources.ApplyResources(this.button32, "button32");
+            this.button32.Name = "button32";
+            this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
+            // 
+            // label48
+            // 
+            resources.ApplyResources(this.label48, "label48");
+            this.label48.Name = "label48";
+            // 
+            // textBox_velQuantInt
+            // 
+            resources.ApplyResources(this.textBox_velQuantInt, "textBox_velQuantInt");
+            this.textBox_velQuantInt.Name = "textBox_velQuantInt";
+            // 
+            // label18
+            // 
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.Name = "label18";
+            // 
+            // textBox_LimitLenBeats
+            // 
+            resources.ApplyResources(this.textBox_LimitLenBeats, "textBox_LimitLenBeats");
+            this.textBox_LimitLenBeats.Name = "textBox_LimitLenBeats";
+            // 
+            // button31
+            // 
+            resources.ApplyResources(this.button31, "button31");
+            this.button31.Name = "button31";
+            this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
+            // button30
+            // 
+            resources.ApplyResources(this.button30, "button30");
+            this.button30.Name = "button30";
+            this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
             // button28
             // 
@@ -1369,6 +1437,36 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
+            // tabPage14
+            // 
+            this.tabPage14.Controls.Add(this.textBox_orderTextOut);
+            this.tabPage14.Controls.Add(this.button29);
+            this.tabPage14.Controls.Add(this.listBox3);
+            resources.ApplyResources(this.tabPage14, "tabPage14");
+            this.tabPage14.Name = "tabPage14";
+            this.tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // textBox_orderTextOut
+            // 
+            resources.ApplyResources(this.textBox_orderTextOut, "textBox_orderTextOut");
+            this.textBox_orderTextOut.Name = "textBox_orderTextOut";
+            // 
+            // button29
+            // 
+            resources.ApplyResources(this.button29, "button29");
+            this.button29.Name = "button29";
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
+            // listBox3
+            // 
+            this.listBox3.AllowDrop = true;
+            this.listBox3.FormattingEnabled = true;
+            resources.ApplyResources(this.listBox3, "listBox3");
+            this.listBox3.Name = "listBox3";
+            this.listBox3.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox3_DragDrop);
+            this.listBox3.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox3_DragEnter);
+            // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
@@ -1453,6 +1551,8 @@
             this.tabPage11.PerformLayout();
             this.tabPage13.ResumeLayout(false);
             this.tabPage13.PerformLayout();
+            this.tabPage14.ResumeLayout(false);
+            this.tabPage14.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1628,6 +1728,17 @@
         private System.Windows.Forms.Panel panel_advancedsettings2;
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.TabPage tabPage14;
+        private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.TextBox textBox_orderTextOut;
+        private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.TextBox textBox_LimitLenBeats;
+        private System.Windows.Forms.Button button31;
+        private System.Windows.Forms.Button button32;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.TextBox textBox_velQuantInt;
+        private System.Windows.Forms.Label label18;
     }
 }
 

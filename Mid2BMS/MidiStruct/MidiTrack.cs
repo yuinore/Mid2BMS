@@ -508,6 +508,8 @@ namespace Mid2BMS
             int pedalOnTime = 0;
             // 15360 (/1拍) って、180BPMで約776小節か。999小節行かないという・・・
 
+            // ノートオンとノートオフを別個に処理したほうが簡単だったと思うんですが・・・
+
             for (int i = 0; i < this.Count; i++)
             {
                 if (this[i] is MidiEventNote)
@@ -523,7 +525,8 @@ namespace Mid2BMS
                         {
                             if (pedalOnTime <= me2.tick + me2.q)
                             {
-                                me2.q = me.tick - me2.tick;  // + offset
+                                //me2.q = me.tick - me2.tick;  // + offset
+                                me2.q = me.tick - me2.tick - 1;  // 1 is offset
                             }
                         }
                     }

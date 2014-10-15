@@ -10,13 +10,35 @@ namespace Mid2BMS
         public ArrTuple(T1 v1, T2 v2) { Item1 = v1; Item2 = v2; }  //8段
         public T1 Item1;
         public T2 Item2;
-        public object this[int index] {
+        public object this[int index]
+        {
             get
             {
                 switch (index)
                 {
                     case 0: return Item1;
                     case 1: return Item2;
+                }
+                return null;  // こんなところで例外投げてもアレ
+            }
+        }
+    }
+
+    public class ArrTuple<T1, T2, T3>
+    {
+        public ArrTuple(T1 v1, T2 v2, T3 v3) { Item1 = v1; Item2 = v2; Item3 = v3; }
+        public T1 Item1;
+        public T2 Item2;
+        public T3 Item3;
+        public object this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0: return Item1;
+                    case 1: return Item2;
+                    case 2: return Item3;
                 }
                 return null;  // こんなところで例外投げてもアレ
             }
@@ -38,10 +60,11 @@ namespace Mid2BMS
         {
             return new ArrTuple<T1, T2>(v1, v2);
         }
-        /*public static Tuple<T1, T2, T3> ay<T1, T2, T3>(T1 v1, T2 v2, T3 v3)
+        public static ArrTuple<T1, T2, T3> ay<T1, T2, T3>(T1 v1, T2 v2, T3 v3)
         {
-            return new Tuple<T1, T2, T3>(v1, v2, v3);
+            return new ArrTuple<T1, T2, T3>(v1, v2, v3);
         }
+        /*
         public static Tuple<T1, T2, T3, T4> ay<T1, T2, T3, T4>(T1 v1, T2 v2, T3 v3, T4 v4)
         {
             return new Tuple<T1, T2, T3, T4>(v1, v2, v3, v4);

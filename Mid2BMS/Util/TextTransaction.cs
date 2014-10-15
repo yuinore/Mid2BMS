@@ -8,7 +8,7 @@ namespace Mid2BMS
     static class TextTransaction
     {
         /// <summary>
-        /// 改行だけの要素は空とみなされます。空白とタブ文字は空とは見なされません。<br></br>
+        /// 改行だけの要素は空とみなされますが、空白とタブ文字は空とは見なされません。2014/08/05に変更。<br></br>
         /// 使用例： SplitString("ABC\r\nDEF\r\n//\r\nGHI\r\n//\r\n\r\n//\r\n//\r\nJ\tK\tL\r\n\t\r\nMNO\r\n//\r\n", "\r\n", "\r\n//\r\n", StringSplitOptions.RemoveEmptyEntries)<br></br>
         /// 結果： {"ABC", "DEF"}, {"GHI"}, {"//", "J\tK\tL", "MNO"}
         /// </summary>

@@ -40,7 +40,7 @@ namespace Mid2BMS
                 //}
                 //else
                 //{
-                return "v" + velo + "l" + Ln2 + (Ln1 == 1 ? "" : ("_" + Ln1)) + "" + "o" + (nt / 12) + getNoteHeight(nt);
+                return "v" + velo + "l" + Ln2 + (Ln1 == 1 ? "" : ("-" + Ln1)) + "" + "o" + (nt / 12) + getNoteHeight(nt);
                 //}
             }
             if (namingway == 1)
@@ -60,7 +60,7 @@ namespace Mid2BMS
                 //}
                 //else
                 //{
-                return "v" + velo + "l" + Ln2 + (Ln1 == 1 ? "" : ("_" + Ln1)) + "" + "o" + (nt / 12) + getNoteHeight(nt) + "_" + "o" + (prevNoteN / 12) + getNoteHeight(prevNoteN);
+                return "v" + velo + "l" + Ln2 + (Ln1 == 1 ? "" : ("-" + Ln1)) + "" + "o" + (nt / 12) + getNoteHeight(nt) + "-" + "o" + (prevNoteN / 12) + getNoteHeight(prevNoteN);
                 //}
             }
             if (namingway == 1)
@@ -80,7 +80,7 @@ namespace Mid2BMS
                 //}
                 //else
                 //{
-                    return String.Format("{0:D5}_", number + 1) + "v" + velo + "l" + Ln2 + (Ln1 == 1 ? "" : ("_" + Ln1)) + "" + "o" + (nt / 12) + getNoteHeight(nt);
+                return String.Format("{0:D5}_", number + 1) + "v" + velo + "l" + Ln2 + (Ln1 == 1 ? "" : ("-" + Ln1)) + "" + "o" + (nt / 12) + getNoteHeight(nt);
                 //}
             }
             if (namingway == 1)
@@ -102,7 +102,7 @@ namespace Mid2BMS
             }
             return s2;
         }
-        
+
         /// <summary>
         /// ChordModeがtrueの場合に使用します。
         /// wavファイルに名前を付けます
@@ -134,10 +134,10 @@ namespace Mid2BMS
             wavnms = new List<string>();
 
             // input file name prefix
-            s2.Append("" + ib + "\r\n");
+            s2.Append("" + (ib != "" ? ib : "(No line can be empty, because such lines will be ignored. This is not an error message.)") + "\r\n");
 
             // input file name suffix
-            s2.Append("" + ia + "\r\n");
+            s2.Append("" + (ia != "" ? ia : "(No line can be empty, because such lines will be ignored. This is not an error message.)") + "\r\n");
 
             s2.Append("1" + "\r\n");  // original index
 
@@ -175,7 +175,7 @@ namespace Mid2BMS
         /// <param name="ntantm">MidiInterpreter3.GetNta()</param>
         /// <returns></returns>
         public String AllNoteToName(
-            int namingway , String ib, String ia, String ob, String oa, String bb, String ba,
+            int namingway, String ib, String ia, String ob, String oa, String bb, String ba,
             out String OutputInArrayFormat, bool isRedMode, bool isPurpleMode, List<MNote> ntantm)
         {
             IsRedMode = isRedMode;
@@ -189,10 +189,10 @@ namespace Mid2BMS
             wavnms = new List<string>();
 
             // input file name prefix
-            s2.Append("" + ib + "\r\n");
+            s2.Append("" + (ib != "" ? ib : "(No line can be empty, because such lines will be ignored. This is not an error message.)") + "\r\n");
 
             // input file name suffix
-            s2.Append("" + ia + "\r\n");
+            s2.Append("" + (ia != "" ? ia : "(No line can be empty, because such lines will be ignored. This is not an error message.)") + "\r\n");
 
             s2.Append("1" + "\r\n");  // original index
 
@@ -237,7 +237,14 @@ namespace Mid2BMS
 
             s2.Append("//\r\n");
 
-            OutputInArrayFormat = s2.ToString();
+            if (ntantm.Count == 0)
+            {
+                OutputInArrayFormat = "";
+            }
+            else
+            {
+                OutputInArrayFormat = s2.ToString();
+            }
             return "";
         }
     }

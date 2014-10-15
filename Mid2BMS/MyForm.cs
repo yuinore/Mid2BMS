@@ -405,9 +405,13 @@ namespace Mid2BMS
                 else
                 {
                     WaveSplitter_Text = WaveRenamer_Text.Select(x => new[] { x[0] + x[1] }).ToArray();
-                } 
-                
-                RenameRequiredFilesCount = WaveRenamer_Text.Select(x => x.Length - 3).Sum();
+                }
+
+                RenameRequiredFilesCount = WaveRenamer_Text.Select(
+                    x => x.Skip(3).Count(
+                        y => !(y.Length >= 10 && y.Substring(0, 10) == "____dummy_")  // ダミーファイルはカウントに含めない
+                    )
+                ).Sum();
             }
             else
             {

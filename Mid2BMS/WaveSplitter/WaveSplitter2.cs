@@ -161,6 +161,7 @@ namespace Mid2BMS
                                             RenamedWaveFilePath + filename,
                                             new float[][] { buffer[0].ToArray(), buffer[1].ToArray() },
                                             reader.ChannelsCount, reader.SamplingRate, reader.BitDepth);
+                                        // モノラルの書き出しにも対応しているというクソ仕様
                                         createdWavCount++;
                                     }
                                     renameNames_index2++;

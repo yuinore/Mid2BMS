@@ -942,14 +942,14 @@ namespace Mid2BMS
             c.Export(neu.IFileStream("gazou.bmp", FileMode.Create, FileAccess.Write));
             d.Export(neu.IFileStream("gazou2.bmp", FileMode.Create, FileAccess.Write));
 
-            if (false)
+            if (true)
             {
-                FIRFilter sL = new FIRFilter(neu.IFileStream(@"C:\asdfruhito\impulse_response_hipass_x2.wav", FileMode.Open, FileAccess.Read));
-                FIRFilter sR = new FIRFilter(neu.IFileStream(@"C:\asdfruhito\impulse_response_hipass_x2.wav", FileMode.Open, FileAccess.Read));
+                //FIRFilter sL = new FIRFilter(neu.IFileStream(@"D:\asdfruhito\impulse_response_hipass_x2.wav", FileMode.Open, FileAccess.Read));
+                //FIRFilter sR = new FIRFilter(neu.IFileStream(@"D:\asdfruhito\impulse_response_hipass_x2.wav", FileMode.Open, FileAccess.Read));
                 //SimpleFilter sL = new SimpleFilter(0.01);
                 //SimpleFilter sR = new SimpleFilter(0.01);
-                //var sL = new ButterworthFilter(FilterType.LowPass, 9, Math.PI * 0.25);
-                //var sR = new ButterworthFilter(FilterType.LowPass, 9, Math.PI * 0.25);
+                var sL = new ButterworthFilter(FilterType.LowPass, 9, Math.PI * 0.125);
+                var sR = new ButterworthFilter(FilterType.LowPass, 9, Math.PI * 0.125);
                 //var sL = new IIRFilter(new double[] { 1, -1 }, new double[] { 0.1, 0 });//積分
                 //var sR = new IIRFilter(new double[] { 1, -1 }, new double[] { 0.1, 0 });
                 /*var sL = new IIRFilter(
@@ -970,8 +970,9 @@ namespace Mid2BMS
                         0.0046408102012674,
                         0.0092816204025348,
                         0.0046408102012674 });*/
-                WaveFileReader wr = new WaveFileReader(neu.IFileStream(@"C:\asdfruhito\gjbuop.wav", FileMode.Open, FileAccess.Read));
-                WaveFileWriter ww = new WaveFileWriter(neu.IFileStream(@"C:\asdfruhito\wavout.wav", FileMode.Create, FileAccess.Write));
+                WaveFileReader wr = new WaveFileReader(neu.IFileStream(@"D:\asdfruhito\gjbuop2.wav", FileMode.Open, FileAccess.Read));
+                WaveFileWriter ww = new WaveFileWriter(neu.IFileStream(@"D:\asdfruhito\wavout.wav", FileMode.Create, FileAccess.Write), 
+                    wr.ChannelsCount, wr.SamplingRate, wr.BitDepth);
 
                 float indtL, indtR;
                 int n = 0;
@@ -992,14 +993,14 @@ namespace Mid2BMS
             }
 
 
-            if (true)
+            if (false)
             {
 
                 // 適応的ダウンサンプリング
                 MessageBox.Show("ファイルを上書き保存します。bmsフォルダのバックアップを取ってください。OKを押すと続行します。");
 
                 // ファイルを上書き保存します。ちょっと良くないですね。
-                string[] files = Directory.GetFiles(@"C:\asdfruhito\test", "*.wav", SearchOption.TopDirectoryOnly);
+                string[] files = Directory.GetFiles(@"D:\asdfruhito\test", "*.wav", SearchOption.TopDirectoryOnly);
                 foreach (string s in files)
                 {
                     AdaptiveDownsampler.DownSample(s, s, -42);
@@ -1951,5 +1952,305 @@ namespace Mid2BMS
                 MessageBox.Show(exc.ToString());
             }
         }
+
+
+        private void listBox3_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+        }
+        private void listBox3_DragDrop(object sender, DragEventArgs e)
+        {
+            var flist = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                listBox3.Items.AddRange(flist);
+            }
+
+            if (flist.Length >= 1)
+            {
+                textBox_orderTextOut.Text =
+                    Path.Combine(
+                        Path.GetDirectoryName(flist[0]),
+                        "__ordering_result.txt");
+            }
+        }
+
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            var order = new Order();
+
+            var result = new List<ArrTuple<string,double>>();
+            var textoutpath = textBox_orderTextOut.Text;
+
+            List<String> filelist = new List<String>();
+
+            var theListBox = listBox3;
+
+            foreach (String s2 in theListBox.Items)
+            {
+                if (Directory.Exists(s2))
+                {
+                    string[] files = Directory.GetFiles(s2, "*.wav", SearchOption.TopDirectoryOnly);
+                    filelist.AddRange(files);
+                }
+                else
+                {
+                    if (Path.GetExtension(s2) == ".wav")
+                    {
+                        filelist.Add(s2);
+                    }
+                }
+            }
+
+            InitializeProgressBar();
+
+            Thread anotherThread = new Thread(new ThreadStart(() =>
+            {
+                var finishedCount = new List<int>();
+                finishedCount.Add(0);
+
+                int threadN = 4;  // 設定可能項目
+                // コア数と同じくらいが良いと思います
+                // スレッド数を増やしたいなら.Net Framework 4.0のTaskを使おう
+
+                if (threadN >= 2)
+                {
+                    Random rnd = new System.Random();
+                    filelist = filelist.OrderBy(_ => rnd.Next()).ToList();
+                }
+
+                Action<int> ithProc = (i) =>
+                {
+                    String s = filelist[i];
+                    lock (result) { result.Add(Arr.ay(s, order.Evaluate(s))); }
+                    ProgressBarValue += 1.0 / (double)filelist.Count;  // アトミックじゃないからもしかしたら死ぬかも
+                };
+                Action finished = () =>
+                {
+                    lock (finishedCount)
+                    {
+                        if (++finishedCount[0] == threadN)
+                        {
+                            ProgressBarValue = 1;
+                            ProgressBarFinished = true;
+
+                            // 終了処理
+                            var ord =
+                                result.OrderBy(x => x.Item2).Select(x => Arr.ay(x.Item1, x.Item2, 0.0)).ToArray();
+                            for (int i = 1; i < ord.Length; i++)
+                            {
+                                ord[i] = Arr.ay(
+                                    ord[i].Item1,
+                                    ord[i].Item2,
+                                    Math.Min(ord[i].Item2, ord[i - 1].Item2) / Math.Max(ord[i].Item2, ord[i - 1].Item2)
+                                    );
+                            }
+                            String resulttext =
+                                ord
+                                .Select(x => x.Item2.ToString("F17") + " \t" + x.Item3.ToString("F17") + " \t" + Path.GetFileName(x.Item1))
+                                .Join("\n");
+                            File.WriteAllText(textoutpath, resulttext);
+
+                            String resultcsv =
+                                ord
+                                .Select(x => x.Item2.ToString("F17") + "," + x.Item3.ToString("F17") + "," + Path.GetFileName(x.Item1))
+                                .Join("\n");
+                            File.WriteAllText(Path.ChangeExtension(textoutpath, "csv"), resultcsv);
+
+                            System.Diagnostics.Process p =
+                                System.Diagnostics.Process.Start(textoutpath);
+                        }
+                    }
+                };
+
+                for (int j = 0; j < threadN; j++)
+                {
+                    int j2 = j;  // これでいけますかね
+                    Thread multiThread = new Thread(new ThreadStart(() =>
+                    {
+                        for (int i = (filelist.Count * j2 / threadN); i < (filelist.Count * (j2 + 1) / threadN); i++)
+                        {
+                            ithProc(i);
+                        }
+                        finished();
+                    }));
+                    multiThread.Start();
+                }
+            }));
+
+            anotherThread.Start();
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            using (Stream rf = neu.IFileStream(textBox_MidiInput5.Text, FileMode.Open, FileAccess.Read))
+            {
+
+                ImprovedBinaryReader r = new ImprovedBinaryReader(rf);
+
+                StringSuruyatuSafe s = new StringSuruyatuSafe();
+
+                byte[] data;
+                int dword;
+                long longdata;
+                uint uintdata;
+
+
+                String BR = "\r\n";
+
+                data = r.ReadBytes(4);
+                s += "Chunk Name (must be FLhd) : " + HatoEnc.Encode(data) + BR;
+
+                dword = r.ReadInt32();
+                s += "Header Size (must be 6) : " + dword + BR;
+
+                data = r.ReadBytes(dword);
+                s += "Header Value : " + data.Select(x => x.ToString()).Join(" ") + BR + BR;
+
+                data = r.ReadBytes(4);
+                s += "Chunk Name (must be FLdt) : " + HatoEnc.Encode(data) + BR;
+                try
+                {
+                    while (true)  // 二度手間っぽくてクソ
+                    {
+                        dword = r.ReadByte();
+                        switch (dword & 0xC0)
+                        {
+                            case 0x00:
+                                s += "  ";
+                                s += String.Format("{0:X}", dword);
+                                s += " : ";
+                                uintdata = r.ReadByte();
+                                s += String.Format("{0:X} ({0})", uintdata);
+                                s += BR;
+                                break;
+
+                            case 0x40:
+                                s += "  ";
+                                s += String.Format("{0:X}", dword);
+                                s += " : ";
+                                uintdata = r.ReadUInt16();
+                                s += String.Format("{0:X} ({0})", uintdata);
+                                s += BR;
+                                break;
+
+                            case 0x80:
+                                s += "  ";
+                                s += String.Format("{0:X}", dword);
+                                s += " : ";
+                                uintdata = r.ReadUInt32();
+                                s += String.Format("{0:X} ({0})", uintdata);
+                                s += BR;
+                                break;
+
+                            case 0xC0:
+                                s += "  ";
+                                s += String.Format("{0:X}", dword);
+
+                                longdata = r.ReadDeltaTimeBigEndian();
+                                data = r.ReadBytes((int)longdata);
+                                s += " : " + String.Format("0x{0:X} bytes", longdata) + BR + "    ";
+
+                                s += data.Select(x => String.Format("{0:X}", x)).Join(" ");
+                                s += BR + "    ";
+
+                                //s += Regex.Replace(HatoEnc.Encode(data), @"\p{Cc}", str => string.Format("[{0:X2}]", (byte)str.Value[0]));
+                                s += Regex.Replace(HatoEnc.Encode(data), @"\p{Cc}", str => "?");
+                                // http://nanoappli.com/blog/archives/4841
+                                // [C#]文字列中の制御文字を、[CR][LF]や[0D][0A]のように可視化する / nanoblog
+
+                                s += BR;
+                                break;
+
+                            default:
+                                throw new Exception("あれれ～～～おかしいぞ～～～～");
+                        }
+                    }
+                }
+                catch (EndOfStreamException)
+                {
+                }
+
+                FileIO.WriteAllText(
+                    textBox_TextOut5.Text,
+                    s.ToString());
+            }
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double max_beats = Convert.ToDouble(textBox_LimitLenBeats.Text);
+
+                Stream rf = neu.IFileStream(textBox_MidiInput5.Text, FileMode.Open, FileAccess.Read);
+
+                MidiStruct ms = new MidiStruct(rf, true);
+
+                int max_tick = (int)(max_beats * ms.resolution);
+
+                foreach (MidiTrack mt in ms.tracks)
+                {
+                    foreach (MidiEvent me_ in mt)
+                    {
+                        MidiEventNote me = me_ as MidiEventNote;
+                        if (me != null)
+                        {
+                            me.q = Math.Min(max_tick, me.q);  // 破壊的変更
+                        }
+                    }
+                }
+
+                ms.Export(neu.IFileStream(textBox_MidiOut5.Text, FileMode.Create, FileAccess.Write), true);
+
+                rf.Close();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.ToString());
+            }
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int velQuantInt = Convert.ToInt32(textBox_velQuantInt.Text);
+                if (velQuantInt < 1) throw new Exception("Velocity Quantization Interval は 1以上である必要があります");
+
+                Stream rf = neu.IFileStream(textBox_MidiInput5.Text, FileMode.Open, FileAccess.Read);
+
+                MidiStruct ms = new MidiStruct(rf, true);
+                
+                foreach (MidiTrack mt in ms.tracks)
+                {
+                    foreach (MidiEvent me_ in mt)
+                    {
+                        MidiEventNote me = me_ as MidiEventNote;
+                        if (me != null)
+                        {
+                            if (me.v >= 1)
+                            {
+                                me.v = ((int)Math.Round((double)me.v / (double)velQuantInt)) * velQuantInt;
+                                if (me.v < 1) me.v = 1;
+                                else if (me.v > 127) me.v = 127;
+                            }
+                        }
+                    }
+                }
+
+                ms.Export(neu.IFileStream(textBox_MidiOut5.Text, FileMode.Create, FileAccess.Write), true);
+
+                rf.Close();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.ToString());
+            }
+        }
+
+
     }
 }

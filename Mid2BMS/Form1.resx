@@ -688,7 +688,7 @@ and so on!</value>
     <value>True</value>
   </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 6</value>
+    <value>38, 33</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 12</value>
@@ -712,7 +712,7 @@ and so on!</value>
     <value>0</value>
   </data>
   <data name="textBox_margintime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 3</value>
+    <value>108, 30</value>
   </data>
   <data name="textBox_margintime.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 19</value>
@@ -746,7 +746,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>True</value>
   </data>
   <data name="checkBox_seqLayer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 112</value>
+    <value>105, 147</value>
   </data>
   <data name="checkBox_seqLayer.Size" type="System.Drawing.Size, System.Drawing">
     <value>374, 28</value>
@@ -782,7 +782,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>True</value>
   </data>
   <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 6</value>
+    <value>215, 33</value>
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 12</value>
@@ -809,7 +809,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>True</value>
   </data>
   <data name="checkBox_NoPlace11to29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 90</value>
+    <value>105, 125</value>
   </data>
   <data name="checkBox_NoPlace11to29.Size" type="System.Drawing.Size, System.Drawing">
     <value>317, 16</value>
@@ -840,7 +840,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>True</value>
   </data>
   <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>46, 32</value>
+    <value>46, 59</value>
   </data>
   <data name="label28.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 12</value>
@@ -870,7 +870,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>True</value>
   </data>
   <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 32</value>
+    <value>215, 59</value>
   </data>
   <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
     <value>290, 12</value>
@@ -951,7 +951,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>1</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 54</value>
+    <value>105, 89</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 28</value>
@@ -975,7 +975,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>False</value>
   </data>
   <data name="textBox_timebase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 29</value>
+    <value>108, 56</value>
   </data>
   <data name="textBox_timebase.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 19</value>
@@ -1005,7 +1005,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>True</value>
   </data>
   <data name="checkBox_createExtraFiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 153</value>
+    <value>105, 188</value>
   </data>
   <data name="checkBox_createExtraFiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 16</value>
@@ -1032,7 +1032,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>True</value>
   </data>
   <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 58</value>
+    <value>21, 93</value>
   </data>
   <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 24</value>
@@ -1057,10 +1057,10 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>10</value>
   </data>
   <data name="panel_advancedsettings1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 206</value>
+    <value>19, 180</value>
   </data>
   <data name="panel_advancedsettings1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>528, 187</value>
+    <value>538, 213</value>
   </data>
   <data name="panel_advancedsettings1.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -1119,6 +1119,9 @@ DAWによってwavが書き出されるのに時間が掛かります。
   <data name="radioButton_purple.Text" xml:space="preserve">
     <value>purple mode (portament)</value>
   </data>
+  <data name="radioButton_purple.ToolTip" xml:space="preserve">
+    <value>自動ポルタメントを使用するモードです。オートメーションは使用出来ません。</value>
+  </data>
   <data name="&gt;&gt;radioButton_purple.Name" xml:space="preserve">
     <value>radioButton_purple</value>
   </data>
@@ -1145,6 +1148,9 @@ DAWによってwavが書き出されるのに時間が掛かります。
   </data>
   <data name="radioButton_red.Text" xml:space="preserve">
     <value>red mode</value>
+  </data>
+  <data name="radioButton_red.ToolTip" xml:space="preserve">
+    <value>オートメーションを使用するモードです。キー音数が非常に多くなる傾向があります。</value>
   </data>
   <data name="&gt;&gt;radioButton_red.Name" xml:space="preserve">
     <value>radioButton_red</value>
@@ -1173,6 +1179,9 @@ DAWによってwavが書き出されるのに時間が掛かります。
   <data name="radioButton_blue.Text" xml:space="preserve">
     <value>blue mode (default)</value>
   </data>
+  <data name="radioButton_blue.ToolTip" xml:space="preserve">
+    <value>オートメーションを使用しない、基本となるモードです。</value>
+  </data>
   <data name="&gt;&gt;radioButton_blue.Name" xml:space="preserve">
     <value>radioButton_blue</value>
   </data>
@@ -1186,7 +1195,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>2</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>127, 135</value>
+    <value>127, 122</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>537, 23</value>
@@ -1207,7 +1216,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>2</value>
   </data>
   <data name="textBox_vacantWavidUpdated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 185</value>
+    <value>200, 155</value>
   </data>
   <data name="textBox_vacantWavidUpdated.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 19</value>
@@ -1231,7 +1240,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>3</value>
   </data>
   <data name="button11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>160, 183</value>
+    <value>161, 153</value>
   </data>
   <data name="button11.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 23</value>
@@ -1241,6 +1250,9 @@ DAWによってwavが書き出されるのに時間が掛かります。
   </data>
   <data name="button11.Text" xml:space="preserve">
     <value>&lt;=</value>
+  </data>
+  <data name="button11.ToolTip" xml:space="preserve">
+    <value>このボタンを押すと、前回の変換結果における最後のキー音の次の次の次の次の定義番号を挿入します。</value>
   </data>
   <data name="&gt;&gt;button11.Name" xml:space="preserve">
     <value>button11</value>
@@ -1258,7 +1270,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>True</value>
   </data>
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 188</value>
+    <value>240, 158</value>
   </data>
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 12</value>
@@ -1285,7 +1297,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>True</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 188</value>
+    <value>46, 158</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 12</value>
@@ -1309,7 +1321,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>6</value>
   </data>
   <data name="textBox_vacantWavid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 185</value>
+    <value>127, 155</value>
   </data>
   <data name="textBox_vacantWavid.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
@@ -1319,6 +1331,9 @@ DAWによってwavが書き出されるのに時間が掛かります。
   </data>
   <data name="textBox_vacantWavid.Text" xml:space="preserve">
     <value>01</value>
+  </data>
+  <data name="textBox_vacantWavid.ToolTip" xml:space="preserve">
+    <value>配置開始WAV定義番号です。2桁の36進数で指定してください。</value>
   </data>
   <data name="&gt;&gt;textBox_vacantWavid.Name" xml:space="preserve">
     <value>textBox_vacantWavid</value>
@@ -1367,6 +1382,9 @@ DAWによってwavが書き出されるのに時間が掛かります。
   </data>
   <data name="textBox_MidiFileName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="textBox_MidiFileName.ToolTip" xml:space="preserve">
+    <value>ここにmidiファイルをドラッグしてください。</value>
   </data>
   <data name="&gt;&gt;textBox_MidiFileName.Name" xml:space="preserve">
     <value>textBox_MidiFileName</value>
@@ -1442,6 +1460,9 @@ DAWによってwavが書き出されるのに時間が掛かります。
   </data>
   <data name="textBox_BasePath.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="textBox_BasePath.ToolTip" xml:space="preserve">
+    <value>ここにmidiファイルをドラッグしてください。</value>
   </data>
   <data name="&gt;&gt;textBox_BasePath.Name" xml:space="preserve">
     <value>textBox_BasePath</value>
@@ -2992,6 +3013,186 @@ DAWによってwavが書き出されるのに時間が掛かります。
   <data name="&gt;&gt;tabPage7.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="button32.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 274</value>
+  </data>
+  <data name="button32.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="button32.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="button32.Text" xml:space="preserve">
+    <value>Quantize</value>
+  </data>
+  <data name="&gt;&gt;button32.Name" xml:space="preserve">
+    <value>button32</value>
+  </data>
+  <data name="&gt;&gt;button32.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button32.Parent" xml:space="preserve">
+    <value>tabPage8</value>
+  </data>
+  <data name="&gt;&gt;button32.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label48.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label48.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label48.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 307</value>
+  </data>
+  <data name="label48.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 12</value>
+  </data>
+  <data name="label48.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="label48.Text" xml:space="preserve">
+    <value>velocity (1で無効； 注意：1,127 は常に値域に含まれる)</value>
+  </data>
+  <data name="&gt;&gt;label48.Name" xml:space="preserve">
+    <value>label48</value>
+  </data>
+  <data name="&gt;&gt;label48.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label48.Parent" xml:space="preserve">
+    <value>tabPage8</value>
+  </data>
+  <data name="&gt;&gt;label48.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="textBox_velQuantInt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>139, 276</value>
+  </data>
+  <data name="textBox_velQuantInt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 19</value>
+  </data>
+  <data name="textBox_velQuantInt.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="textBox_velQuantInt.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;textBox_velQuantInt.Name" xml:space="preserve">
+    <value>textBox_velQuantInt</value>
+  </data>
+  <data name="&gt;&gt;textBox_velQuantInt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox_velQuantInt.Parent" xml:space="preserve">
+    <value>tabPage8</value>
+  </data>
+  <data name="&gt;&gt;textBox_velQuantInt.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label18.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label18.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 279</value>
+  </data>
+  <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 12</value>
+  </data>
+  <data name="label18.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="label18.Text" xml:space="preserve">
+    <value>Vel. Quantization</value>
+  </data>
+  <data name="&gt;&gt;label18.Name" xml:space="preserve">
+    <value>label18</value>
+  </data>
+  <data name="&gt;&gt;label18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label18.Parent" xml:space="preserve">
+    <value>tabPage8</value>
+  </data>
+  <data name="&gt;&gt;label18.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="textBox_LimitLenBeats.Location" type="System.Drawing.Point, System.Drawing">
+    <value>443, 324</value>
+  </data>
+  <data name="textBox_LimitLenBeats.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 19</value>
+  </data>
+  <data name="textBox_LimitLenBeats.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="textBox_LimitLenBeats.Text" xml:space="preserve">
+    <value>4.0</value>
+  </data>
+  <data name="&gt;&gt;textBox_LimitLenBeats.Name" xml:space="preserve">
+    <value>textBox_LimitLenBeats</value>
+  </data>
+  <data name="&gt;&gt;textBox_LimitLenBeats.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox_LimitLenBeats.Parent" xml:space="preserve">
+    <value>tabPage8</value>
+  </data>
+  <data name="&gt;&gt;textBox_LimitLenBeats.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="button31.Location" type="System.Drawing.Point, System.Drawing">
+    <value>551, 321</value>
+  </data>
+  <data name="button31.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 23</value>
+  </data>
+  <data name="button31.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="button31.Text" xml:space="preserve">
+    <value>Limit Len (=gate)</value>
+  </data>
+  <data name="&gt;&gt;button31.Name" xml:space="preserve">
+    <value>button31</value>
+  </data>
+  <data name="&gt;&gt;button31.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button31.Parent" xml:space="preserve">
+    <value>tabPage8</value>
+  </data>
+  <data name="&gt;&gt;button31.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="button30.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 135</value>
+  </data>
+  <data name="button30.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 23</value>
+  </data>
+  <data name="button30.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="button30.Text" xml:space="preserve">
+    <value>Analyze .flp</value>
+  </data>
+  <data name="&gt;&gt;button30.Name" xml:space="preserve">
+    <value>button30</value>
+  </data>
+  <data name="&gt;&gt;button30.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button30.Parent" xml:space="preserve">
+    <value>tabPage8</value>
+  </data>
+  <data name="&gt;&gt;button30.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="button28.Location" type="System.Drawing.Point, System.Drawing">
     <value>311, 211</value>
   </data>
@@ -3014,7 +3215,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabPage8</value>
   </data>
   <data name="&gt;&gt;button28.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>7</value>
   </data>
   <data name="button14.Location" type="System.Drawing.Point, System.Drawing">
     <value>551, 271</value>
@@ -3038,7 +3239,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabPage8</value>
   </data>
   <data name="&gt;&gt;button14.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>8</value>
   </data>
   <data name="textBox_newTimeBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>444, 276</value>
@@ -3062,7 +3263,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabPage8</value>
   </data>
   <data name="&gt;&gt;textBox_newTimeBase.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>9</value>
   </data>
   <data name="button13.Location" type="System.Drawing.Point, System.Drawing">
     <value>429, 211</value>
@@ -3086,7 +3287,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabPage8</value>
   </data>
   <data name="&gt;&gt;button13.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>10</value>
   </data>
   <data name="button9.Location" type="System.Drawing.Point, System.Drawing">
     <value>555, 211</value>
@@ -3110,7 +3311,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabPage8</value>
   </data>
   <data name="&gt;&gt;button9.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>11</value>
   </data>
   <data name="button8.Location" type="System.Drawing.Point, System.Drawing">
     <value>555, 136</value>
@@ -3134,7 +3335,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabPage8</value>
   </data>
   <data name="&gt;&gt;button8.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>12</value>
   </data>
   <data name="label30.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3161,7 +3362,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabPage8</value>
   </data>
   <data name="&gt;&gt;label30.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>13</value>
   </data>
   <data name="textBox_MidiOut5.Location" type="System.Drawing.Point, System.Drawing">
     <value>124, 185</value>
@@ -3182,7 +3383,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabPage8</value>
   </data>
   <data name="&gt;&gt;textBox_MidiOut5.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>14</value>
   </data>
   <data name="textBox_TextOut5.Location" type="System.Drawing.Point, System.Drawing">
     <value>124, 110</value>
@@ -3203,7 +3404,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabPage8</value>
   </data>
   <data name="&gt;&gt;textBox_TextOut5.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>15</value>
   </data>
   <data name="textBox_MidiInput5.Location" type="System.Drawing.Point, System.Drawing">
     <value>124, 41</value>
@@ -3224,7 +3425,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabPage8</value>
   </data>
   <data name="&gt;&gt;textBox_MidiInput5.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>16</value>
   </data>
   <data name="tabPage8.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 40</value>
@@ -4420,6 +4621,111 @@ DAWによってwavが書き出されるのに時間が掛かります。
   </data>
   <data name="&gt;&gt;tabPage13.ZOrder" xml:space="preserve">
     <value>12</value>
+  </data>
+  <data name="textBox_orderTextOut.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 216</value>
+  </data>
+  <data name="textBox_orderTextOut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 19</value>
+  </data>
+  <data name="textBox_orderTextOut.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBox_orderTextOut.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;textBox_orderTextOut.Name" xml:space="preserve">
+    <value>textBox_orderTextOut</value>
+  </data>
+  <data name="&gt;&gt;textBox_orderTextOut.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox_orderTextOut.Parent" xml:space="preserve">
+    <value>tabPage14</value>
+  </data>
+  <data name="&gt;&gt;textBox_orderTextOut.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="button29.Location" type="System.Drawing.Point, System.Drawing">
+    <value>212, 246</value>
+  </data>
+  <data name="button29.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="button29.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="button29.Text" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="button29.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;button29.Name" xml:space="preserve">
+    <value>button29</value>
+  </data>
+  <data name="&gt;&gt;button29.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button29.Parent" xml:space="preserve">
+    <value>tabPage14</value>
+  </data>
+  <data name="&gt;&gt;button29.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="listBox3.ItemHeight" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="listBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 38</value>
+  </data>
+  <data name="listBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 172</value>
+  </data>
+  <data name="listBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="listBox3.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;listBox3.Name" xml:space="preserve">
+    <value>listBox3</value>
+  </data>
+  <data name="&gt;&gt;listBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listBox3.Parent" xml:space="preserve">
+    <value>tabPage14</value>
+  </data>
+  <data name="&gt;&gt;listBox3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tabPage14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 40</value>
+  </data>
+  <data name="tabPage14.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>737, 422</value>
+  </data>
+  <data name="tabPage14.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="tabPage14.Text" xml:space="preserve">
+    <value>tabPage14</value>
+  </data>
+  <data name="&gt;&gt;tabPage14.Name" xml:space="preserve">
+    <value>tabPage14</value>
+  </data>
+  <data name="&gt;&gt;tabPage14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage14.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage14.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>

@@ -71,7 +71,7 @@ namespace Mid2BMS
             double t = val;
             double y = 0;
 
-            for (int i = an.Length - 2; i >= 0; i++)
+            for (int i = an.Length - 2; i >= 0; i--)
             {
                 xn[i + 1] = xn[i];
             }

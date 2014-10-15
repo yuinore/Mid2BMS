@@ -16,7 +16,7 @@ namespace Mid2BMS
         {
         }
 
-        public int ReadDeltaTime()
+        public int ReadDeltaTime()  // midiの読み込みではこちら。（間違いの可能性あり）
         {
             // Long形だけど大丈夫だよね！むしろjava scriptのfloat（？）のほうが心配だお
             byte ret;
@@ -25,6 +25,21 @@ namespace Mid2BMS
             {
                 ret = base.ReadByte();
                 retS = (retS << 7) + (ret & 0x7F);
+                if ((ret & 0x80) == 0) break;
+            }
+            return retS;
+        }
+        public int ReadDeltaTimeBigEndian() // flpの読み込みではこちら。
+        {
+            // Long形だけど大丈夫だよね！むしろjava scriptのfloat（？）のほうが心配だお
+            byte ret;
+            int retS = 0;
+            int shiftbit = 0;
+            while (true)
+            {
+                ret = base.ReadByte();
+                retS = retS + ((ret & 0x7F) << shiftbit);
+                shiftbit += 7;
                 if ((ret & 0x80) == 0) break;
             }
             return retS;
