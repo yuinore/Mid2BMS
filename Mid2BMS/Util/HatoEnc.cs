@@ -61,6 +61,12 @@ namespace Mid2BMS
 #if SILVERLIGHT
             return Soramimi.Jcode.sjis_to_wstr(buf);
 #else
+            if (buf[buf.Length - 1] == (byte)0)
+            {
+                byte[] buf2 = new byte[buf.Length - 1];
+                Array.Copy(buf, buf2, buf2.Length);
+                buf = buf2;
+            }
             return Encoding.GetString(buf, 0, buf.Length);
 #endif
         }
