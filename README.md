@@ -33,7 +33,7 @@ BMS界隈の発展につながることを祈ってやみません。
 About:  
 Mid2BMS BMS Inproved Development Environment  
 Released on April 1st, 2014  
-License: GNU **Lesser** General Public License
+License: GNU **Lesser** General Public License  
 Copyright (c) 2007-2014 yuinore  
 (修正版を公開する際はソースコードも公開してください。)  
 
