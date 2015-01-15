@@ -52,17 +52,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panel_advancedsettings1 = new System.Windows.Forms.Panel();
+            this.label66 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.textBox_WavidSpacing = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox_margintime = new System.Windows.Forms.TextBox();
             this.checkBox_seqLayer = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
             this.checkBox_NoPlace11to29 = new System.Windows.Forms.CheckBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.textBox_timebase = new System.Windows.Forms.TextBox();
             this.checkBox_createExtraFiles = new System.Windows.Forms.CheckBox();
             this.label31 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
@@ -209,6 +209,7 @@
             this.label32 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label28 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -254,6 +255,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label28);
             this.tabPage1.Controls.Add(this.button27);
             this.tabPage1.Controls.Add(this.button24);
             this.tabPage1.Controls.Add(this.checkBox_advanced);
@@ -420,19 +422,35 @@
             // 
             // panel_advancedsettings1
             // 
+            this.panel_advancedsettings1.Controls.Add(this.label66);
+            this.panel_advancedsettings1.Controls.Add(this.label49);
+            this.panel_advancedsettings1.Controls.Add(this.textBox_WavidSpacing);
             this.panel_advancedsettings1.Controls.Add(this.label19);
             this.panel_advancedsettings1.Controls.Add(this.textBox_margintime);
             this.panel_advancedsettings1.Controls.Add(this.checkBox_seqLayer);
             this.panel_advancedsettings1.Controls.Add(this.label20);
             this.panel_advancedsettings1.Controls.Add(this.checkBox_NoPlace11to29);
-            this.panel_advancedsettings1.Controls.Add(this.label28);
-            this.panel_advancedsettings1.Controls.Add(this.label29);
             this.panel_advancedsettings1.Controls.Add(this.panel1);
-            this.panel_advancedsettings1.Controls.Add(this.textBox_timebase);
             this.panel_advancedsettings1.Controls.Add(this.checkBox_createExtraFiles);
             this.panel_advancedsettings1.Controls.Add(this.label31);
             resources.ApplyResources(this.panel_advancedsettings1, "panel_advancedsettings1");
             this.panel_advancedsettings1.Name = "panel_advancedsettings1";
+            // 
+            // label66
+            // 
+            resources.ApplyResources(this.label66, "label66");
+            this.label66.Name = "label66";
+            // 
+            // label49
+            // 
+            resources.ApplyResources(this.label49, "label49");
+            this.label49.Name = "label49";
+            // 
+            // textBox_WavidSpacing
+            // 
+            resources.ApplyResources(this.textBox_WavidSpacing, "textBox_WavidSpacing");
+            this.textBox_WavidSpacing.Name = "textBox_WavidSpacing";
+            this.toolTip1.SetToolTip(this.textBox_WavidSpacing, resources.GetString("textBox_WavidSpacing.ToolTip"));
             // 
             // label19
             // 
@@ -466,16 +484,6 @@
             this.toolTip1.SetToolTip(this.checkBox_NoPlace11to29, resources.GetString("checkBox_NoPlace11to29.ToolTip"));
             this.checkBox_NoPlace11to29.UseVisualStyleBackColor = true;
             // 
-            // label28
-            // 
-            resources.ApplyResources(this.label28, "label28");
-            this.label28.Name = "label28";
-            // 
-            // label29
-            // 
-            resources.ApplyResources(this.label29, "label29");
-            this.label29.Name = "label29";
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.radioButton2);
@@ -496,11 +504,6 @@
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.TabStop = true;
             this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // textBox_timebase
-            // 
-            resources.ApplyResources(this.textBox_timebase, "textBox_timebase");
-            this.textBox_timebase.Name = "textBox_timebase";
             // 
             // checkBox_createExtraFiles
             // 
@@ -1504,6 +1507,11 @@
             this.toolTip1.InitialDelay = 250;
             this.toolTip1.ReshowDelay = 50;
             // 
+            // label28
+            // 
+            resources.ApplyResources(this.label28, "label28");
+            this.label28.Name = "label28";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -1621,9 +1629,6 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox textBox_BasePath4;
-        private System.Windows.Forms.TextBox textBox_timebase;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TabPage tabPage8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
@@ -1739,6 +1744,10 @@
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.TextBox textBox_velQuantInt;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.TextBox textBox_WavidSpacing;
+        private System.Windows.Forms.Label label28;
     }
 }
 

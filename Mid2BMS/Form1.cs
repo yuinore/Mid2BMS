@@ -153,6 +153,7 @@ namespace Mid2BMS
             bool LookAtInstrumentName = radioButton2.Checked;
             bool createExFiles = checkBox_createExtraFiles.Checked;
             bool sequenceLayer = checkBox_seqLayer.Checked;
+            int WavidSpacing = Convert.ToInt32(textBox_WavidSpacing.Text);
 
             Convert.ToDouble(margintime_beats);  // 例外チェック
 
@@ -186,7 +187,7 @@ namespace Mid2BMS
             Action mid2bms_proc = () =>
                 MyFormInstance.Mid2BMS_Process(
                     isRedMode, isPurpleMode, createExFiles, ref VacantWavid, ref DefVacantBMSChIdx,
-                    LookAtInstrumentName, margintime_beats, out trackCsv, ref MidiTrackNames, out MidiInstrumentNames,
+                    LookAtInstrumentName, margintime_beats, WavidSpacing, out trackCsv, ref MidiTrackNames, out MidiInstrumentNames,
                     isDrumsList, ignoreList, isChordList, sequenceLayer,
                     ref ProgressBarValue, ref ProgressBarFinished);
 

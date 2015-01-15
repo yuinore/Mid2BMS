@@ -124,6 +124,12 @@
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>656, 394</value>
   </data>
+  <data name="button1.Text" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="button2.Text" xml:space="preserve">
+    <value>変更する</value>
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>607, 108</value>
   </data>
@@ -4648,5 +4654,8 @@
         ////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////8=
 </value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>トラック名の確認</value>
   </data>
 </root>

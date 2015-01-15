@@ -130,7 +130,7 @@ namespace Mid2BMS
 
         public void Mid2BMS_Process(
             bool isRedMode, bool isPurpleMode, bool createExFiles, ref int VacantWavid, ref int DefaultVacantBMSChannelIdx,
-            bool LookAtInstrumentName, String margintime_beats,
+            bool LookAtInstrumentName, String margintime_beats, int WavidSpacing,
             out String trackCsv, ref List<String> MidiTrackNames, out List<String> MidiInstrumentNames,
             List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, bool sequenceLayer,
             ref double ProgressBarValue, ref bool ProgressBarFinished)
@@ -279,6 +279,7 @@ namespace Mid2BMS
             //{
             MelodyWalker mw = new MelodyWalker();
             mw.VacantBMSChannelIdx = DefaultVacantBMSChannelIdx;
+            mw.WavidSpacing = WavidSpacing;
             mw.MultiProcess(MMLs, MidiTrackIdentifier, isDrumsList, ignoreList, isChordList, sequenceLayer, PathBase,
                 isRedMode, isPurpleMode, createExFiles, ref VacantWavid, timebase, margintime_beats, out trackCsv, out isEmptyList, midi_bpm,
                 ref ProgressBarValue, 0.10, 1.00);
