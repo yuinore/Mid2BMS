@@ -21,7 +21,12 @@ namespace Mid2BMS
 
             {
                 // 選択されているカルチャ情報を取得する
-                String culturetext = File.ReadAllText("culture.ini");
+                String culturetext = "default";
+                if (File.Exists("culture.ini"))
+                {
+                    culturetext = File.ReadAllText("culture.ini");
+                }
+
                 if (culturetext != "default")
                 {
                     CultureInfo culture = (CultureInfo)CultureInfo.GetCultureInfo(culturetext);

@@ -57,7 +57,7 @@ namespace Mid2BMS
                 if (i == bp.LNOBJ) continue;
                 if ((obj = bp.FindAllWavId(i)) == null) continue;
 
-                if (obj.Count != 1 /*&& System.IO.File.Exists(RenamedBasePath + bp.GetWaveFileName(i))*/)  // @"E:\Demonstration\blue_1\" + @"renamed\"
+                if (obj.Count != 1 /*&& System.IO.File.Exists(RenamedBasePath + bp.GetWaveFileName(i))*/)
                 {
                     times = new List<DoubleBool>();
 

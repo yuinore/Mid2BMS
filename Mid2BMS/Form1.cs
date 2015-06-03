@@ -76,7 +76,6 @@ namespace Mid2BMS
             }
         }
 
-
         double ProgressBarValue = 0;
         bool ProgressBarFinished = true;
         Stopwatch SW;
@@ -105,7 +104,6 @@ namespace Mid2BMS
             SW.Start();
         }
 
-
         // Control.ControlCollection と Forms.ControlCollection というのがある・・・？？
         // 同じ名前のクラスがたくさんある・・・
         // http://msdn.microsoft.com/ja-jp/library/system.windows.forms.control.controlcollection(v=vs.110).aspx
@@ -120,7 +118,7 @@ namespace Mid2BMS
                 {
                     SetAllButtonsEnabled(ctrl.Controls, enabled);
                 }
-                if (ctrl.GetType() == button1.GetType())
+                if (ctrl.GetType() == typeof(Button))
                 {
                     ctrl.Enabled = enabled;
                 }
@@ -130,10 +128,6 @@ namespace Mid2BMS
         // Mid2BMS
         private void button1_Click(object sender, EventArgs e)
         {
-            //button1.Enabled = false;
-            //button2.Enabled = false;
-            //button3.Enabled = false;
-
             int VacantWavid;
 
             try
@@ -195,20 +189,11 @@ namespace Mid2BMS
 
             Thread anotherThread = new Thread(new ThreadStart(() =>
             {
-                //throw new Exception("あ～～～～");  // ←ハンドルされない
                 try
                 {
                     try
                     {
-                        //for (int iii = 0; iii < 100; iii++)
-                        //{
-                        //    VacantWavid = 1;
-                        //    DefVacantBMSChIdx = 16;
-                        //    MidiTrackNames = null;
                         mid2bms_proc();
-                        //}
-                        //ProgressBarValue = 1.00;
-                        //                        ProgressBarFinished = true;
                     }
                     catch (Exception exc)
                     {
@@ -373,11 +358,6 @@ namespace Mid2BMS
 
             InitializeProgressBar();  // これを実行したら必ずanotherThreadが走るようにする
 
-            //http://oshiete.goo.ne.jp/qa/5772117.html
-            // >>しかし、カートゥーン ネットワーク（CARTOON NETWORK）で放映中ですので
-            // >>放送順さえ気にせず見続ければ、いつかは全エピソード制覇も夢じゃないかも？？？
-            // まじかー
-
             Thread anotherThread = new Thread(new ThreadStart(() =>
             {
                 try
@@ -406,9 +386,6 @@ namespace Mid2BMS
                     SetAllButtonsEnabled(this.Controls, true);
                 }
 
-                //button1.Enabled = true;
-                //button2.Enabled = true;
-                //button3.Enabled = true;
                 progressBar1.Value = progressBar1.Maximum;
                 label1.Text = "Finished";
                 timer1.Enabled = false;
@@ -425,10 +402,8 @@ namespace Mid2BMS
             }
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
-
             _tabPageManager = new TabPageManager(tabControl1);
 
             Load_Click(sender, e);  // 上級者モードにおける設定を含めたすべての設定の読み込み
@@ -440,10 +415,6 @@ namespace Mid2BMS
             }
 
             // 上級者モードを解除して、プログラムを終了すると、上級者モード専用の設定はすべて削除されます。
-
-            //tabControl1.SelectedIndex = 2;
-
-            textBox7_TextChanged(sender, e);
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -600,7 +571,6 @@ namespace Mid2BMS
         //*** タブページ６
         //***************************************************************************
 
-
         private void button6_Click(object sender, EventArgs e)
         {
             try
@@ -660,7 +630,6 @@ namespace Mid2BMS
                 }
             }
         }
-
 
         private void textBox_BasePath3_DragEnter(object sender, DragEventArgs e)
         {
@@ -744,7 +713,6 @@ namespace Mid2BMS
             e.Effect = DragDropEffects.All;
         }
 
-
         //***************************************************************************
         //*** タブページ８
         //***************************************************************************
@@ -823,259 +791,10 @@ namespace Mid2BMS
             }
         }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-            /*MidiStruct ms = new MidiStruct(15360);
-
-            MidiTrack conductortrack = new MidiTrack("My Song 01");
-            conductortrack.AddTempo(120.0, ms);
-            conductortrack.AddEndOfTrack(ms);
-            ms.tracks.Add(conductortrack);
-
-            MidiTrack mt = new MidiTrack("Mugicha Lead");
-            {
-                MidiTrackWriter mtw = new MidiTrackWriter(mt, ms);
-                mtw.AddNote(72 + 7, 90, new Frac(1, 4), new Frac(1, 4));
-                mtw.AddNote(72 + 4, 90, new Frac(1, 4), new Frac(1, 4));
-                mtw.AddNote(72 + 4, 90, new Frac(3, 8), new Frac(1, 2));
-                mtw.AddNote(72 + 5, 90, new Frac(1, 4), new Frac(1, 4));
-                mtw.AddNote(72 + 2, 90, new Frac(1, 4), new Frac(1, 4));
-                mtw.AddNote(72 + 2, 90, new Frac(3, 8), new Frac(1, 2));
-                mtw.Close();
-            }
-            mt.AddEndOfTrack(ms);
-            ms.tracks.Add(mt);
-
-            ms.Export(FileStreamFactory.Create(@"C:\テスト用フォルダ\choucho.mid", FileMode.Create, FileAccess.Write));
-             */
-
-            MessageBox.Show(VorbisReader.GetTotalSamples(@"D:\01.ogg") + " samples, sampling rate = " + VorbisReader.GetSamplingRate(@"D:\01.ogg"));
-        }
-
         private void button11_Click(object sender, EventArgs e)
         {
             textBox_vacantWavid.Text = textBox_vacantWavidUpdated.Text;
         }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            /*
-            Form2 f = new Form2();
-            f.ShowDialog(this);
-            f.Dispose();
-             */
-            //openFileDialog1.ShowDialog(this);
-
-            SmallCanvas c = new SmallCanvas(1920, 1080, 0xFFFFFF);
-            SmallCanvas d = new SmallCanvas(1920, 1080, 0xFFFFFF);
-
-            //c.Plot2d(-10, 10, -2, 2, (x) => Math.Sin(x));  // ラムダ式書くときのIDEはクソ？
-            //c.Plot2d(-10, 10, -2, 2, (x) => Math.Atan(x));  // ラムダ式書くときのIDEはクソ？
-            c.PlotBode(Math.PI / 10000, Math.PI, -60, 6, (x) => 1.0);  // ラムダ式書くときのIDEはクソ？
-            c.PlotBode(Math.PI / 10000, Math.PI, -60, 6, (x) => 0.1);  // ラムダ式書くときのIDEはクソ？
-            c.PlotBode(Math.PI / 10000, Math.PI, -60, 6, (x) => 0.01);  // ラムダ式書くときのIDEはクソ？
-            d.Plot2d(0, Math.PI, 0.0, 1.5, (x) => 1.0);  // ラムダ式書くときのIDEはクソ？
-            //c.Plot2d(-10, 10, -2, 2, (x) => 0.5 * Math.PI);  // ラムダ式書くときのIDEはクソ？
-            //c.Plot2d(-10, 10, -2, 2, (x) => -0.5 * Math.PI);  // ラムダ式書くときのIDEはクソ？
-            //c.Plot2d(-10, 10, -2, 2, (x) => x);  // ラムダ式書くときのIDEはクソ？
-
-            /*
-            Polynomial poly = new Polynomial(2, "x");
-            poly[0] = -3;
-            poly[1] = 3;
-            poly[2] = 1;
-            Console.WriteLine(poly);
-            c.Plot2d(-4, 4, -20, 20, poly.Eval);
-
-            Polynomial poly2 = new Polynomial((new double[] { 2, 0, -2 }).Reverse(), "x");
-            Console.WriteLine(poly2);
-            c.Plot2d(-4, 4, -20, 20, poly2.Eval);
-
-            Polynomial product = poly * poly2;
-            Console.WriteLine(product);
-            c.Plot2d(-4, 4, -20, 20, product.Eval);
-             */
-
-            /*SimpleFilter s;
-            s = new SimpleFilter(0.001);
-            c.PlotBode(Math.PI / 10000, Math.PI, -60, 6, s.CharacteristicCurve);
-            d.Plot2d(0, Math.PI, 0.0, 1.5, s.CharacteristicCurve);
-            s = new SimpleFilter(0.01);
-            c.PlotBode(Math.PI / 10000, Math.PI, -60, 6, s.CharacteristicCurve);
-            d.Plot2d(0, Math.PI, 0.0, 1.5, s.CharacteristicCurve);
-            s = new SimpleFilter(0.1);
-            c.PlotBode(Math.PI / 10000, Math.PI, -60, 6, s.CharacteristicCurve);
-            d.Plot2d(0, Math.PI, 0.0, 1.5, s.CharacteristicCurve);
-            s = new SimpleFilter(0.5);
-            c.PlotBode(Math.PI / 10000, Math.PI, -60, 6, s.CharacteristicCurve);
-            d.Plot2d(0, Math.PI, 0.0, 1.5, s.CharacteristicCurve);
-            */
-
-            //for (int j = 0; j < 100; j++)
-            {
-                /*
-                var bLPF = new ButterworthFilter(FilterType.LowPass, 3, 1.25663706);
-                c.PlotBode(Math.PI / 10000, Math.PI, -60, 6, bLPF.CharacteristicCurve);
-                d.Plot2d(0, Math.PI, 0.0, 1.5, bLPF.CharacteristicCurve);
-
-                bLPF = new ButterworthFilter(FilterType.LowPass, 10, 1.25663706);
-                c.PlotBode(Math.PI / 10000, Math.PI, -60, 6, bLPF.CharacteristicCurve);
-                d.Plot2d(0, Math.PI, 0.0, 1.5, bLPF.CharacteristicCurve);
-
-                bLPF = new ButterworthFilter(FilterType.LowPass, 3, Math.PI * 0.1);
-                c.PlotBode(Math.PI / 10000, Math.PI, -60, 6, bLPF.CharacteristicCurve);
-                d.Plot2d(0, Math.PI, 0.0, 1.5, bLPF.CharacteristicCurve);
-
-                bLPF = new ButterworthFilter(FilterType.LowPass, 10, Math.PI * 0.1);
-                c.PlotBode(Math.PI / 10000, Math.PI, -60, 6, bLPF.CharacteristicCurve);
-                d.Plot2d(0, Math.PI, 0.0, 1.5, bLPF.CharacteristicCurve);
-                
-                 * */
-            }
-
-            for (int j = 0; j < 5; j++)
-            {
-                var bLPF = new ButterworthFilter(FilterType.LowPass, 9, Math.PI * 0.1);
-                c.PlotBode(Math.PI / 10000, Math.PI, -60, 6, bLPF.cascadeIIR[j].CharacteristicCurve);
-                d.Plot2d(0, Math.PI, 0.0, 1.5, bLPF.cascadeIIR[j].CharacteristicCurve);
-            }
-
-            c.Export(neu.IFileStream("gazou.bmp", FileMode.Create, FileAccess.Write));
-            d.Export(neu.IFileStream("gazou2.bmp", FileMode.Create, FileAccess.Write));
-
-            if (true)
-            {
-                //FIRFilter sL = new FIRFilter(neu.IFileStream(@"D:\asdfruhito\impulse_response_hipass_x2.wav", FileMode.Open, FileAccess.Read));
-                //FIRFilter sR = new FIRFilter(neu.IFileStream(@"D:\asdfruhito\impulse_response_hipass_x2.wav", FileMode.Open, FileAccess.Read));
-                //SimpleFilter sL = new SimpleFilter(0.01);
-                //SimpleFilter sR = new SimpleFilter(0.01);
-                var sL = new ButterworthFilter(FilterType.LowPass, 9, Math.PI * 0.125);
-                var sR = new ButterworthFilter(FilterType.LowPass, 9, Math.PI * 0.125);
-                //var sL = new IIRFilter(new double[] { 1, -1 }, new double[] { 0.1, 0 });//積分
-                //var sR = new IIRFilter(new double[] { 1, -1 }, new double[] { 0.1, 0 });
-                /*var sL = new IIRFilter(
-                    new double[] {
-                        1,
-                        -1.79825972655,
-                        0.81682296735508
-		            }, new double[] {
-                        0.0046408102012674,
-                        0.0092816204025348,
-                        0.0046408102012674 });
-                var sR = new IIRFilter(
-                    new double[] {
-                        1,
-                        -1.79825972655,
-                        0.81682296735508
-		            }, new double[] {
-                        0.0046408102012674,
-                        0.0092816204025348,
-                        0.0046408102012674 });*/
-                WaveFileReader wr = new WaveFileReader(neu.IFileStream(@"D:\asdfruhito\gjbuop2.wav", FileMode.Open, FileAccess.Read));
-                WaveFileWriter ww = new WaveFileWriter(neu.IFileStream(@"D:\asdfruhito\wavout.wav", FileMode.Create, FileAccess.Write), 
-                    wr.ChannelsCount, wr.SamplingRate, wr.BitDepth);
-
-                float indtL, indtR;
-                int n = 0;
-                while (wr.ReadSample(out indtL))
-                {
-                    indtL = (float)sL.Process(indtL);
-                    if (n == 0) ww.WriteSample(indtL);
-
-                    wr.ReadSample(out indtR);
-                    indtR = (float)sR.Process(indtR);
-                    if (n == 0) ww.WriteSample(indtR);
-
-                    //n = ((n + 1) & 1);
-                    n = 0;
-                }
-                wr.Close();  // usingを使わないからCloseを忘れるんだよ！！！
-                ww.Close();
-            }
-
-
-            if (false)
-            {
-
-                // 適応的ダウンサンプリング
-                MessageBox.Show("ファイルを上書き保存します。bmsフォルダのバックアップを取ってください。OKを押すと続行します。");
-
-                // ファイルを上書き保存します。ちょっと良くないですね。
-                string[] files = Directory.GetFiles(@"D:\asdfruhito\test", "*.wav", SearchOption.TopDirectoryOnly);
-                foreach (string s in files)
-                {
-                    AdaptiveDownsampler.DownSample(s, s, -42);
-                }
-            }
-
-
-            {
-                Polynomial a = new Polynomial(new double[] { 3, 1, 2 }, "x");
-                Polynomial a2 = a.代入(
-                new Polynomial(new double[] { 1, -1 }, "y"),
-                new Polynomial(new double[] { 1, 1 }, "y"));  // s = 1 - z^-1 を代入
-
-                Console.WriteLine(a);
-                Console.WriteLine(a2);
-            }
-
-
-            // 0
-            // 1
-            // x
-            // 3x
-            // x^2
-            // 3x^2
-
-
-            // 豆餅がおいしそうに焼けました
-            // ・・・きっとうまい
-            if (false)
-            {
-                var keisuu = new Dictionary<int, double>();
-                string input = "x^3+3x^2-x-1";
-                string pattern = @"(^|\+-|\+|-)("
-                  + @"((\d*)([a-zA-Z_]+)(\^\d+)?)|"  // 論理和では左にあるものの方が優先的にマッチする
-                  + @"(\d+)"
-                  + ")";
-                foreach (Match match in Regex.Matches(input, pattern))
-                {
-                    Console.WriteLine("Match: {0}", match.Value);
-                    for (int groupCtr = 0; groupCtr < match.Groups.Count; groupCtr++)
-                    {
-                        Group group = match.Groups[groupCtr];
-                        Console.WriteLine("   Group {0}: {1}", groupCtr, group.Value);
-                        for (int captureCtr = 0; captureCtr < group.Captures.Count; captureCtr++)
-                            Console.WriteLine("      Capture {0}: {1}", captureCtr,
-                                              group.Captures[captureCtr].Value);
-
-                        int TERM_1 = 3;  // 1次以上の項
-                        int COEFFI = 4;  // 係数
-                        int VARIABLE = 5;  // 変数
-                        int EXPONENT = 6;  // "^" + 指数
-                        int TERM_0 = 7;  // 0次の項
-                        String vari = null;  // varは「文脈キーワード」のひとつ
-
-
-                        if (match.Groups[TERM_1].Captures.Count >= 1)
-                        {
-                            // 1次以上の項
-                        }
-                        else
-                        {
-                            // 0次の項
-                        }
-                    }
-
-                }
-            }
-
-            // https://www.google.co.jp/search?q=豆餅+栃木&tbm=isch
-
-
-        }
-
-
 
         private void button13_Click(object sender, EventArgs e)
         {
@@ -1275,9 +994,6 @@ namespace Mid2BMS
 
             // Hashtable は O(1) (もしかしたらO(log n)かもしれない ) (そこそこ速い(多分))
             // Where().First() は O(n) (遅い)
-            // なぜなのか。
-            // Linqとかいう神なのかゴミなのか分からない機能な
-            // え、Where().First() は O(1)でしょ？？？？(遅延評価)
 
             Thread anotherThread = new Thread(new ThreadStart(() =>
             {
@@ -1325,16 +1041,6 @@ namespace Mid2BMS
                     }
                 };
 
-
-                //for (int i = 0; i < filelist.Count; i++)
-                //{
-                //String s = filelist[i];
-                //AdaptiveDownsampler.DownSample(s, s, threshold,
-                //    ref  ProgressBarValue, i / (double)filelist.Count, (i + 1) / (double)filelist.Count);
-                //ProgressBarValue = (i + 1) / (double)filelist.Count;
-                //}
-
-
                 for (int j = 0; j < threadN; j++)
                 {
                     int j2 = j;  // これでいけますかね
@@ -1348,97 +1054,8 @@ namespace Mid2BMS
                     }));
                     multiThread.Start();
                 }
-
-
-                //ProgressBarValue = 1;
-                //ProgressBarFinished = true;
             }));
             anotherThread.Start();
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-            int ProcessN = 60 * 140;
-            double second_per_frame = 1.0 / 60.0;
-            int FFTex = 10;
-            int FFTn = 1 << FFTex;
-
-            InitializeProgressBar();
-
-            Thread anotherThread = new Thread(new ThreadStart(() =>
-            {
-                WaveFileReader wr = new WaveFileReader(@"D:\asdfruhito\akari.wav");
-                if (wr.ChannelsCount != 1) throw new Exception("モノラルで頼む");
-                FFT fft = new FFT(FFTex);
-
-                Complex[] waveform = new Complex[FFTn];
-                Complex[] spectrum = new Complex[FFTn];
-
-                for (int frame = 0; frame < ProcessN; frame++)
-                {
-                    SmallCanvas sc = new SmallCanvas(64, 32, 0xFFFFFFu);
-
-                    float indt;
-                    int readPosition = (int)(wr.SamplingRate * frame * second_per_frame);
-                    wr.Seek(readPosition);
-                    for (int i = 0; i < waveform.Length; i++)
-                    {
-                        wr.ReadSample(out indt);
-                        waveform[i] = indt * (0.5 + 0.5 - Math.Cos(2 * Math.PI * i / (double)waveform.Length));  // 窓関数
-                    }
-                    fft.Process(waveform, spectrum);
-                    sc.PlotBodeFill(
-                        50.0 * FFTn / wr.SamplingRate,
-                        10000.0 * FFTn / wr.SamplingRate,
-                        10, 80, (freq) =>
-                    {
-                        double position = freq;
-                        int index = (int)Math.Floor(position);
-                        double offset = position - index;
-                        return (1 - offset) * spectrum[index].Abs() + offset * spectrum[index + 1].Abs();
-                    });
-
-                    sc.Export(neu.IFileStream(@"D:\asdfruhito\bmp\image_" + frame.ToString("D5") + @".bmp", FileMode.Create, FileAccess.Write));
-
-                    ProgressBarValue = (frame + 1) / (double)ProcessN;
-                }
-
-                wr.Close();
-
-                ProgressBarValue = 1;
-                ProgressBarFinished = true;
-            }));
-            anotherThread.Start();
-            // エクストリームしにたい
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-            int[] x = { 1, 2, 3 };
-
-            IEnumerable<int> y = x.Select(n => n * n);
-
-            x[2] = 10;
-
-            MessageBox.Show(y.Sum().ToString());
-
-            InitializeProgressBar();
-
-            var xxx = File.ReadAllLines(@"D:\bms_package\_yuinore\a.txt", HatoEnc.Encoding);
-            var yyy = File.ReadAllLines(@"D:\bms_package\_yuinore\n.txt", HatoEnc.Encoding);
-
-            var s =
-                "M = " + xxx.Length + "\n" +
-                "N = " + yyy.Length + "\n" +
-                String.Join("\n", Diff.ShortestCommonSuperstring(xxx, yyy));
-
-            ProgressBarValue = 1.0;
-            ProgressBarFinished = true;
-
-            FileIO.WriteAllText(@"D:\bms_package\_yuinore\_union.txt", s);
-
-            // SCSを求める目的は、2つのBMSの間でオブジェのデータをやりとりすること。
-            // ・・・であれば、3つ以上の文字列のSCSを求める必要はないのでは。
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1485,7 +1102,6 @@ namespace Mid2BMS
             textBox_DiffResult.Text = "";
         }
 
-
         private void button21_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("フォームの内容をすべてリセットします。よろしいですか。", "confirm", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
@@ -1493,149 +1109,6 @@ namespace Mid2BMS
                 checkBox_InitForm.Checked = true;
                 Application.Restart();
                 // 再起動するとデバッグが終了するらしい
-            }
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-            double d;
-
-            d = 1.0 / 3.0;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            d = 100.0 / 3.0;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            d = 10000.0 / 7.0;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            d = 1 / 5.0;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            d = 0.11111111111;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            d = 0.000001;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            d = 0.11111111;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            d = 0.11111;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            d = 0.111;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            d = 0.11;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            d = 0.1;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            d = 111111111.111;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            d = 11111.1111111;
-            Console.WriteLine(d + "\n" + new Frac(d));
-            /*
-             * 0.333333333333333
-             * 1 / 3
-             * 
-             * 33.3333333333333
-             * 100 / 3
-             * 
-             * 1428.57142857143
-             * 10000 / 7
-             * 
-             * 0.2
-             * 1 / 5
-             * 
-             * 0.11111111111
-             * 1 / 9
-             * 
-             * 0.11111111
-             * 1 / 9
-             * 
-             * 0.11111
-             * 107519 / 967680
-             * 
-             * 0.111
-             * 268531 / 2419200
-             * 
-             * 0.11
-             * 11 / 100
-             * 
-             * 0.1
-             * 1 / 10
-             * 
-             * 111111111.111
-             * 268799999999731 / 2419200
-             * 
-             * 11111.1111111
-             * 100000 / 9
-             */
-            /*
-             * 改良版
-             * 
-             * 0.333333333333333
-             * 1 / 3
-             * 
-             * 33.3333333333333
-             * 100 / 3
-             * 
-             * 1428.57142857143
-             * 10000 / 7
-             * 
-             * 0.2
-             * 1 / 5
-             * 
-             * 0.11111111111
-             * 1 / 9
-             * 
-             * 1E-06
-             * 1 / 1000000
-             * 
-             * 0.11111111
-             * 1 / 9
-             * 
-             * 0.11111
-             * 11111 / 100000
-             * 
-             * 0.111
-             * 111 / 1000
-             * 
-             * 0.11
-             * 11 / 100
-             * 
-             * 0.1
-             * 1 / 10
-             * 
-             * 111111111.111
-             * 111111111111 / 1000
-             * 
-             * 11111.1111111
-             * 100000 / 9
-             * 
-             */
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-            {
-                var x = WaveFileReader.ReadAllSamples(@"D:\asdfruhito\wav\orig.wav");
-
-                var k = 5.0f;  // scaling factor
-
-                for (int i = 0; i < x[0].Length; i++)
-                {
-                    var L = x[0][i];
-                    var R = x[1][i];
-
-                    x[0][i] = ((1 + k) * L + (1 - k) * R) * 0.5f;
-                    x[1][i] = ((1 - k) * L + (1 + k) * R) * 0.5f;
-                }
-
-                WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\wav\orig_" + k + ".wav", x);
-            }
-            {
-                var x = WaveFileReader.ReadAllSamples(@"D:\asdfruhito\wav\orig.wav");
-
-                for (int i = 0; i < x[0].Length - 1; i++)
-                {
-                    x[0][i] = (x[0][i] * x[0][i + 1] < 0) ? 1 : 0;
-                    x[1][i] = (x[1][i] * x[1][i + 1] < 0) ? 1 : 0;
-                }
-
-                WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\wav\zerocross_.wav", x);
             }
         }
 
@@ -1672,7 +1145,6 @@ namespace Mid2BMS
         {
             textBox2_TextChanged(sender, e);
         }
-
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
@@ -1743,12 +1215,6 @@ namespace Mid2BMS
             catch (Exception ex)
             {
             }
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            //linkLabel1.LinkVisited = true;
-            System.Diagnostics.Process.Start("https://www.google.com/search?q=シーケンスレイヤー&tbm=isch");
         }
 
         private void checkBox_advanced_CheckedChanged(object sender, EventArgs e)
@@ -1833,59 +1299,6 @@ namespace Mid2BMS
             }
         }
 
-        private void button24_Click(object sender, EventArgs e)
-        {
-            var data = WaveFileReader.ReadAllSamples(@"D:\asdfruhito\bit\16m.wav");
-
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_16_8m.wav", data, 1, 44100, 8);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_16_16m.wav", data, 1, 44100, 16);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_16_24m.wav", data, 1, 44100, 24);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_16_32m.wav", data, 1, 44100, 32);
-
-            data = WaveFileReader.ReadAllSamples(@"D:\asdfruhito\bit\32m.wav");
-
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_32_8m.wav", data, 1, 44100, 8);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_32_16m.wav", data, 1, 44100, 16);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_32_24m.wav", data, 1, 44100, 24);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_32_32m.wav", data, 1, 44100, 32);
-
-            data = WaveFileReader.ReadAllSamples(@"D:\asdfruhito\bit\24m.wav");
-
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_24_8m.wav", data, 1, 44100, 8);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_24_16m.wav", data, 1, 44100, 16);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_24_24m.wav", data, 1, 44100, 24);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_24_32m.wav", data, 1, 44100, 32);
-
-            data = WaveFileReader.ReadAllSamples(@"D:\asdfruhito\bit\8m.wav");
-
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_8_8m.wav", data, 1, 44100, 8);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_8_16m.wav", data, 1, 44100, 16);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_8_24m.wav", data, 1, 44100, 24);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_8_32m.wav", data, 1, 44100, 32);
-
-
-            data = WaveFileReader.ReadAllSamples(@"D:\asdfruhito\bit\24om.wav");
-
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_24o_8m.wav", data, 1, 44100, 8);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_24o_16m.wav", data, 1, 44100, 16);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_24o_24m.wav", data, 1, 44100, 24);
-            WaveFileWriter.WriteAllSamples(@"D:\asdfruhito\bit\_24o_32m.wav", data, 1, 44100, 32);
-
-            //NVorbis.VorbisReader
-            using (var r = new NVorbis.VorbisReader(@"D:\asdfruhito\bit\ogg.ogg"))
-            using (var w = new WaveFileWriter(@"D:\asdfruhito\bit\_ogg_wav.wav", r.Channels, r.SampleRate, 16))
-            {
-                float[] buf = new float[1];
-                while (true)
-                {
-                    var ret = r.ReadSamples(buf, 0, 1);
-                    w.WriteSample(buf[0]);
-                    if (ret == 0) break;
-                }
-            }
-
-        }
-
         private void listBox2_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.All;
@@ -1909,35 +1322,10 @@ namespace Mid2BMS
             AdaptiveProcess(sender, e, AdaptiveProcessType.Monoauralize, comboBox2, listBox2);
         }
 
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-            String text = "@yuinore 【アプデ希望】" + textBox7.Text;
-            String preview = text + " #Mid2BMSupd";
-            textBox8.Text = preview;
-            webBrowser1.DocumentText =
-                "<html><head></head><body>"
-                + "<a href=\"https://twitter.com/intent/tweet?button_hashtag=Mid2BMSupd&text=" + HttpUtility.UrlEncode(text) + "\" class=\"twitter-hashtag-button\" data-lang=\"ja\">Tweet #Mid2BMSupd</a>"
-                + "<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>"
-                + "</body></html>";
-        }
-
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             textBox_serialWavFileName.Enabled = checkBox2.Checked;
             textBox_BasePath2.Enabled = !checkBox2.Checked;
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-            //String path1 = @"D:\bms_package\Programming\mid2mml_v2\MidiSeparatorのテスト用の音楽_960.mid";
-            String path1 = @"D:\bms_package\Programming\mid2mml_v2\fam.003.23.mid";
-            String path2 = @"D:\bms_package\Programming\mid2mml_v2\fam.003.23.mid.mml";
-            //String path1 = @"D:\bms_package\Programming\mid2mml_v2\vc25_fmt1.mid";
-            //String path2 = @"D:\bms_package\Programming\mid2mml_v2\vc25_fmt1.mid.mml";
-            //String path1 = @"D:\bms_package\Programming\mid2mml_v2\Chobits - Opening - Let Me Be With You.mid";
-            //String path2 = @"D:\bms_package\Programming\mid2mml_v2\Chobits - Opening - Let Me Be With You.mid.mml";
-
-            FileIO.WriteAllText(path2, (new Mid2mml2(new MidiStruct(neu.IFileStream(path1, FileMode.Open, FileAccess.Read))).ToString()));
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -1953,7 +1341,6 @@ namespace Mid2BMS
                 MessageBox.Show(exc.ToString());
             }
         }
-
 
         private void listBox3_DragEnter(object sender, DragEventArgs e)
         {
@@ -1976,7 +1363,6 @@ namespace Mid2BMS
                         "__ordering_result.txt");
             }
         }
-
 
         private void button29_Click(object sender, EventArgs e)
         {
@@ -2252,6 +1638,10 @@ namespace Mid2BMS
             }
         }
 
-
+        private void someLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ((LinkLabel)sender).LinkVisited = true;
+            System.Diagnostics.Process.Start(((LinkLabel)sender).Text);
+        }
     }
 }
