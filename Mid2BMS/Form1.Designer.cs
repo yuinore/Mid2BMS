@@ -98,6 +98,15 @@
             this.textBox_WaveFileName = new System.Windows.Forms.TextBox();
             this.textBox_WaveBasePath = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label70 = new System.Windows.Forms.Label();
+            this.textBox_tcp_time = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label69 = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.listBox4 = new System.Windows.Forms.ListBox();
+            this.label68 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.label39 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
@@ -182,6 +191,11 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label52 = new System.Windows.Forms.Label();
             this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.label67 = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
+            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.label29 = new System.Windows.Forms.Label();
             this.label63 = new System.Windows.Forms.Label();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -196,11 +210,6 @@
             this.label32 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label29 = new System.Windows.Forms.Label();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
-            this.label64 = new System.Windows.Forms.Label();
-            this.label67 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -210,6 +219,7 @@
             this.panel2.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.panel_advancedsettings2.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabPage8.SuspendLayout();
@@ -227,6 +237,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
@@ -711,6 +722,80 @@
             // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label70);
+            this.tabPage2.Controls.Add(this.textBox_tcp_time);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.label69);
+            this.tabPage2.Controls.Add(this.comboBox3);
+            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.listBox4);
+            this.tabPage2.Controls.Add(this.label68);
+            resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label70
+            // 
+            resources.ApplyResources(this.label70, "label70");
+            this.label70.Name = "label70";
+            // 
+            // textBox_tcp_time
+            // 
+            resources.ApplyResources(this.textBox_tcp_time, "textBox_tcp_time");
+            this.textBox_tcp_time.Name = "textBox_tcp_time";
+            this.toolTip1.SetToolTip(this.textBox_tcp_time, resources.GetString("textBox_tcp_time.ToolTip"));
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.toolTip1.SetToolTip(this.button1, resources.GetString("button1.ToolTip"));
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // label69
+            // 
+            resources.ApplyResources(this.label69, "label69");
+            this.label69.Name = "label69";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            resources.GetString("comboBox3.Items"),
+            resources.GetString("comboBox3.Items1"),
+            resources.GetString("comboBox3.Items2"),
+            resources.GetString("comboBox3.Items3"),
+            resources.GetString("comboBox3.Items4"),
+            resources.GetString("comboBox3.Items5")});
+            resources.ApplyResources(this.comboBox3, "comboBox3");
+            this.comboBox3.Name = "comboBox3";
+            this.toolTip1.SetToolTip(this.comboBox3, resources.GetString("comboBox3.ToolTip"));
+            // 
+            // button2
+            // 
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // listBox4
+            // 
+            this.listBox4.AllowDrop = true;
+            this.listBox4.FormattingEnabled = true;
+            resources.ApplyResources(this.listBox4, "listBox4");
+            this.listBox4.Name = "listBox4";
+            this.toolTip1.SetToolTip(this.listBox4, resources.GetString("listBox4.ToolTip"));
+            this.listBox4.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox4_DragDrop);
+            this.listBox4.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox4_DragEnter);
+            // 
+            // label68
+            // 
+            resources.ApplyResources(this.label68, "label68");
+            this.label68.Name = "label68";
             // 
             // tabPage6
             // 
@@ -1315,6 +1400,35 @@
             this.tabPage13.Name = "tabPage13";
             this.tabPage13.UseVisualStyleBackColor = true;
             // 
+            // label67
+            // 
+            resources.ApplyResources(this.label67, "label67");
+            this.label67.Name = "label67";
+            // 
+            // label64
+            // 
+            resources.ApplyResources(this.label64, "label64");
+            this.label64.Name = "label64";
+            // 
+            // linkLabel4
+            // 
+            resources.ApplyResources(this.linkLabel4, "linkLabel4");
+            this.linkLabel4.Name = "linkLabel4";
+            this.linkLabel4.TabStop = true;
+            this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
+            // 
+            // linkLabel3
+            // 
+            resources.ApplyResources(this.linkLabel3, "linkLabel3");
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
+            // 
+            // label29
+            // 
+            resources.ApplyResources(this.label29, "label29");
+            this.label29.Name = "label29";
+            // 
             // label63
             // 
             resources.ApplyResources(this.label63, "label63");
@@ -1401,35 +1515,6 @@
             this.toolTip1.InitialDelay = 250;
             this.toolTip1.ReshowDelay = 50;
             // 
-            // label29
-            // 
-            resources.ApplyResources(this.label29, "label29");
-            this.label29.Name = "label29";
-            // 
-            // linkLabel3
-            // 
-            resources.ApplyResources(this.linkLabel3, "linkLabel3");
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
-            // 
-            // linkLabel4
-            // 
-            resources.ApplyResources(this.linkLabel4, "linkLabel4");
-            this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.TabStop = true;
-            this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
-            // 
-            // label64
-            // 
-            resources.ApplyResources(this.label64, "label64");
-            this.label64.Name = "label64";
-            // 
-            // label67
-            // 
-            resources.ApplyResources(this.label67, "label67");
-            this.label67.Name = "label67";
-            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -1460,6 +1545,8 @@
             this.tabPage5.PerformLayout();
             this.panel_advancedsettings2.ResumeLayout(false);
             this.panel_advancedsettings2.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
             this.tabPage7.ResumeLayout(false);
@@ -1656,6 +1743,15 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label67;
         private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListBox listBox4;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.TextBox textBox_tcp_time;
     }
 }
 

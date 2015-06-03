@@ -252,7 +252,7 @@ First, click "[1]Mid2MML" tab above.</value>
     <value>0</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>Start Page</value>
   </data>
   <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
     <value>tabPage1</value>
@@ -1969,6 +1969,276 @@ DAWによってwavが書き出されるのに時間が掛かります。
   <data name="&gt;&gt;tabPage5.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="label70.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label70.Location" type="System.Drawing.Point, System.Drawing">
+    <value>395, 347</value>
+  </data>
+  <data name="label70.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 12</value>
+  </data>
+  <data name="label70.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="label70.Text" xml:space="preserve">
+    <value>Fadeout Duration (sec)</value>
+  </data>
+  <data name="&gt;&gt;label70.Name" xml:space="preserve">
+    <value>label70</value>
+  </data>
+  <data name="&gt;&gt;label70.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label70.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;label70.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="textBox_tcp_time.Location" type="System.Drawing.Point, System.Drawing">
+    <value>523, 344</value>
+  </data>
+  <data name="textBox_tcp_time.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 19</value>
+  </data>
+  <data name="textBox_tcp_time.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="textBox_tcp_time.Text" xml:space="preserve">
+    <value>0.002</value>
+  </data>
+  <data name="textBox_tcp_time.ToolTip" xml:space="preserve">
+    <value>0.002以上の値がおすすめです。</value>
+  </data>
+  <data name="&gt;&gt;textBox_tcp_time.Name" xml:space="preserve">
+    <value>textBox_tcp_time</value>
+  </data>
+  <data name="&gt;&gt;textBox_tcp_time.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox_tcp_time.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;textBox_tcp_time.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 310</value>
+  </data>
+  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 23</value>
+  </data>
+  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="button1.Text" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="button1.ToolTip" xml:space="preserve">
+    <value>上のファイル一覧を全部消します。</value>
+  </data>
+  <data name="&gt;&gt;button1.Name" xml:space="preserve">
+    <value>button1</value>
+  </data>
+  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label69.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label69.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label69.Location" type="System.Drawing.Point, System.Drawing">
+    <value>437, 321</value>
+  </data>
+  <data name="label69.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 12</value>
+  </data>
+  <data name="label69.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="label69.Text" xml:space="preserve">
+    <value>Threshold (dB)</value>
+  </data>
+  <data name="&gt;&gt;label69.Name" xml:space="preserve">
+    <value>label69</value>
+  </data>
+  <data name="&gt;&gt;label69.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label69.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;label69.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="comboBox3.Items" xml:space="preserve">
+    <value>-30 (very low filesize of BMS)</value>
+  </data>
+  <data name="comboBox3.Items1" xml:space="preserve">
+    <value>-36 (low filesize of BMS)</value>
+  </data>
+  <data name="comboBox3.Items2" xml:space="preserve">
+    <value>-42 (normal)</value>
+  </data>
+  <data name="comboBox3.Items3" xml:space="preserve">
+    <value>-48 (normal)</value>
+  </data>
+  <data name="comboBox3.Items4" xml:space="preserve">
+    <value>-54 (rich sound)</value>
+  </data>
+  <data name="comboBox3.Items5" xml:space="preserve">
+    <value>-60 (very rich sound)</value>
+  </data>
+  <data name="comboBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>523, 318</value>
+  </data>
+  <data name="comboBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 20</value>
+  </data>
+  <data name="comboBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="comboBox3.ToolTip" xml:space="preserve">
+    <value>この設定はむずかしいので、おとなのひとに聞いてください。
+まず -36dB, 0.002sec の設定で切った後に、
+違和感を感じる部分だけファイルを元のファイルに差し替える、
+というのを繰り返すのが最もよいと思います。
+</value>
+  </data>
+  <data name="&gt;&gt;comboBox3.Name" xml:space="preserve">
+    <value>comboBox3</value>
+  </data>
+  <data name="&gt;&gt;comboBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBox3.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;comboBox3.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>611, 381</value>
+  </data>
+  <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 23</value>
+  </data>
+  <data name="button2.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="button2.Text" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="&gt;&gt;button2.Name" xml:space="preserve">
+    <value>button2</value>
+  </data>
+  <data name="&gt;&gt;button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="listBox4.ItemHeight" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="listBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 48</value>
+  </data>
+  <data name="listBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>681, 256</value>
+  </data>
+  <data name="listBox4.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="listBox4.ToolTip" xml:space="preserve">
+    <value>末尾をカットしたいwavファイルをドラッグ＆ドロップしてください。
+フォルダごとドラッグ＆ドロップすることもできます。
+ただし、フォルダの中のフォルダのさらに中のwavは処理できなかった気がします。</value>
+  </data>
+  <data name="&gt;&gt;listBox4.Name" xml:space="preserve">
+    <value>listBox4</value>
+  </data>
+  <data name="&gt;&gt;listBox4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listBox4.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;listBox4.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="label68.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label68.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 22</value>
+  </data>
+  <data name="label68.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 12</value>
+  </data>
+  <data name="label68.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label68.Text" xml:space="preserve">
+    <value>Step2 (b). Cut the tail of the .wav files</value>
+  </data>
+  <data name="&gt;&gt;label68.Name" xml:space="preserve">
+    <value>label68</value>
+  </data>
+  <data name="&gt;&gt;label68.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label68.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;label68.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 40</value>
+  </data>
+  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>737, 422</value>
+  </data>
+  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>[2.5]TailCutPlus</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="label39.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2279,7 +2549,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPage6.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="textBox_outfnformat.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 99</value>
@@ -2708,7 +2978,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPage7.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="button32.Location" type="System.Drawing.Point, System.Drawing">
     <value>245, 274</value>
@@ -3149,7 +3419,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPage8.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="button16.Location" type="System.Drawing.Point, System.Drawing">
     <value>22, 321</value>
@@ -3350,7 +3620,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPage9.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="button25.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3555,7 +3825,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPage12.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="label60.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3783,7 +4053,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPage10.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="label58.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4161,7 +4431,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPage11.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="label67.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4407,7 +4677,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPage13.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="textBox_orderTextOut.Location" type="System.Drawing.Point, System.Drawing">
     <value>20, 216</value>
@@ -4512,7 +4782,7 @@ DAWによってwavが書き出されるのに時間が掛かります。
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPage14.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>

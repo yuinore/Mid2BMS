@@ -933,7 +933,8 @@ namespace Mid2BMS
         {
             None = 0,
             DownSampling,
-            Monoauralize
+            Monoauralize,
+            TailCutPlus
         };
 
         private void AdaptiveProcess(object sender, EventArgs e, AdaptiveProcessType pType,
@@ -955,8 +956,15 @@ namespace Mid2BMS
                 return;
             }
 
+            double tcp_time = 0.002;
+            if(!Double.TryParse(textBox_tcp_time.Text, out tcp_time) || tcp_time < 0)
+            {
+                MessageBox.Show("正しいフェードアウト時間(Fadeout Duration)を入力してください。単位は秒で、値は0以上の実数です。");
+                return;
+            }
+
             // 適応的ダウンサンプリング
-            if (DialogResult.Cancel == MessageBox.Show("ファイルを上書き保存します。bmsフォルダのバックアップを取ってください。OKを押すと続行します。", "Confirm to proceed", MessageBoxButtons.OKCancel))
+            if (DialogResult.Cancel == MessageBox.Show("ファイルを上書き保存します。bmsフォルダのバックアップを**絶対に**取ってください。OKを押すと、このまま進めます。", "Confirm to proceed", MessageBoxButtons.OKCancel))
             {
                 return;
             }
@@ -1023,6 +1031,11 @@ namespace Mid2BMS
 
                         case AdaptiveProcessType.Monoauralize:
                             Monoauralizer.Monoauralize(s, s, threshold);
+                            break;
+
+                        case AdaptiveProcessType.TailCutPlus:
+
+                            TailCutPlus.Process(s, s, threshold, tcp_time, false); 
                             break;
 
                         default: throw new Exception("wwwwwwwww");
@@ -1219,15 +1232,6 @@ namespace Mid2BMS
 
         private void checkBox_advanced_CheckedChanged(object sender, EventArgs e)
         {
-            //tabControl1.Hide();
-            //tabPage1.Hide();
-            /*tabPage2.Text = "";
-            tabPage7.Text = "";
-            tabPage8.Text = "";
-            tabPage9.Text = "";
-            tabPage10.Text = "";
-            tabPage11.Text = "";*/
-
             bool magicalsoundshower = checkBox_advanced.Checked;
             _tabPageManager.ChangeTabPageVisible(1, magicalsoundshower);
             _tabPageManager.ChangeTabPageVisible(6, magicalsoundshower);
@@ -1243,6 +1247,7 @@ namespace Mid2BMS
 
             if (comboBox1.Text == "") comboBox1.Text = "-42 (normal)";
             if (comboBox2.Text == "") comboBox2.Text = "-24 (normal)";
+            if (comboBox3.Text == "") comboBox3.Text = "-36 (low filesize of BMS)";
         }
 
         // http://dobon.net/vb/dotnet/control/tabpagehide.html
@@ -1642,6 +1647,29 @@ namespace Mid2BMS
         {
             ((LinkLabel)sender).LinkVisited = true;
             System.Diagnostics.Process.Start(((LinkLabel)sender).Text);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            listBox4.Items.Clear();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            AdaptiveProcess(sender, e, AdaptiveProcessType.TailCutPlus, comboBox3, listBox4);
+        }
+
+        private void listBox4_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+        }
+
+        private void listBox4_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                listBox4.Items.AddRange((string[])e.Data.GetData(DataFormats.FileDrop));
+            }
         }
     }
 }

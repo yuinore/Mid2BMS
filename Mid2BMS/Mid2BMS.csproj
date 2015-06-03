@@ -87,6 +87,7 @@
     <Compile Include="DupeDefinition.cs" />
     <Compile Include="Mid2mml\Mid2mml2.cs" />
     <Compile Include="SignalProcessing\Order.cs" />
+    <Compile Include="SignalProcessing\TailCutPlus.cs" />
     <Compile Include="Util\Arr.cs" />
     <Compile Include="Util\CompareSelector.cs" />
     <Compile Include="DynamicJson\DynamicJson.cs" />
