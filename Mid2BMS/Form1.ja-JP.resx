@@ -156,7 +156,7 @@
     <value>160, 12</value>
   </data>
   <data name="label66.Text" xml:space="preserve">
-    <value>(高度な設定, 0以上, default: 4)</value>
+    <value>(高度な設定, 0以上, default: 0)</value>
   </data>
   <data name="label66.ToolTip" xml:space="preserve">
     <value />
@@ -240,11 +240,24 @@
   <data name="checkBox_createExtraFiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="checkBox_createExtraFiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 16</value>
+  </data>
+  <data name="checkBox_createExtraFiles.Text" xml:space="preserve">
+    <value>余分なファイルも書き出す</value>
+  </data>
   <data name="checkBox_createExtraFiles.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="label31.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 24</value>
+  </data>
+  <data name="label31.Text" xml:space="preserve">
+    <value>ファイル命名法
+(些細な設定)</value>
   </data>
   <data name="label31.ToolTip" xml:space="preserve">
     <value />
@@ -532,6 +545,33 @@
     <value />
   </data>
   <data name="tabPage5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label70.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 12</value>
+  </data>
+  <data name="label70.Text" xml:space="preserve">
+    <value>フェードアウトの長さ (sec)</value>
+  </data>
+  <data name="label70.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label69.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 12</value>
+  </data>
+  <data name="label69.Text" xml:space="preserve">
+    <value>しきい値 (dB)</value>
+  </data>
+  <data name="label69.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="button2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label68.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPage2.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="label39.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -895,6 +935,21 @@
     <value />
   </data>
   <data name="tabPage11.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label67.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label64.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="linkLabel4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="linkLabel3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label29.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="label63.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
