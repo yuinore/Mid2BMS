@@ -120,22 +120,11 @@
   <data name="label28.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="checkBox_advanced.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button21.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="checkBox_InitForm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="checkBox_InitForm.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>737, 455</value>
   </data>
   <data name="tabPage1.ToolTip" xml:space="preserve">
     <value />
@@ -143,20 +132,11 @@
   <data name="textBox1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label3.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>737, 455</value>
-  </data>
   <data name="tabPage3.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label74.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 12</value>
   </data>
   <data name="label74.Text" xml:space="preserve">
     <value>default: 1, 1で無効</value>
@@ -167,26 +147,17 @@
   <data name="textBox_velocitystep.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label73.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 12</value>
-  </data>
   <data name="label73.Text" xml:space="preserve">
     <value>Velocity増分</value>
   </data>
   <data name="label73.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label72.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 12</value>
-  </data>
   <data name="label72.Text" xml:space="preserve">
     <value>ティック/拍 (クオンタイズが実行されます。default: 48, -1で無効)</value>
   </data>
   <data name="label72.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label71.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 12</value>
   </data>
   <data name="label71.Text" xml:space="preserve">
     <value>Timebase値</value>
@@ -197,26 +168,11 @@
   <data name="textBox_newTimebase2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label66.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label66.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 12</value>
-  </data>
   <data name="label66.Text" xml:space="preserve">
     <value>(高度な設定, 0以上, 0推奨)</value>
   </data>
   <data name="label66.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label49.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label49.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 47</value>
-  </data>
-  <data name="label49.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 12</value>
   </data>
   <data name="label49.Text" xml:space="preserve">
     <value>wav定義の間隔</value>
@@ -224,36 +180,15 @@
   <data name="label49.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 21</value>
-  </data>
-  <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 12</value>
-  </data>
   <data name="label19.Text" xml:space="preserve">
     <value>音符同士の間隔</value>
   </data>
   <data name="label19.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="checkBox_seqLayer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox_seqLayer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>374, 28</value>
-  </data>
   <data name="checkBox_seqLayer.Text" xml:space="preserve">
     <value>tanon_smfをシーケンスレイヤーとして書き出す
  (BPM変化を含む場合はチェック、個人的には常にチェックするのがおすすめ)</value>
-  </data>
-  <data name="label20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 12</value>
   </data>
   <data name="label20.Text" xml:space="preserve">
     <value>拍 (高度な設定, default: 12.0)</value>
@@ -261,23 +196,11 @@
   <data name="label20.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="checkBox_NoPlace11to29.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox_NoPlace11to29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 16</value>
-  </data>
   <data name="checkBox_NoPlace11to29.Text" xml:space="preserve">
     <value>BMSチャンネル11-29には配置しない (衝突回避、2回目以降はチェック)</value>
   </data>
-  <data name="radioButton2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="radioButton2.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="radioButton1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="radioButton1.ToolTip" xml:space="preserve">
     <value />
@@ -285,23 +208,11 @@
   <data name="panel1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="checkBox_createExtraFiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox_createExtraFiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 16</value>
-  </data>
   <data name="checkBox_createExtraFiles.Text" xml:space="preserve">
     <value>余分なファイルも書き出す</value>
   </data>
   <data name="checkBox_createExtraFiles.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label31.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 24</value>
   </data>
   <data name="label31.Text" xml:space="preserve">
     <value>ファイル命名法
@@ -313,29 +224,14 @@
   <data name="panel_advancedsettings1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label33.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="label33.Text" xml:space="preserve">
+    <value>Step1. DAWから書きだしたMidiファイルを読み込みます</value>
   </data>
   <data name="label33.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="radioButton_purple.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radioButton_purple.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 16</value>
-  </data>
   <data name="radioButton_purple.Text" xml:space="preserve">
     <value>purple mode (ポルタメント)</value>
-  </data>
-  <data name="radioButton_red.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radioButton_blue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radioButton_blue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 16</value>
   </data>
   <data name="radioButton_blue.Text" xml:space="preserve">
     <value>blue mode (通常)</value>
@@ -346,29 +242,11 @@
   <data name="textBox_vacantWavidUpdated.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="button11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 12</value>
-  </data>
   <data name="label13.Text" xml:space="preserve">
     <value>(36進数表記)</value>
   </data>
   <data name="label13.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 158</value>
-  </data>
-  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 12</value>
   </data>
   <data name="label12.Text" xml:space="preserve">
     <value>開始wav定義番号</value>
@@ -376,26 +254,11 @@
   <data name="label12.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 12</value>
-  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>ここにmidiファイルをドラッグ＆ドロップしてね</value>
   </data>
   <data name="label6.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 91</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 12</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>midiファイル</value>
@@ -403,23 +266,11 @@
   <data name="label5.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>53, 56</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 12</value>
-  </data>
   <data name="label4.Text" xml:space="preserve">
     <value>作業フォルダ</value>
   </data>
   <data name="label4.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="button4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="button4.Text" xml:space="preserve">
     <value>処理開始</value>
@@ -430,17 +281,8 @@
   <data name="tabPage4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label42.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label42.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label51.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label51.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 12</value>
   </data>
   <data name="label51.Text" xml:space="preserve">
     <value>秒</value>
@@ -448,29 +290,14 @@
   <data name="label51.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label43.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label43.Size" type="System.Drawing.Size, System.Drawing">
-    <value>19, 12</value>
-  </data>
   <data name="label43.Text" xml:space="preserve">
     <value>dB</value>
   </data>
   <data name="label43.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label44.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label44.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label50.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label50.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 12</value>
   </data>
   <data name="label50.Text" xml:space="preserve">
     <value>無音検出時間</value>
@@ -478,29 +305,14 @@
   <data name="label50.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label45.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label45.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label47.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label47.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 12</value>
   </data>
   <data name="label47.Text" xml:space="preserve">
     <value>サンプル</value>
   </data>
   <data name="label47.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label46.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label46.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 12</value>
   </data>
   <data name="label46.Text" xml:space="preserve">
     <value>サンプル</value>
@@ -511,12 +323,6 @@
   <data name="panel_advancedsettings2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label65.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label65.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 12</value>
-  </data>
   <data name="label65.Text" xml:space="preserve">
     <value>wavファイル名    renamed/</value>
   </data>
@@ -526,29 +332,17 @@
   <data name="textBox_serialWavFileName.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="checkBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 16</value>
-  </data>
   <data name="checkBox2.Text" xml:space="preserve">
     <value> ファイル名を連番(数字)にする (自分で#WAV定義をする必要があります)</value>
   </data>
   <data name="checkBox2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label34.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="label34.Text" xml:space="preserve">
+    <value>Step2. 単音wavを読み込み、音切りを行います</value>
   </data>
   <data name="label34.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="checkBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 16</value>
   </data>
   <data name="checkBox1.Text" xml:space="preserve">
     <value>複数のwavファイルの代わりに、単一のwavファイルを使う (推奨)</value>
@@ -559,23 +353,11 @@
   <data name="textBox_BasePath2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 12</value>
-  </data>
   <data name="label11.Text" xml:space="preserve">
     <value>ここに "text5_renamer_array.txt" をドラッグ＆ドロップしてね</value>
   </data>
   <data name="label11.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 12</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value>作業フォルダ</value>
@@ -583,32 +365,17 @@
   <data name="label10.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="button5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button5.Text" xml:space="preserve">
     <value>音切り開始</value>
   </data>
   <data name="button5.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 12</value>
-  </data>
   <data name="label9.Text" xml:space="preserve">
     <value>単音wavファイル</value>
   </data>
   <data name="label9.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 12</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>wav作業フォルダ</value>
@@ -622,14 +389,8 @@
   <data name="textBox_WaveBasePath.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>573, 12</value>
-  </data>
   <data name="label7.Text" xml:space="preserve">
-    <value>ここにDAWから書き出したwavファイルをドラッグ＆ドロップしてね ("Base Path" can be as same as "Wave Base Path")</value>
+    <value>ここにDAWから書き出したwavファイルをドラッグ＆ドロップしてね</value>
   </data>
   <data name="label7.ToolTip" xml:space="preserve">
     <value />
@@ -637,17 +398,11 @@
   <data name="tabPage5.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label70.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 12</value>
-  </data>
   <data name="label70.Text" xml:space="preserve">
     <value>フェードアウトの長さ (sec)</value>
   </data>
   <data name="label70.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label69.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 12</value>
   </data>
   <data name="label69.Text" xml:space="preserve">
     <value>しきい値 (dB)</value>
@@ -661,20 +416,17 @@
   <data name="button2.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="label68.Text" xml:space="preserve">
+    <value>Step2 (b). キー音の末尾の不要な無音を削除します</value>
+  </data>
   <data name="label68.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="tabPage2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label39.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label39.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label38.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
   </data>
   <data name="label38.Text" xml:space="preserve">
     <value>間隔時間</value>
@@ -685,20 +437,11 @@
   <data name="textBox_intervaltime.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label35.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 12</value>
-  </data>
   <data name="label35.Text" xml:space="preserve">
     <value>Step3. 重複定義を行います</value>
   </data>
   <data name="label35.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="button6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="button6.Text" xml:space="preserve">
     <value>重複定義開始</value>
@@ -706,17 +449,11 @@
   <data name="button6.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="label17.Text" xml:space="preserve">
+    <value>同じフォルダに結果が出力されます</value>
   </data>
   <data name="label17.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 12</value>
   </data>
   <data name="label16.Text" xml:space="preserve">
     <value>BMSファイルをドラッグアンドドロップしてね</value>
@@ -727,12 +464,6 @@
   <data name="textBox_BMSFilePath.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 12</value>
-  </data>
   <data name="label15.Text" xml:space="preserve">
     <value>BMSファイル名</value>
   </data>
@@ -741,12 +472,6 @@
   </data>
   <data name="textBox_BasePath3.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 12</value>
   </data>
   <data name="label14.Text" xml:space="preserve">
     <value>作業フォルダ</value>
@@ -760,14 +485,8 @@
   <data name="textBox_outfnformat.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label59.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label59.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label27.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label27.ToolTip" xml:space="preserve">
     <value />
@@ -775,20 +494,11 @@
   <data name="textBox_crossfadebeats.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label26.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label26.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label25.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label25.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label24.ToolTip" xml:space="preserve">
     <value />
@@ -799,9 +509,6 @@
   <data name="textBox_prebeats.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label23.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label23.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -811,14 +518,8 @@
   <data name="textBox_InputFile4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label22.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label21.ToolTip" xml:space="preserve">
     <value />
@@ -826,17 +527,11 @@
   <data name="textBox_BasePath4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="button7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button7.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="tabPage7.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="button32.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="button32.ToolTip" xml:space="preserve">
     <value />
@@ -853,26 +548,14 @@
   <data name="textBox_LimitLenBeats.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="button31.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button31.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="button30.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="button30.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="button28.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button28.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="button14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="button14.ToolTip" xml:space="preserve">
     <value />
@@ -880,26 +563,14 @@
   <data name="textBox_newTimeBase.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="button13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button13.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="button9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="button9.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="button8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button8.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label30.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label30.ToolTip" xml:space="preserve">
     <value />
@@ -916,35 +587,20 @@
   <data name="tabPage8.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="button16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button16.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label37.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label37.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="button15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button15.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label36.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label36.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="listBox1.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="tabPage9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>737, 455</value>
   </data>
   <data name="tabPage9.ToolTip" xml:space="preserve">
     <value />
@@ -964,32 +620,17 @@
   <data name="listBox2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tabPage12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>737, 455</value>
-  </data>
   <data name="tabPage12.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label60.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label60.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="button20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button20.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label41.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label41.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label40.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label40.ToolTip" xml:space="preserve">
     <value />
@@ -1000,32 +641,20 @@
   <data name="textBox_BMS_X.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="button19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button19.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="textBox_DiffResult.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tabPage10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>737, 455</value>
-  </data>
   <data name="tabPage10.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label58.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label58.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="label57.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label56.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label56.ToolTip" xml:space="preserve">
     <value />
@@ -1039,20 +668,11 @@
   <data name="textBox4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label55.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label55.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label54.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label54.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label53.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label53.ToolTip" xml:space="preserve">
     <value />
@@ -1063,14 +683,8 @@
   <data name="textBox2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label52.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label52.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="tabPage11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>737, 455</value>
   </data>
   <data name="tabPage11.ToolTip" xml:space="preserve">
     <value />
@@ -1090,9 +704,6 @@
   <data name="label29.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label63.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label63.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -1102,17 +713,11 @@
   <data name="linkLabel1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tabPage13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>737, 455</value>
-  </data>
   <data name="tabPage13.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="textBox_orderTextOut.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="button29.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="button29.ToolTip" xml:space="preserve">
     <value />
@@ -1120,39 +725,25 @@
   <data name="listBox3.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tabPage14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>737, 455</value>
-  </data>
   <data name="tabPage14.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="tabControl1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label2.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="progressBar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="progressBar1.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="label32.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label32.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAAAAAAAEAIAAoIAQAFgAAACgAAAAAAQAAAAIAAAEAIAAAAAAAACAEAAAAAAAAAAAAAAAAAAAA
@@ -5663,9 +5254,6 @@
         ////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////8=
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />

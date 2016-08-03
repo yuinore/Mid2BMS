@@ -881,6 +881,7 @@ namespace Mid2BMS
                 // IDEからデフォルト値を指定してしまうと、selectedIndexが-1のときに正しく読み込まれない（←日本語
                 comboBox1.Text = "-42 (normal)";
                 comboBox2.Text = "-24 (normal)";
+                comboBox3.Text = "-42 (normal)";  // TailCutPlus
                 return;
             }
 
@@ -1232,7 +1233,7 @@ namespace Mid2BMS
 
             if (comboBox1.Text == "") comboBox1.Text = "-42 (normal)";
             if (comboBox2.Text == "") comboBox2.Text = "-24 (normal)";
-            if (comboBox3.Text == "") comboBox3.Text = "-36 (low filesize of BMS)";
+            if (comboBox3.Text == "") comboBox3.Text = "-42 (normal)";
         }
 
         // http://dobon.net/vb/dotnet/control/tabpagehide.html
