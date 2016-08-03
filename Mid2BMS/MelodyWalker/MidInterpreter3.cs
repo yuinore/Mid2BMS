@@ -79,7 +79,7 @@ namespace Mid2BMS
             int j, j2;
             long l = 8, l2 = -1;
             int o = 5, ddo = 0, k = 0, v = 60;
-            String s2 = "";
+            StringSuruyatuSafe s2 = new StringSuruyatuSafe();
             Frac t = new Frac(0);
             //int voiN = 0;  // voice number 音色番号 (outdated)
             //int lastVoiN = 0;
@@ -106,9 +106,10 @@ namespace Mid2BMS
 
             s += "     ";
 
+            Frac margintime_frac = new Frac();
 
             //while (ihave)
-            //{
+            {
                 //ihave = false;
                 nts = new List<MNote>();
                 //lastVoiN = voiN;
@@ -182,23 +183,13 @@ namespace Mid2BMS
                         continue;
                     }
                     if (s[j] == 'l')
-                    {  // l* または l** または l*** のみ有効
-                        l = s[j + 1] - '0';
-                        if ("0123456789".IndexOf(s[j + 2]) >= 0)
+                    {
+                        l = 0;
+                        while (s.Length >= j + 2 && '0' <= s[j + 1] && s[j + 1] <= '9')
                         {
-                            l = (s[j + 1] - '0') * 10 + (s[j + 2] - '0');
-                            if ("0123456789".IndexOf(s[j + 3]) >= 0)
-                            {
-                                l = (s[j + 1] - '0') * 100 + (s[j + 2] - '0') * 10 + (s[j + 3] - '0');
-                                if ("0123456789".IndexOf(s[j + 4]) >= 0)
-                                {
-                                    throw new Exception("Lの数値指定は3文字まで！ around:" + s.Substring(Math.Max(0, j - 20), Math.Min(s.Length, j + 20)));
-                                }
-                                j++;
-                            }
+                            l = l * 10 + (s[j + 1] - '0');
                             j++;
                         }
-                        j++;
                         continue;
                     }
                     if (s[j] == 'v')
@@ -348,7 +339,7 @@ namespace Mid2BMS
                 l = -1; l2 = -1;
                 o = -1;
                 v = -1;  // 再初期化
-                Frac margintime_frac = new Frac((int)Math.Ceiling(Convert.ToDouble(margintime_beats)), 4);
+                margintime_frac = new Frac((int)Math.Ceiling(Convert.ToDouble(margintime_beats)), 4);
                 int margintime_mmllength = (int)Math.Ceiling(Convert.ToDouble(margintime_beats) / 4);
                 for (j = 0; j < nts.Count; j++)
                 {
@@ -428,13 +419,13 @@ namespace Mid2BMS
                 }
                 //l = lastDt[0];
                 //o = (int)lastDt[1];
-            //}  // while(ihave)
+            }  // while(ihave)
 
             //alert(ntm)
 
-            s2 = "// Track " + (TrackIndex) + (TrackIndex == 0 ? " (conductor track)" : "") +"\r\n"
+            s2 = new StringSuruyatuSafe() + "// Track " + (TrackIndex) + (TrackIndex == 0 ? " (conductor track)" : "") +"\r\n"
                 + "Track(" + (TrackIndex + 1) + ") q100\r\n"
-                + "TrackName = {\"" + TrackName + "\"} r1r1r1r1\r\n" + s2;
+                + "TrackName = {\"" + TrackName + "\"} r1r1r1r1\r\n" + s2.ToString();
 
             if (ChordModeEnabled == false)
             {
@@ -512,7 +503,7 @@ namespace Mid2BMS
                 }
             }
 
-            return s2;
+            return s2.ToString();
         }
 
         /// <summary>

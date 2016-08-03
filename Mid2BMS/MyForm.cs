@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Mid2BMS
 {
@@ -153,6 +154,7 @@ namespace Mid2BMS
             bool LookAtInstrumentName, String margintime_beats, int WavidSpacing,
             out String trackCsv, ref List<String> MidiTrackNames, out List<String> MidiInstrumentNames,
             List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, bool sequenceLayer,
+            int newTimebase, int velocityStep,
             ref double ProgressBarValue, ref bool ProgressBarFinished)
         {
             #region ファイルの更新チェック
@@ -168,13 +170,67 @@ namespace Mid2BMS
             }
             #endregion
 
+            Func<Stream> quantizedMidiStreamGenerator;
+
+            #region Midiのクオンタイズ
+            if (newTimebase > 0)
+            {
+                var quantizedMidiWriteStream = new MemoryStream();
+
+                MyForm.ChangeMidiTimebase(
+                    neu.IFileStream(this.PathBase + this.FileName_MidiFile, FileMode.Open, FileAccess.Read),
+                    quantizedMidiWriteStream,
+                    newTimebase);
+
+                quantizedMidiWriteStream.Close();
+
+                var mbuf = quantizedMidiWriteStream.GetBuffer();
+
+                quantizedMidiStreamGenerator = () => new MemoryStream(mbuf);
+
+                if (createExFiles)
+                {
+                    File.WriteAllBytes(this.PathBase + "midiinput_timequantizedstream.mid", quantizedMidiWriteStream.GetBuffer());
+                }
+            }
+            else
+            {
+                quantizedMidiStreamGenerator = () => neu.IFileStream(this.PathBase + this.FileName_MidiFile, FileMode.Open, FileAccess.Read);
+            }
+            #endregion
+
+            #region ベロシティの量子化
+            if (newTimebase > 0)
+            {
+                var quantizedMidiWriteStream2 = new MemoryStream();
+
+                MyForm.QuantizeVelocity(
+                    quantizedMidiStreamGenerator(),
+                    quantizedMidiWriteStream2,
+                    velocityStep);
+
+                quantizedMidiWriteStream2.Close();
+
+                var mbuf = quantizedMidiWriteStream2.GetBuffer();
+
+                quantizedMidiStreamGenerator = () => new MemoryStream(mbuf);
+
+                if (createExFiles)
+                {
+                    File.WriteAllBytes(this.PathBase + "midiinput_velocityquantizedstream.mid", quantizedMidiWriteStream2.GetBuffer());
+                }
+            }
+            else
+            {
+                // 何もしない
+            }
+            #endregion
+
             #region timebase及びmidi_bpmの取得、及び重複ノーツのチェック、テンポチェンジBMSの作成
             int timebase;
             decimal midi_bpm;
             {
-                Stream rf = neu.IFileStream(
-                    this.PathBase + this.FileName_MidiFile,
-                    FileMode.Open, FileAccess.Read);
+                Stream rf = quantizedMidiStreamGenerator();
                 MidiStruct ms = new MidiStruct(rf);
                 if (ms.resolution == null) throw new Exception("resolutionがnull #とは");
                 timebase = ms.resolution ?? 480;
@@ -262,7 +318,7 @@ namespace Mid2BMS
 
             List<bool> isEmptyList;
 
-            m2m.Process(PathBase + FileName_MidiFile, PathBase + @"text0_stdout_part1.txt", out MMLs,
+            m2m.Process(quantizedMidiStreamGenerator(), PathBase + @"text0_stdout_part1.txt", out MMLs,
                 out MidiTrackNames, out MidiInstrumentNames, createExFiles, ref ProgressBarValue, 0.00, 0.10);
 
             if (MidiTrackIdentifier == null)
@@ -339,7 +395,7 @@ namespace Mid2BMS
 
             if (isRedMode)
             {
-                MidiStruct ms2 = new MidiStruct(neu.IFileStream(PathBase + FileName_MidiFile, FileMode.Open, FileAccess.Read), true);
+                MidiStruct ms2 = new MidiStruct(quantizedMidiStreamGenerator(), true);
 
                 int margintime_beats_int = (int)Math.Ceiling(Convert.ToDouble(margintime_beats));
                 MidiTrack.SPLIT_BEATS_INTERVAL = margintime_beats_int + 4;
@@ -538,6 +594,73 @@ namespace Mid2BMS
             ProgressBarFinished = true;
 
             MessageBox.Show("\"" + newBmsPath + "\" にBMSを書き込みました。");
+        }
+
+        //***********************************************************************************
+        //*** その他
+        //***********************************************************************************
+
+        public static void ChangeMidiTimebase(Stream inStream, Stream outStream, long newTimeBase)
+        {
+            MidiStruct ms = new MidiStruct(inStream, true);
+
+            Debug.Assert(ms.resolution != null);
+            long oldTimeBase = ms.resolution ?? 480;  // この480って必要？
+
+            for (int i = 0; i < ms.tracks.Count; i++)
+            {
+                MidiTrack mt = ms.tracks[i];
+
+                for (int j = 0; j < mt.Count; j++)
+                {
+                    // 切り捨てではなく四捨五入に修正
+                    int tick_old = mt[j].tick;
+
+                    mt[j].tick = (int)Math.Round((tick_old * newTimeBase) / (double)oldTimeBase);  // 切り捨て
+                    if (mt[j] is MidiEventNote)
+                    {
+                        MidiEventNote me = (MidiEventNote)mt[j];
+                        me.q = (int)Math.Round(((tick_old + me.q) * newTimeBase) / (double)oldTimeBase) - mt[j].tick;  // 切り捨て
+                        me.q = Math.Max(1, me.q);  // ただし1以上
+                    }
+                }
+            }
+
+            ms.resolution = (int)newTimeBase;
+
+            ms.Export(outStream, true);
+
+            inStream.Close();
+        }
+
+        public static void QuantizeVelocity(Stream inStream, Stream outStream, int velocityStep)
+        {
+            if (velocityStep < 1) throw new Exception("Velocity Quantization Interval は 1以上である必要があります");
+
+            Stream rf = inStream;
+
+            MidiStruct ms = new MidiStruct(rf, true);
+
+            foreach (MidiTrack mt in ms.tracks)
+            {
+                foreach (MidiEvent me_ in mt)
+                {
+                    MidiEventNote me = me_ as MidiEventNote;
+                    if (me != null)
+                    {
+                        if (me.v >= 1)
+                        {
+                            me.v = ((int)Math.Round((double)me.v / (double)velocityStep)) * velocityStep;
+                            if (me.v < 1) me.v = 1;
+                            else if (me.v > 127) me.v = 127;
+                        }
+                    }
+                }
+            }
+
+            ms.Export(outStream, true);
+
+            rf.Close();
         }
     }
 }

@@ -128,18 +128,7 @@ namespace Mid2BMS
         // Mid2BMS
         private void button1_Click(object sender, EventArgs e)
         {
-            int VacantWavid;
-
-            try
-            {
-                VacantWavid = BMSParser.IntFromHex36(textBox_vacantWavid.Text);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                VacantWavid = 1;
-            }
-
+            int VacantWavid = BMSParser.IntFromHex36(textBox_vacantWavid.Text);  // 例外は親メソッドでcatchするw
             bool isRedMode = radioButton_red.Checked;
             bool isPurpleMode = radioButton_purple.Checked;
             String margintime_beats = textBox_margintime.Text;
@@ -147,16 +136,27 @@ namespace Mid2BMS
             bool LookAtInstrumentName = radioButton2.Checked;
             bool createExFiles = checkBox_createExtraFiles.Checked;
             bool sequenceLayer = checkBox_seqLayer.Checked;
-            int WavidSpacing = Convert.ToInt32(textBox_WavidSpacing.Text);
+            int WavidSpacing = Int32.Parse(textBox_WavidSpacing.Text);
 
-            Convert.ToDouble(margintime_beats);  // 例外チェック
+            int newtimebase = Int32.Parse(textBox_newTimebase2.Text);
+            int velocityStep = Int32.Parse(textBox_velocitystep.Text);
 
+            Convert.ToDouble(margintime_beats);  // 例外チェックのみ行う
+            
             String trackCsv = null;
             List<String> MidiTrackNames = null;
             List<String> MidiInstrumentNames = null;
             List<bool> isDrumsList = null;
             List<bool> ignoreList = null;
             List<bool> isChordList = null;
+
+            if (newtimebase > 1000)
+            {
+                if (MessageBox.Show("4桁以上のTimebaseはやめておいた方が良いと思います。続行しますか？ (Click yes to continue)", "確認", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
 
             // ラムダ式を濫用している感じある
             // そんなことよりラムダ式の中からローカル変数にアクセスできるのがやばい
@@ -182,7 +182,7 @@ namespace Mid2BMS
                 MyFormInstance.Mid2BMS_Process(
                     isRedMode, isPurpleMode, createExFiles, ref VacantWavid, ref DefVacantBMSChIdx,
                     LookAtInstrumentName, margintime_beats, WavidSpacing, out trackCsv, ref MidiTrackNames, out MidiInstrumentNames,
-                    isDrumsList, ignoreList, isChordList, sequenceLayer,
+                    isDrumsList, ignoreList, isChordList, sequenceLayer, newtimebase, velocityStep,
                     ref ProgressBarValue, ref ProgressBarFinished);
 
             InitializeProgressBar();  // これを実行したら必ずanotherThreadが走るようにする
@@ -451,7 +451,15 @@ namespace Mid2BMS
                 MyFormInstance.PathBase = textBox_BasePath.Text + "\\";
             }
             MyFormInstance.FileName_MidiFile = textBox_MidiFileName.Text;
-            button1_Click(sender, e);
+
+            try
+            {
+                button1_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void textBox_BasePath_DragEnter(object sender, DragEventArgs e)
@@ -824,34 +832,11 @@ namespace Mid2BMS
         {
             try
             {
-                Stream rf = neu.IFileStream(textBox_MidiInput5.Text, FileMode.Open, FileAccess.Read);
-
-                MidiStruct ms = new MidiStruct(rf, true);
-
-                long newTimeBase = Convert.ToInt32(textBox_newTimeBase.Text);
-                long oldTimeBase = ms.resolution ?? 480;
-
-                for (int i = 0; i < ms.tracks.Count; i++)
-                {
-                    MidiTrack mt = ms.tracks[i];
-
-                    for (int j = 0; j < mt.Count; j++)
-                    {
-                        mt[j].tick = (int)((mt[j].tick * newTimeBase) / oldTimeBase);  // 切り捨て
-                        if (mt[j] is MidiEventNote)
-                        {
-                            MidiEventNote me = (MidiEventNote)mt[j];
-                            me.q = (int)((me.q * newTimeBase) / oldTimeBase);  // 切り捨て
-                            me.q = Math.Max(1, me.q);  // ただし1以上
-                        }
-                    }
-                }
-
-                ms.resolution = (int)newTimeBase;
-
-                ms.Export(neu.IFileStream(textBox_MidiOut5.Text, FileMode.Create, FileAccess.Write), true);
-
-                rf.Close();
+                MyForm.ChangeMidiTimebase(
+                    neu.IFileStream(textBox_MidiInput5.Text, FileMode.Open, FileAccess.Read),
+                    neu.IFileStream(textBox_MidiOut5.Text, FileMode.Create, FileAccess.Write),
+                    Convert.ToInt32(textBox_newTimeBase.Text)
+                    );
             }
             catch (Exception exc)
             {
@@ -1609,33 +1594,10 @@ namespace Mid2BMS
         {
             try
             {
-                int velQuantInt = Convert.ToInt32(textBox_velQuantInt.Text);
-                if (velQuantInt < 1) throw new Exception("Velocity Quantization Interval は 1以上である必要があります");
-
-                Stream rf = neu.IFileStream(textBox_MidiInput5.Text, FileMode.Open, FileAccess.Read);
-
-                MidiStruct ms = new MidiStruct(rf, true);
-                
-                foreach (MidiTrack mt in ms.tracks)
-                {
-                    foreach (MidiEvent me_ in mt)
-                    {
-                        MidiEventNote me = me_ as MidiEventNote;
-                        if (me != null)
-                        {
-                            if (me.v >= 1)
-                            {
-                                me.v = ((int)Math.Round((double)me.v / (double)velQuantInt)) * velQuantInt;
-                                if (me.v < 1) me.v = 1;
-                                else if (me.v > 127) me.v = 127;
-                            }
-                        }
-                    }
-                }
-
-                ms.Export(neu.IFileStream(textBox_MidiOut5.Text, FileMode.Create, FileAccess.Write), true);
-
-                rf.Close();
+                MyForm.QuantizeVelocity(
+                    neu.IFileStream(textBox_MidiInput5.Text, FileMode.Open, FileAccess.Read),
+                    neu.IFileStream(textBox_MidiOut5.Text, FileMode.Create, FileAccess.Write),
+                    Convert.ToInt32(textBox_velQuantInt.Text));
             }
             catch (Exception exc)
             {

@@ -16,7 +16,7 @@ namespace Mid2BMS
 
             if (x1.t != y1.t) return (x1.t > y1.t) ? 1 : -1;  // t の小さい順
             if (x1.n != y1.n) return (x1.n > y1.n) ? 1 : -1;  // n の小さい順
-            if (x1.v != y1.v) return (x1.v < y1.v) ? 1 : -1;  // v の*大きい*順
+            if (x1.v != y1.v) return (x1.v > y1.v) ? 1 : -1;  // v の大きい順 (なんとなく修正)
             if (x1.l != y1.l) return (x1.l > y1.l) ? 1 : -1;  // L の小さい順
             if (x1.prev != null && y1.prev != null && x1.prev.n != y1.prev.n) return (x1.prev.n > y1.prev.n) ? 1 : -1;  // prev.n の小さい順
 
@@ -31,7 +31,7 @@ namespace Mid2BMS
             MNote y1 = (MNote)y;
 
             if (x1.n != y1.n) return (x1.n > y1.n) ? 1 : -1;  // n の小さい順
-            if (x1.v != y1.v) return (x1.v < y1.v) ? 1 : -1;  // v の*大きい*順
+            if (x1.v != y1.v) return (x1.v > y1.v) ? 1 : -1;  // v の小さい順 (なんとなく修正)
             if (x1.l != y1.l) return (x1.l > y1.l) ? 1 : -1;  // L の小さい順
             if (x1.prev != null && y1.prev != null && x1.prev.n != y1.prev.n) return (x1.prev.n > y1.prev.n) ? 1 : -1;  // prev.n の小さい順
 

@@ -62,7 +62,7 @@ namespace Mid2BMS
         }
 
 
-        public int Process(String MidFilePath, String MmlFilePath, out List<String> MMLs,
+        public int Process(Stream MidFileReadStream, String MmlFilePath, out List<String> MMLs,
             out List<String> MidiTrackNames,
             out List<String> MidiInstrumentNames,
             bool createExFiles,
@@ -106,7 +106,7 @@ namespace Mid2BMS
                 {
                     streamW = new StreamWriter(new MemoryStream());  // 読み捨て用(NullObjectStream？)
                 }
-                fpR = new BinaryReader(neu.IFileStream(MidFilePath, FileMode.Open, FileAccess.Read));//@"stdread.mid"));
+                fpR = new BinaryReader(MidFileReadStream);//@"stdread.mid"));
 
                 streamW.Write("\r\n\r\n\r\nTempo(160)TimeBase=(384*40);\r\n// Hello.\r\n// 「トラック番号修正」や「@118付加」を適宜\r\n\r\n");
 

@@ -21,11 +21,13 @@ namespace Mid2BMS
         /// <summary>
         /// 最大分解能
         /// </summary>
-        const int MaxDenominator = 384;//384;
-        const int MaxTimeDenominator = 384;
+        int MaxDenominator = 384;//384;
+        int MaxTimeDenominator = 384;
 
         public int SetTimeBase(int timebase)
         {
+            MaxDenominator = MaxTimeDenominator = timebase * 4;  // 信頼性に不安
+
             tpm = timebase * 4;
             return timebase;
         }
