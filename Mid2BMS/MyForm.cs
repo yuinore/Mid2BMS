@@ -127,7 +127,27 @@ namespace Mid2BMS
         //***********************************************************************************
         //*** Mid2BMS に関する記述
         //***********************************************************************************
-
+        /// <summary>
+        /// midiファイルからbmsファイル等の音切りに必要なファイルを生成します。
+        /// [1] Mid2BMS タブの Process ボタンに相当します。
+        /// </summary>
+        /// <param name="isRedMode">red modeであるかどうかを表すbool値です。</param>
+        /// <param name="isPurpleMode">purple modeであるかどうかを表すbool値です。</param>
+        /// <param name="createExFiles">テンポチェンジ定義BMS等の追加のファイルを生成するかどうかを示すbool値です。</param>
+        /// <param name="VacantWavid">定義を開始するWAV定義番号です。</param>
+        /// <param name="DefaultVacantBMSChannelIdx">配置を開始するレーンを表す、static string[] Mid2BMS.BMSPlacement.ChannelTemplate の添字です。</param>
+        /// <param name="LookAtInstrumentName">キー音ファイル名に Instrument Name を用いるか、Track Name を用いるかを表すフラグの、各トラックに対する値の配列です。</param>
+        /// <param name="margintime_beats">キー音とキー音の間に設けられる無音時間を、拍で表した長さです。</param>
+        /// <param name="WavidSpacing">トラックとトラックの間に設けられる、キー音が定義されないWAV定義の数です。通常は0です。</param>
+        /// <param name="trackCsv">midiファイルを解析した結果を格納するcsvを表す文字列です。</param>
+        /// <param name="MidiTrackNames">[nullable] midiファイルを解析した結果得られたTrack Nameを格納する配列です。ただしnull以外が与えられた場合は、それに従ってキー音にファイル名を与えます。</param>
+        /// <param name="MidiInstrumentNames">[nullable] midiファイルを解析した結果得られたInstrument Nameを格納する配列です。</param>
+        /// <param name="isDrumsList">[nullable] 各音程に対し1つのBMSレーンを割り当てるかどうかを示すフラグの配列です。フラグのデフォルト値はfalseです。</param>
+        /// <param name="ignoreList">[nullable] トラックを無視するかどうかを示すフラグの配列です。フラグのデフォルト値はfalseです。</param>
+        /// <param name="isChordList">[nullable] 同時に発音された音を1つのキー音にまとめるかどうかを示すフラグの配列です。フラグのデフォルト値はfalseです。</param>
+        /// <param name="sequenceLayer">それぞれのトラックが重ならないように単音midiを時間的にずらすかどうかを示すフラグです。デフォルト値はfalseです。</param>
+        /// <param name="ProgressBarValue">プログレスバーに対して値を反映させるための変数です。</param>
+        /// <param name="ProgressBarFinished">プログレスバーの増加が終了したかどうかを示すフラグです。</param>
         public void Mid2BMS_Process(
             bool isRedMode, bool isPurpleMode, bool createExFiles, ref int VacantWavid, ref int DefaultVacantBMSChannelIdx,
             bool LookAtInstrumentName, String margintime_beats, int WavidSpacing,
@@ -135,7 +155,8 @@ namespace Mid2BMS
             List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, bool sequenceLayer,
             ref double ProgressBarValue, ref bool ProgressBarFinished)
         {
-            if (!Mid2BMS_CheckHash())
+            #region ファイルの更新チェック
+            if (!Mid2BMS_CheckHash())  // TODO: 不要なコードの削除or修正
             {
                 // 操作をキャンセルする
                 ProgressBarValue = 1.00;
@@ -145,9 +166,9 @@ namespace Mid2BMS
                 MidiInstrumentNames = null;
                 return;
             }
+            #endregion
 
-
-
+            #region timebase及びmidi_bpmの取得、及び重複ノーツのチェック、テンポチェンジBMSの作成
             int timebase;
             decimal midi_bpm;
             {
@@ -201,8 +222,7 @@ namespace Mid2BMS
                     // 処理を中断しますか。(Click \"Yes\" to Abort)
                     // (注：Mid2BMSは、Midiチャンネルには対応していません)
                 }
-
-
+                
                 if (createExFiles) // テンポチェンジBMSの作成
                 {
                     var tempochanges = ms.tracks[0].Where(x => x is MidiEventMeta && ((MidiEventMeta)x).id == 0x51);
@@ -229,7 +249,9 @@ namespace Mid2BMS
                     FileIO.WriteAllText(this.PathBase + "text6_tempochangebms.txt", tempobms);
                 }
             }
+            #endregion
 
+            #region midiファイルからmmlへの変換、Track Name、Instrument Nameの取得
             Mid2mml m2m = new Mid2mml();
 
             List<String> MMLs = new List<String>();
@@ -256,7 +278,9 @@ namespace Mid2BMS
             {
                 // null以外が与えられた場合はそれに従う
             }
+            #endregion
 
+            #region 何か書き出しっぽいの
             String[][] TextFormatOut = new String[MMLs.Count][];
             for (int i = 0; i < MMLs.Count; i++)
             {
@@ -272,20 +296,18 @@ namespace Mid2BMS
             {
                 FileIO.WriteAllText(PathBase + @"text0_stdout_part1_array.txt", TextFormatOutStr);
             }
+            #endregion
 
-            //String mml = System.IO.File.ReadAllText(pathBase + @"stdout_part1.txt");
-
-            //for (int i = 0; i < 100; i++)
-            //{
+            #region MMLから各出力ファイルへの変換（多分）
             MelodyWalker mw = new MelodyWalker();
             mw.VacantBMSChannelIdx = DefaultVacantBMSChannelIdx;
             mw.WavidSpacing = WavidSpacing;
             mw.MultiProcess(MMLs, MidiTrackIdentifier, isDrumsList, ignoreList, isChordList, sequenceLayer, PathBase,
                 isRedMode, isPurpleMode, createExFiles, ref VacantWavid, timebase, margintime_beats, out trackCsv, out isEmptyList, midi_bpm,
                 ref ProgressBarValue, 0.10, 1.00);
-            //}
+            #endregion
 
-            // トラックリストファイルの作成。WaveSplitterで使用する
+            #region トラックリストファイルの作成。WaveSplitterで使用する（？？？？？？？？？？？？）
             {
                 String Text1;
                 SoundRunner sr = new SoundRunner();
@@ -308,6 +330,9 @@ namespace Mid2BMS
                 //    PathBase + @"wavesplitter_tracklist.txt",
                 //    validTrackIds.Join("\r\n"));
             }
+            #endregion
+
+            #region RedModeの場合の処理（以前の処理の一部を破棄する？）
 
             // RedModeの場合はmidiをSplitしたものを提出する
             // ignoreListをちゃんと見て！
@@ -359,6 +384,7 @@ namespace Mid2BMS
 
                 ms2.Export(neu.IFileStream(PathBase + @"text3_tanon_smf_red.mid", FileMode.Create, FileAccess.Write), true);
             }
+            #endregion
 
             Mid2BMS_WriteHash();
 
