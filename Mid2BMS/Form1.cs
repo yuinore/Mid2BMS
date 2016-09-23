@@ -13,6 +13,7 @@ using Codeplex.Data;
 using System.Text.RegularExpressions;  // DynamicJson
 //using System.Runtime.Serialization.Json;
 using System.Web;
+using System.Security.Cryptography;
 #if SILVERLIGHT
 using System.Windows;
 #else
@@ -1675,7 +1676,7 @@ namespace Mid2BMS
                 listBox4.Items.AddRange((string[])e.Data.GetData(DataFormats.FileDrop));
             }
         }
-
+        
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox4.SelectedIndex == 0)
@@ -1686,6 +1687,49 @@ namespace Mid2BMS
             {
                 textBox_silenceMin.Enabled = true;
             }
+        }
+        
+        
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            SHA512Managed hashComputer = new SHA512Managed();
+
+            Func<string,string> GetFileHash = filename => hashComputer.ComputeHash(new FileStream(filename, FileMode.Open, FileAccess.Read)).Select(x => x.ToString("x2")).Join("");
+            // ラムダ式、(技術的に)やばいなあ・・・すごいなあ・・・
+
+            var path1 = textBox_ksrenamePath.Text;  // old
+            var path2 = textBox_ksrenamePath2.Text;  // new
+
+            var oldName_to_hash = new Dictionary<string, string>();
+            var hash_to_newName = new Dictionary<string, string>();
+
+            foreach (var filename in Directory.GetFiles(path1))
+            {
+                var hash = GetFileHash(filename);
+
+                oldName_to_hash.Add(filename, hash);
+            }
+
+            foreach (var filename in Directory.GetFiles(path2))
+            {
+                var hash = GetFileHash(filename);
+
+                try
+                {
+                    hash_to_newName.Add(hash, filename);
+                }
+                catch
+                {
+                    // 要修正
+                }
+            }
+
+            foreach (var kvpair in oldName_to_hash)
+            {
+                Console.WriteLine(kvpair.Key + " ---> " + hash_to_newName[kvpair.Value]);
+            }
+
+            hashComputer.Clear();
         }
     }
 }
