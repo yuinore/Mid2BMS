@@ -18,7 +18,7 @@ namespace Mid2BMS
         public double ThresholdInDB { get; set; }  // tailcut時のthreshold
 
         //readonly float[] SilenceLevelsSquare = new float[] { 0.0001f, 0.00001f, 0.000001f, 0.0000001f };  // -40, -50, -60, -70dB
-        readonly float[] SilenceLevelsSquare = new float[] { 0.01f, 0.001f, 0.0001f, 0.00001f, 0.000001f, 0.0000001f };  // -20, -30, -40, -50, -60, -70dB
+        //float[] SilenceLevelsSquare = new float[] { 0.01f, 0.001f, 0.0001f, 0.00001f, 0.000001f, 0.0000001f };  // -20, -30, -40, -50, -60, -70dB
         public double SilenceTime { get; set; }  // seconds
 
         public int FadeInSamples { get; set; }
@@ -34,7 +34,7 @@ namespace Mid2BMS
 
         public int Process(
             String[][] WaveSplitter_Text, IEnumerable<String[]> WaveRenamer_Text,
-            String InputWaveFilePath, String RenamedWaveFilePath,
+            String InputWaveFilePath, String RenamedWaveFilePath, float[] SilenceLevelsSquare,
             ref double progressValue, double progressMin, double progressMax)
         {
             double progressMin2;
@@ -88,7 +88,7 @@ namespace Mid2BMS
                             if (!reader.ReadSample(out indt1)) isEnd = true;
                             indt2 = indt1;
                         }
-                        float ave_square = (indt1 * indt1 + indt2 * indt2) * 0.5f;
+                        float ave_square = Math.Max(indt1 * indt1, indt2 * indt2);
                         bool isSplitPoint = false;
 
                         for (int i = 0; i < SilenceLevelsSquare.Length; i++)
@@ -128,7 +128,7 @@ namespace Mid2BMS
                                 float threshold = (float)Math.Pow(10.0, ThresholdInDB / 20.0);  // * 32768.0
                                 for (j = buffer[0].Count - 1; j >= 0; j--)
                                 {
-                                    if ((buffer[0][j] * buffer[0][j] + buffer[1][j] * buffer[1][j]) * 0.5 >= threshold * threshold) break;  // 2で掛けるのを忘れてた
+                                    if (Math.Max(buffer[0][j] * buffer[0][j], buffer[1][j] * buffer[1][j]) >= threshold * threshold) break;  // 2で掛けるのを忘れてた -> maxに変えました
                                 }
                                 // now I need j-th sample, so now new_filesize is ((j+1)*4+44)
                                 buffer[0].RemoveRange(j + 1, buffer[0].Count - j - 1);

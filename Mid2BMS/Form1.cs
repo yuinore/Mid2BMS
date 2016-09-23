@@ -302,6 +302,8 @@ namespace Mid2BMS
         // Splitter
         private void button2_Click(object sender, EventArgs e)
         {
+            // 例外は呼び出し元でキャッチ
+
             double threshold = Convert.ToDouble(textBox_tailCutThreshold.Text);
             int fadein = Convert.ToInt32(textBox_fadeInTime.Text);
             int fadeout = Convert.ToInt32(textBox_fadeOutTime.Text);
@@ -312,6 +314,34 @@ namespace Mid2BMS
             bool renamingEnabled = !checkBox2.Checked;
             string renamingFilename = textBox_serialWavFileName.Text;
 
+            float[] SilenceLevelsSquare;
+            {
+                double dbMax = Double.Parse(textBox_silenceMax.Text);
+                double dbMin = Double.Parse(textBox_silenceMin.Text);
+                int sectionCount = (int)Math.Round(Double.Parse(comboBox4.Text));
+                if (sectionCount >= 1 && dbMax > 0) { MessageBox.Show("Silence Max には0以下の値を指定してください。"); return; }
+                if (sectionCount >= 2 && dbMin > 0) { MessageBox.Show("Silence Min には0以下の値を指定してください。"); return; }
+                if (sectionCount >= 2 && dbMin >= dbMax) { MessageBox.Show("Silence Max > Silence Min となるように指定してください。"); return; }
+
+                if (sectionCount == 1)
+                {
+                    SilenceLevelsSquare =
+                        Enumerable.Range(0, sectionCount)
+                        .Select(i => dbMax)
+                        .Select(decibel => (float)(Math.Pow(10.0, decibel / 10.0)))
+                        .ToArray();
+                }
+                else
+                {
+                    SilenceLevelsSquare =
+                        Enumerable.Range(0, sectionCount)
+                        .Select(i => dbMax + (dbMin - dbMax) * i / (sectionCount - 1))
+                        .Select(decibel => (float)(Math.Pow(10.0, decibel / 10.0)))
+                        .ToArray();
+                    // 二乗（＝電力）なので注意
+                }
+            }
+
             if (threshold > 0)
             {
                 MessageBox.Show("Threshold には0以下の値を入力してください。-60 くらいが良いと思います。");
@@ -321,7 +351,7 @@ namespace Mid2BMS
             if (MyFormInstance.PathBase != MyFormInstance.WavePathBase)
             {
                 if (MessageBox.Show(
-                    "wavファイルのあるフォルダと、text5_renamer_array.txtファイルのあるフォルダが違っています。気にせずこのまま続けていいですか。", "",
+                    "wavファイルのあるフォルダと、text5_renamer_array.txtファイルのあるフォルダが異なっています。気にせずこのまま続けていいですか。", "",
                     MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.Cancel)
                 {
                     return;
@@ -335,7 +365,7 @@ namespace Mid2BMS
                 try
                 {
                     MyFormInstance.WaveSplit_Process(
-                        threshold, fadein, fadeout, silence_time, inputFileIndicated, renamingEnabled, renamingFilename,
+                        threshold, fadein, fadeout, silence_time, inputFileIndicated, renamingEnabled, renamingFilename, SilenceLevelsSquare,
                         ref ProgressBarValue, ref ProgressBarFinished);
                 }
                 catch (Exception exc)
@@ -495,10 +525,19 @@ namespace Mid2BMS
         {
             try
             {
+                if (textBox_BasePath2.Text == "") { MessageBox.Show("基準フォルダ名が指定されていません。設定を確認してください。"); return; }
+                if (textBox_WaveBasePath.Text == "") { MessageBox.Show("WAVファイル基準フォルダ名が指定されていません。設定を確認してください。"); return; }
+                if (checkBox1.Checked && textBox_WaveFileName.Text == "")
+                {
+                    MessageBox.Show("単音wavファイル名が指定されていません。設定を確認してください。"); return;
+                }
+
+                bool renamingEnabled = !checkBox1.Checked;
+
                 char c = textBox_BasePath2.Text[textBox_BasePath2.Text.Length - 1];
                 if (c == '\\' || c == '/')
                 {
-                    MyFormInstance.PathBase = textBox_BasePath2.Text;
+                    MyFormInstance.PathBase = renamingEnabled ? textBox_BasePath2.Text : textBox_WaveBasePath.Text;
                 }
                 else
                 {
@@ -882,6 +921,7 @@ namespace Mid2BMS
                 comboBox1.Text = "-42 (normal)";
                 comboBox2.Text = "-24 (normal)";
                 comboBox3.Text = "-42 (normal)";  // TailCutPlus
+                comboBox4.SelectedIndex = 5;  // "6"
                 return;
             }
 
@@ -1234,6 +1274,7 @@ namespace Mid2BMS
             if (comboBox1.Text == "") comboBox1.Text = "-42 (normal)";
             if (comboBox2.Text == "") comboBox2.Text = "-24 (normal)";
             if (comboBox3.Text == "") comboBox3.Text = "-42 (normal)";
+            if (comboBox4.Text == "") comboBox4.SelectedIndex = 5;  // "6"
         }
 
         // http://dobon.net/vb/dotnet/control/tabpagehide.html
@@ -1632,6 +1673,18 @@ namespace Mid2BMS
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 listBox4.Items.AddRange((string[])e.Data.GetData(DataFormats.FileDrop));
+            }
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox4.SelectedIndex == 0)
+            {
+                textBox_silenceMin.Enabled = false;
+            }
+            else
+            {
+                textBox_silenceMin.Enabled = true;
             }
         }
     }

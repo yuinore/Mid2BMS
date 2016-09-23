@@ -78,6 +78,15 @@
             this.button4 = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel_advancedsettings2 = new System.Windows.Forms.Panel();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.label81 = new System.Windows.Forms.Label();
+            this.label80 = new System.Windows.Forms.Label();
+            this.label79 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label77 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.textBox_silenceMin = new System.Windows.Forms.TextBox();
+            this.textBox_silenceMax = new System.Windows.Forms.TextBox();
             this.label42 = new System.Windows.Forms.Label();
             this.textBox_tailCutThreshold = new System.Windows.Forms.TextBox();
             this.textBox_fadeInTime = new System.Windows.Forms.TextBox();
@@ -197,6 +206,15 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label52 = new System.Windows.Forms.Label();
             this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.linkLabel12 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel11 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel10 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel9 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel8 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
+            this.label75 = new System.Windows.Forms.Label();
             this.label67 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
@@ -216,15 +234,6 @@
             this.label32 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label75 = new System.Windows.Forms.Label();
-            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel8 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel9 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel10 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel11 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel12 = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -608,6 +617,15 @@
             // 
             // panel_advancedsettings2
             // 
+            this.panel_advancedsettings2.Controls.Add(this.comboBox4);
+            this.panel_advancedsettings2.Controls.Add(this.label81);
+            this.panel_advancedsettings2.Controls.Add(this.label80);
+            this.panel_advancedsettings2.Controls.Add(this.label79);
+            this.panel_advancedsettings2.Controls.Add(this.label78);
+            this.panel_advancedsettings2.Controls.Add(this.label77);
+            this.panel_advancedsettings2.Controls.Add(this.label76);
+            this.panel_advancedsettings2.Controls.Add(this.textBox_silenceMin);
+            this.panel_advancedsettings2.Controls.Add(this.textBox_silenceMax);
             this.panel_advancedsettings2.Controls.Add(this.label42);
             this.panel_advancedsettings2.Controls.Add(this.textBox_tailCutThreshold);
             this.panel_advancedsettings2.Controls.Add(this.textBox_fadeInTime);
@@ -622,6 +640,64 @@
             this.panel_advancedsettings2.Controls.Add(this.label46);
             resources.ApplyResources(this.panel_advancedsettings2, "panel_advancedsettings2");
             this.panel_advancedsettings2.Name = "panel_advancedsettings2";
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Items.AddRange(new object[] {
+            resources.GetString("comboBox4.Items"),
+            resources.GetString("comboBox4.Items1"),
+            resources.GetString("comboBox4.Items2"),
+            resources.GetString("comboBox4.Items3"),
+            resources.GetString("comboBox4.Items4"),
+            resources.GetString("comboBox4.Items5"),
+            resources.GetString("comboBox4.Items6"),
+            resources.GetString("comboBox4.Items7")});
+            resources.ApplyResources(this.comboBox4, "comboBox4");
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
+            // 
+            // label81
+            // 
+            resources.ApplyResources(this.label81, "label81");
+            this.label81.Name = "label81";
+            // 
+            // label80
+            // 
+            resources.ApplyResources(this.label80, "label80");
+            this.label80.Name = "label80";
+            // 
+            // label79
+            // 
+            resources.ApplyResources(this.label79, "label79");
+            this.label79.Name = "label79";
+            // 
+            // label78
+            // 
+            resources.ApplyResources(this.label78, "label78");
+            this.label78.Name = "label78";
+            // 
+            // label77
+            // 
+            resources.ApplyResources(this.label77, "label77");
+            this.label77.Name = "label77";
+            // 
+            // label76
+            // 
+            resources.ApplyResources(this.label76, "label76");
+            this.label76.Name = "label76";
+            // 
+            // textBox_silenceMin
+            // 
+            resources.ApplyResources(this.textBox_silenceMin, "textBox_silenceMin");
+            this.textBox_silenceMin.Name = "textBox_silenceMin";
+            // 
+            // textBox_silenceMax
+            // 
+            resources.ApplyResources(this.textBox_silenceMax, "textBox_silenceMax");
+            this.textBox_silenceMax.Name = "textBox_silenceMax";
             // 
             // label42
             // 
@@ -1460,6 +1536,67 @@
             this.tabPage13.Name = "tabPage13";
             this.tabPage13.UseVisualStyleBackColor = true;
             // 
+            // linkLabel12
+            // 
+            resources.ApplyResources(this.linkLabel12, "linkLabel12");
+            this.linkLabel12.Name = "linkLabel12";
+            this.linkLabel12.TabStop = true;
+            this.linkLabel12.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
+            // 
+            // linkLabel11
+            // 
+            resources.ApplyResources(this.linkLabel11, "linkLabel11");
+            this.linkLabel11.Name = "linkLabel11";
+            this.linkLabel11.TabStop = true;
+            this.linkLabel11.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
+            // 
+            // linkLabel10
+            // 
+            resources.ApplyResources(this.linkLabel10, "linkLabel10");
+            this.linkLabel10.Name = "linkLabel10";
+            this.linkLabel10.TabStop = true;
+            this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
+            // 
+            // linkLabel9
+            // 
+            resources.ApplyResources(this.linkLabel9, "linkLabel9");
+            this.linkLabel9.Name = "linkLabel9";
+            this.linkLabel9.TabStop = true;
+            this.linkLabel9.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
+            // 
+            // linkLabel8
+            // 
+            resources.ApplyResources(this.linkLabel8, "linkLabel8");
+            this.linkLabel8.Name = "linkLabel8";
+            this.linkLabel8.TabStop = true;
+            this.linkLabel8.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
+            // 
+            // linkLabel7
+            // 
+            resources.ApplyResources(this.linkLabel7, "linkLabel7");
+            this.linkLabel7.Name = "linkLabel7";
+            this.linkLabel7.TabStop = true;
+            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
+            // 
+            // linkLabel6
+            // 
+            resources.ApplyResources(this.linkLabel6, "linkLabel6");
+            this.linkLabel6.Name = "linkLabel6";
+            this.linkLabel6.TabStop = true;
+            this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
+            // 
+            // linkLabel5
+            // 
+            resources.ApplyResources(this.linkLabel5, "linkLabel5");
+            this.linkLabel5.Name = "linkLabel5";
+            this.linkLabel5.TabStop = true;
+            this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
+            // 
+            // label75
+            // 
+            resources.ApplyResources(this.label75, "label75");
+            this.label75.Name = "label75";
+            // 
             // label67
             // 
             resources.ApplyResources(this.label67, "label67");
@@ -1574,67 +1711,6 @@
             this.toolTip1.AutoPopDelay = 10000;
             this.toolTip1.InitialDelay = 250;
             this.toolTip1.ReshowDelay = 50;
-            // 
-            // label75
-            // 
-            resources.ApplyResources(this.label75, "label75");
-            this.label75.Name = "label75";
-            // 
-            // linkLabel5
-            // 
-            resources.ApplyResources(this.linkLabel5, "linkLabel5");
-            this.linkLabel5.Name = "linkLabel5";
-            this.linkLabel5.TabStop = true;
-            this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
-            // 
-            // linkLabel6
-            // 
-            resources.ApplyResources(this.linkLabel6, "linkLabel6");
-            this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.TabStop = true;
-            this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
-            // 
-            // linkLabel7
-            // 
-            resources.ApplyResources(this.linkLabel7, "linkLabel7");
-            this.linkLabel7.Name = "linkLabel7";
-            this.linkLabel7.TabStop = true;
-            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
-            // 
-            // linkLabel8
-            // 
-            resources.ApplyResources(this.linkLabel8, "linkLabel8");
-            this.linkLabel8.Name = "linkLabel8";
-            this.linkLabel8.TabStop = true;
-            this.linkLabel8.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
-            // 
-            // linkLabel9
-            // 
-            resources.ApplyResources(this.linkLabel9, "linkLabel9");
-            this.linkLabel9.Name = "linkLabel9";
-            this.linkLabel9.TabStop = true;
-            this.linkLabel9.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
-            // 
-            // linkLabel10
-            // 
-            resources.ApplyResources(this.linkLabel10, "linkLabel10");
-            this.linkLabel10.Name = "linkLabel10";
-            this.linkLabel10.TabStop = true;
-            this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
-            // 
-            // linkLabel11
-            // 
-            resources.ApplyResources(this.linkLabel11, "linkLabel11");
-            this.linkLabel11.Name = "linkLabel11";
-            this.linkLabel11.TabStop = true;
-            this.linkLabel11.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
-            // 
-            // linkLabel12
-            // 
-            resources.ApplyResources(this.linkLabel12, "linkLabel12");
-            this.linkLabel12.Name = "linkLabel12";
-            this.linkLabel12.TabStop = true;
-            this.linkLabel12.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.someLinkLabel_LinkClicked);
             // 
             // Form1
             // 
@@ -1888,6 +1964,15 @@
         private System.Windows.Forms.LinkLabel linkLabel8;
         private System.Windows.Forms.LinkLabel linkLabel7;
         private System.Windows.Forms.LinkLabel linkLabel6;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.Label label80;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.TextBox textBox_silenceMin;
+        private System.Windows.Forms.TextBox textBox_silenceMax;
+        private System.Windows.Forms.ComboBox comboBox4;
     }
 }
 

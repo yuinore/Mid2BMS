@@ -65,7 +65,8 @@ namespace Mid2BMS
             dic.Add(typeof(ComboBox), new GetSet()
             {
                 GetValue = (p) => ((p.DropDownStyle == ComboBoxStyle.DropDownList) ? p.SelectedIndex : p.Text),
-                SetValue = (p, v) => ((p.DropDownStyle == ComboBoxStyle.DropDownList) ? (p.Text = (int)v).ToString() : (p.Text = (string)v)).ToString()
+                //SetValue = (p, v) => ((p.DropDownStyle == ComboBoxStyle.DropDownList) ? (p.Text = (int)v).ToString() : (p.Text = (string)v)).ToString()
+                SetValue = (p, v) => ((p.DropDownStyle == ComboBoxStyle.DropDownList) ? (p.SelectedIndex = ((int)v)).ToString() : (p.Text = (string)v)).ToString()
             });
             dic.Add(typeof(DateTimePicker), new GetSet() { GetValue = (p) => p.Value, SetValue = (p, v) => p.Value = DateTime.Parse(v) });
             dic.Add(typeof(CheckBox), new GetSet() { GetValue = (p) => p.Checked, SetValue = (p, v) => p.Checked = v });

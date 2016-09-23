@@ -455,7 +455,7 @@ namespace Mid2BMS
 
         public void WaveSplit_Process(
             double tailcut_threshold, int fadeintime, int fadeouttime, double silence_time, bool inputFileIndicated,
-            bool renamingEnabled, String renamingFilename,
+            bool renamingEnabled, String renamingFilename, float[] SilenceLevelsSquare,
             ref double ProgressBarValue, ref bool ProgressBarFinished)
         {
             if (!WaveSplit_CheckHash())
@@ -519,6 +519,7 @@ namespace Mid2BMS
             int createdWavCount = ws.Process(
                 WaveSplitter_Text, WaveRenamer_Text, 
                 WavePathBase, PathBase + @"renamed\",
+                SilenceLevelsSquare,
                 ref ProgressBarValue, 0.00, 1.00);
 
             WaveSplit_WriteHash();
