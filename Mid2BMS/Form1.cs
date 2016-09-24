@@ -143,7 +143,7 @@ namespace Mid2BMS
             int velocityStep = Int32.Parse(textBox_velocitystep.Text);
 
             Convert.ToDouble(margintime_beats);  // 例外チェックのみ行う
-            
+
             String trackCsv = null;
             List<String> MidiTrackNames = null;
             List<String> MidiInstrumentNames = null;
@@ -984,7 +984,7 @@ namespace Mid2BMS
             }
 
             double tcp_time = 0.002;
-            if(!Double.TryParse(textBox_tcp_time.Text, out tcp_time) || tcp_time < 0)
+            if (!Double.TryParse(textBox_tcp_time.Text, out tcp_time) || tcp_time < 0)
             {
                 MessageBox.Show("正しいフェードアウト時間(Fadeout Duration)を入力してください。単位は秒で、値は0以上の実数です。");
                 return;
@@ -1062,7 +1062,7 @@ namespace Mid2BMS
 
                         case AdaptiveProcessType.TailCutPlus:
 
-                            TailCutPlus.Process(s, s, threshold, tcp_time, false); 
+                            TailCutPlus.Process(s, s, threshold, tcp_time, false);
                             break;
 
                         default: throw new Exception("wwwwwwwww");
@@ -1401,7 +1401,7 @@ namespace Mid2BMS
         {
             var order = new Order();
 
-            var result = new List<ArrTuple<string,double>>();
+            var result = new List<ArrTuple<string, double>>();
             var textoutpath = textBox_orderTextOut.Text;
 
             List<String> filelist = new List<String>();
@@ -1676,7 +1676,7 @@ namespace Mid2BMS
                 listBox4.Items.AddRange((string[])e.Data.GetData(DataFormats.FileDrop));
             }
         }
-        
+
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox4.SelectedIndex == 0)
@@ -1688,48 +1688,147 @@ namespace Mid2BMS
                 textBox_silenceMin.Enabled = true;
             }
         }
-        
-        
+
+
         private void button3_Click_1(object sender, EventArgs e)
         {
             SHA512Managed hashComputer = new SHA512Managed();
 
-            Func<string,string> GetFileHash = filename => hashComputer.ComputeHash(new FileStream(filename, FileMode.Open, FileAccess.Read)).Select(x => x.ToString("x2")).Join("");
+            Func<string, string> GetFileHash = filename => hashComputer.ComputeHash(new FileStream(filename, FileMode.Open, FileAccess.Read)).Select(x => x.ToString("x2")).Join("");
             // ラムダ式、(技術的に)やばいなあ・・・すごいなあ・・・
 
-            var path1 = textBox_ksrenamePath.Text;  // old
-            var path2 = textBox_ksrenamePath2.Text;  // new
+            var path1 = textBox_originalBMSPath.Text;  // old
+            var path2 = textBox_renamedBMSPath.Text;  // new
+            var ext = textBox_renamingExtension.Text.ToLower();
 
             var oldName_to_hash = new Dictionary<string, string>();
             var hash_to_newName = new Dictionary<string, string>();
 
             foreach (var filename in Directory.GetFiles(path1))
             {
+                if (Path.GetExtension(filename).ToLower() != ext) continue;
+
                 var hash = GetFileHash(filename);
 
-                oldName_to_hash.Add(filename, hash);
+                oldName_to_hash.Add(Path.GetFileName(filename), hash);
             }
+
+            // 並列版selectの使い方がわからなくてブチ切れた（とてもつらい）
 
             foreach (var filename in Directory.GetFiles(path2))
             {
+                if (Path.GetExtension(filename).ToLower() != ext) continue;
+
                 var hash = GetFileHash(filename);
 
                 try
                 {
-                    hash_to_newName.Add(hash, filename);
+                    hash_to_newName.Add(hash, Path.GetFileName(filename));
                 }
                 catch
                 {
-                    // 要修正
+                    string f1 = hash_to_newName[hash];
+                    string f2 = filename;
+
+                    if (MessageBox.Show("中身の等しいキー音が宛先フォルダに2つ存在します。\""
+                        + f1 + "\" と \"" + f2 + "\" です。キー音を統合して続行しますか？",
+                        "Confirm",
+                        MessageBoxButtons.OKCancel) != DialogResult.OK)
+                    {
+                        // 処理中断
+                        return;
+                    }
                 }
             }
 
+            StringBuilder s = new StringBuilder();
+
             foreach (var kvpair in oldName_to_hash)
             {
-                Console.WriteLine(kvpair.Key + " ---> " + hash_to_newName[kvpair.Value]);
+                if (!hash_to_newName.ContainsKey(kvpair.Value))
+                {
+                    string f1 = Path.GetFileName(kvpair.Key);
+                    if (MessageBox.Show("消失してしまったキー音が存在するようです。\""
+                        + f1 + "\" です。この音を無視して続行しますか？ キャンセルを押すと中断します。",
+                        "Confirm",
+                        MessageBoxButtons.OKCancel) != DialogResult.OK)
+                    {
+                        // 処理中断
+                        return;
+                    }
+
+                    continue;  // 消失したキー音の処遇は後で考える
+                }
+                s.Append(kvpair.Key + " ---> " + hash_to_newName[kvpair.Value] + "\r\n");
+
             }
 
+            textBox_renamerConsole.Text = s.ToString();
+
             hashComputer.Clear();
+
+            foreach (var bmsfilename in Directory.GetFiles(path2))
+            {
+                var currentFileExt = Path.GetExtension(bmsfilename).ToLower();
+                if (currentFileExt != ".bms" && currentFileExt != ".bme" && currentFileExt != ".bml" && currentFileExt != ".pms") continue;
+
+                int i = 0;
+                string movedFileName = bmsfilename + "_old";
+                while (File.Exists(movedFileName))
+                {
+                    i++;
+                    movedFileName = bmsfilename + "_old" + i;  // i >= 1
+                }
+                File.Move(bmsfilename, movedFileName);
+            }
+
+            foreach (var bmsfilename in Directory.GetFiles(path1))
+            {
+                var currentFileExt = Path.GetExtension(bmsfilename).ToLower();
+                if (currentFileExt != ".bms" && currentFileExt != ".bme" && currentFileExt != ".bml" && currentFileExt != ".pms") continue;
+
+                var bmsAllText = File.ReadAllText(bmsfilename, HatoEnc.Encoding).Replace("\r\n", "\n");
+
+                // http://stackoverflow.com/questions/31326451/replacing-regex-matches-using-lambda-expression
+                var newBMSText = Regex.Replace(bmsAllText, @"^(#WAV[0-9A-Za-z][0-9A-Za-z] )(.+)$", match =>
+                {
+                    try
+                    {
+
+                        var prefix = match.Groups[1].Captures[0].Value;
+                        var old_filename = match.Groups[2].Captures[0].Value;
+                        var new_filename = hash_to_newName[oldName_to_hash[old_filename]];
+
+                        if(new_filename == "bass_000.wav")
+                        {
+                            Console.WriteLine(match.Groups.Count + ", " + match.Groups[1].Captures.Count + ", " + match.Groups[2].Captures.Count + "");
+                        }
+
+                        return prefix + new_filename;
+                    }
+                    catch(KeyNotFoundException)
+                    {
+                        // 全キャッチは良くない
+                        return match.Value;
+                    }
+                }, RegexOptions.Multiline);
+
+                string newBMSFilename = Path.Combine(path2, Path.GetFileName(bmsfilename));
+                if (File.Exists(newBMSFilename))
+                {
+                    //****************** 何らかの処理 ********************
+                    MessageBox.Show("何らかの処理");
+                }
+                else
+                {
+                    File.WriteAllText(newBMSFilename, newBMSText.Replace("\n", "\r\n"), HatoEnc.Encoding);
+                }
+            }
+        }
+    
+        private void button3_Click_2(object sender, EventArgs e)
+        {
+            button3_Click_1(sender, e);
         }
     }
 }

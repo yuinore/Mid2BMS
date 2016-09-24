@@ -227,6 +227,8 @@
             this.textBox_orderTextOut = new System.Windows.Forms.TextBox();
             this.button29 = new System.Windows.Forms.Button();
             this.listBox3 = new System.Windows.Forms.ListBox();
+            this.tabPage15 = new System.Windows.Forms.TabPage();
+            this.label82 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -234,6 +236,14 @@
             this.label32 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.textBox_originalBMSPath = new System.Windows.Forms.TextBox();
+            this.textBox_renamedBMSPath = new System.Windows.Forms.TextBox();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label84 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox_renamerConsole = new System.Windows.Forms.TextBox();
+            this.textBox_renamingExtension = new System.Windows.Forms.TextBox();
+            this.label85 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -253,6 +263,7 @@
             this.tabPage11.SuspendLayout();
             this.tabPage13.SuspendLayout();
             this.tabPage14.SuspendLayout();
+            this.tabPage15.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -271,6 +282,7 @@
             this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.Controls.Add(this.tabPage13);
             this.tabControl1.Controls.Add(this.tabPage14);
+            this.tabControl1.Controls.Add(this.tabPage15);
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
@@ -1675,6 +1687,26 @@
             this.listBox3.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox3_DragDrop);
             this.listBox3.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox3_DragEnter);
             // 
+            // tabPage15
+            // 
+            this.tabPage15.Controls.Add(this.label85);
+            this.tabPage15.Controls.Add(this.textBox_renamingExtension);
+            this.tabPage15.Controls.Add(this.textBox_renamerConsole);
+            this.tabPage15.Controls.Add(this.button3);
+            this.tabPage15.Controls.Add(this.label84);
+            this.tabPage15.Controls.Add(this.label83);
+            this.tabPage15.Controls.Add(this.textBox_renamedBMSPath);
+            this.tabPage15.Controls.Add(this.textBox_originalBMSPath);
+            this.tabPage15.Controls.Add(this.label82);
+            resources.ApplyResources(this.tabPage15, "tabPage15");
+            this.tabPage15.Name = "tabPage15";
+            this.tabPage15.UseVisualStyleBackColor = true;
+            // 
+            // label82
+            // 
+            resources.ApplyResources(this.label82, "label82");
+            this.label82.Name = "label82";
+            // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
@@ -1711,6 +1743,49 @@
             this.toolTip1.AutoPopDelay = 10000;
             this.toolTip1.InitialDelay = 250;
             this.toolTip1.ReshowDelay = 50;
+            // 
+            // textBox_originalBMSPath
+            // 
+            resources.ApplyResources(this.textBox_originalBMSPath, "textBox_originalBMSPath");
+            this.textBox_originalBMSPath.Name = "textBox_originalBMSPath";
+            // 
+            // textBox_renamedBMSPath
+            // 
+            resources.ApplyResources(this.textBox_renamedBMSPath, "textBox_renamedBMSPath");
+            this.textBox_renamedBMSPath.Name = "textBox_renamedBMSPath";
+            // 
+            // label83
+            // 
+            resources.ApplyResources(this.label83, "label83");
+            this.label83.Name = "label83";
+            // 
+            // label84
+            // 
+            resources.ApplyResources(this.label84, "label84");
+            this.label84.Name = "label84";
+            // 
+            // button3
+            // 
+            resources.ApplyResources(this.button3, "button3");
+            this.button3.Name = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_2);
+            // 
+            // textBox_renamerConsole
+            // 
+            resources.ApplyResources(this.textBox_renamerConsole, "textBox_renamerConsole");
+            this.textBox_renamerConsole.Name = "textBox_renamerConsole";
+            this.textBox_renamerConsole.ReadOnly = true;
+            // 
+            // textBox_renamingExtension
+            // 
+            resources.ApplyResources(this.textBox_renamingExtension, "textBox_renamingExtension");
+            this.textBox_renamingExtension.Name = "textBox_renamingExtension";
+            // 
+            // label85
+            // 
+            resources.ApplyResources(this.label85, "label85");
+            this.label85.Name = "label85";
             // 
             // Form1
             // 
@@ -1762,6 +1837,8 @@
             this.tabPage13.PerformLayout();
             this.tabPage14.ResumeLayout(false);
             this.tabPage14.PerformLayout();
+            this.tabPage15.ResumeLayout(false);
+            this.tabPage15.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1973,6 +2050,16 @@
         private System.Windows.Forms.TextBox textBox_silenceMin;
         private System.Windows.Forms.TextBox textBox_silenceMax;
         private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.TabPage tabPage15;
+        private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.TextBox textBox_renamedBMSPath;
+        private System.Windows.Forms.TextBox textBox_originalBMSPath;
+        private System.Windows.Forms.TextBox textBox_renamerConsole;
+        private System.Windows.Forms.Label label85;
+        private System.Windows.Forms.TextBox textBox_renamingExtension;
     }
 }
 
