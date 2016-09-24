@@ -365,6 +365,8 @@ namespace Mid2BMS
                 // 見つからなかった場合は 0 以上 events.Count 以下
             }
 
+            // アルゴリズム上の都合により、me を逆順に(インデックスの大きい方から)探索します。
+
             //for (int i = events.Count - 1; i >= 0; i--)
             //for (int i = endIndex - 1; i >= beginIndex; i--)
             int i = endIndex - 1;
@@ -478,6 +480,27 @@ namespace Mid2BMS
                                 break;
                             }
                         }
+                    }
+                    else if (me is MidiEventMeta)  // 主にテンポチェンジ(id==0x51)
+                    {
+                        /*foreach (ArrTuple<int, MidiEvent> _me3 in sLeft)
+                        {
+                            if (!(_me3.Item2 is MidiEventMeta)) continue;
+                            if (_me3.Item1 != events[i].Item1) continue;  // Item1は直和した際のトラック番号
+                            var me3 = (MidiEventMeta)_me3.Item2;
+
+                            if (me3.id == ((MidiEventMeta)me).id)
+                            {
+                                found = true;
+                                break;
+                            }
+                        }*/
+
+                        found = sLeft
+                            .Where(me3 => me3.Item2 is MidiEventMeta)    // MidiEventMeta型で、
+                            .Where(me3 => me3.Item1 != events[i].Item1)  // Midiトラック番号が同じものの中に、
+                            .Select(me3 => (MidiEventMeta)me3.Item2)
+                            .Any(me3 => me3.id == ((MidiEventMeta)me).id); // idが同じものがあるかどうか
                     }
                     else
                     {
