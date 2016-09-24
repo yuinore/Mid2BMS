@@ -286,16 +286,17 @@ namespace Mid2BMS
                     int bpmid = 1;  // 0じゃダメだよ
                     List<ArrTuple<Frac, int>> tempos = new List<ArrTuple<Frac, int>>();
                     int lasttick = -99999999;
-                    int TEMPOCHANGE_RESOLUTION = 16;
+                    int TEMPOCHANGE_RESOLUTION = 32;  // 拍
+                    int PRECISION = 1000;  // BPMの精度
                     foreach (var tempoev in tempochanges)
                     {
                         if (bpmid >= 36 * 36) break;
-                        if (tempoev.tick - lasttick <= (ms.resolution ?? 480) * 4 / TEMPOCHANGE_RESOLUTION) continue;
+                        if (tempoev.tick - lasttick < (ms.resolution ?? 480) * 4 / TEMPOCHANGE_RESOLUTION) continue;
                         lasttick = tempoev.tick;
                         // += としてはダメ！
                         tempobms = tempobms +
                             "#BPM" + BMSParser.IntToHex36Upper(bpmid) + " "
-                            + (60000000.0 / ((MidiEventMeta)tempoev).val) + "\r\n";
+                            + Math.Round((60000000.0 / ((MidiEventMeta)tempoev).val) * PRECISION) / (double)PRECISION + "\r\n";
                         tempos.Add(Arr.ay(new Frac((long)(tempoev.tick * 192.0 * 0.25 / (ms.resolution ?? 480) + 192.0), 192), bpmid)); // 面倒なので分解能は192
 
                         bpmid++;
