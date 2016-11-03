@@ -178,7 +178,7 @@ namespace Mid2BMS
 
                                         //if (!LookAtInstrumentName)
                                         //{
-                                        //    while (MidiTrackNames.Count <= j) { MidiTrackNames.Add("untitled" + MidiTrackNames.Count); }  // いろいろファイル名の衝突とかのバグを生みそうなので修正した
+                                        //    while (MidiTrackNames.Count <= j) { MidiTrackNames.Add("untitled " + MidiTrackNames.Count); }  // いろいろファイル名の衝突とかのバグを生みそうなので修正した
                                         //    MidiTrackNames[j] = HatoEnc.Encode(buffe);
                                         //}
                                         while (MidiTrackNames.Count <= j) { MidiTrackNames.Add(""); }  // 不等号に等号を含める必要がある
@@ -192,7 +192,7 @@ namespace Mid2BMS
 
                                         //if (LookAtInstrumentName)
                                         //{
-                                        //    while (MidiTrackNames.Count <= j) { MidiTrackNames.Add("untitled" + MidiTrackNames.Count); }  // いろいろファイル名の衝突とかのバグを生みそうなので修正した
+                                        //    while (MidiTrackNames.Count <= j) { MidiTrackNames.Add("untitled " + MidiTrackNames.Count); }  // いろいろファイル名の衝突とかのバグを生みそうなので修正した
                                         //    MidiTrackNames[j] = HatoEnc.Encode(buffe);
                                         //}
                                         while (MidiInstrumentNames.Count <= j) { MidiInstrumentNames.Add(""); }
@@ -321,9 +321,9 @@ namespace Mid2BMS
                 if (fpR != null) fpR.Close();
             }
 
-            //while (MidiTrackNames.Count <= j) { MidiTrackNames.Add("untitled" + MidiTrackNames.Count); }  // いろいろファイル名の衝突とかのバグを生みそうなので修正した
-            while (MidiTrackNames.Count < j) { MidiTrackNames.Add(""); }  // 不等号に等号を含めてはならない
-            while (MidiInstrumentNames.Count < j) { MidiInstrumentNames.Add(""); }
+            //while (MidiTrackNames.Count <= j) { MidiTrackNames.Add("untitled " + MidiTrackNames.Count); }  // いろいろファイル名の衝突とかのバグを生みそうなので修正した
+            while (MidiTrackNames.Count < j) { MidiTrackNames.Add("untitled"); }  // 不等号に等号を含めてはならない
+            while (MidiInstrumentNames.Count < j) { MidiInstrumentNames.Add("untitled"); }
             return 0;
         }
     }

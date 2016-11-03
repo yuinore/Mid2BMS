@@ -337,7 +337,7 @@ namespace Mid2BMS
                 MidiTrackIdentifier = new List<String>(LookAtInstrumentName ? MidiInstrumentNames : MidiTrackNames);  // ちゃんとCloneする
                 for (int i = 0; i < MidiTrackIdentifier.Count; i++)
                 {
-                    if (MidiTrackIdentifier[i] == "") MidiTrackIdentifier[i] = "untitled" + i;  // コンダクタートラックに関する処理をどうするか
+                    if (MidiTrackIdentifier[i] == "") MidiTrackIdentifier[i] = "untitled " + i;  // コンダクタートラックに関する処理をどうするか
                 }
             }
             else
@@ -398,7 +398,7 @@ namespace Mid2BMS
             }
             #endregion
 
-            #region RedModeの場合の処理（以前の処理の一部を破棄する？）
+            #region RedModeの場合のMidi書き出し処理
 
             // RedModeの場合はmidiをSplitしたものを提出する
             // ignoreListをちゃんと見て！
