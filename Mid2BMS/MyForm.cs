@@ -200,7 +200,7 @@ namespace Mid2BMS
             #endregion
 
             #region ベロシティの量子化
-            if (newTimebase > 0)
+            if (velocityStep >= 2)
             {
                 var quantizedMidiWriteStream2 = new MemoryStream();
 
@@ -213,7 +213,7 @@ namespace Mid2BMS
 
                 var mbuf = quantizedMidiWriteStream2.GetBuffer();
 
-                quantizedMidiStreamGenerator = () => new MemoryStream(mbuf);
+                quantizedMidiStreamGenerator = () => new MemoryStream(mbuf);  // quantizedMidiStreamGenerator に上書き
 
                 if (createExFiles)
                 {
@@ -235,15 +235,19 @@ namespace Mid2BMS
                 if (ms.resolution == null) throw new Exception("resolutionがnull #とは");
                 timebase = ms.resolution ?? 480;
                 double uspb = ms.InitalUSecondPerBeat ?? (600000000.0 / 120.0);
-                midi_bpm = 0.01m * (decimal)Math.Round(100.0 * 60000000.0 / uspb);  // そこまで0.01単位にこだわる必要があったのかどうか
+                midi_bpm = 0.001m * (decimal)Math.Round(1000.0 * 60000000.0 / uspb);  // そこまで0.001単位にこだわる必要があったのかどうか
 
                 bool messageShown = false;
 
-                double newResolution = 4 * 24;  // BMS分解能、マジックナンバー感ある。16分音符を24個に分解出来る。
+                //double newResolution = 4 * 24;  // BMS分解能、マジックナンバー感ある。16分音符を24個に分解出来る。
+                // ↑これは恐らく、テンポチェンジがMIDIファイルに多すぎた場合の対処だと思います。
+                // めんどくさいのでとりあえずこのままで（要修正）
+
+                double newResolution = timebase;
 
                 for (int trackindex = 0; trackindex < ms.tracks.Count; trackindex++ )
                 {
-                    var dict = new HashSet<long>();
+                    var dict = new HashSet<Tuple<int, long>>();  // Tuple<ノート番号, 発音時間>
 
                     foreach (var _me in ms.tracks[trackindex])
                     {
@@ -254,9 +258,14 @@ namespace Mid2BMS
                             {
                                 throw new Exception("いや、逆にそれはおかしい");
                             }
-                            long serialized = me.n + 256 * (int)Math.Round((double)me.tick * newResolution / (double)ms.resolution);
+                            Tuple<int, long> serialized = Tuple.Create(
+                                me.n,
+                                (long)Math.Round((double)me.tick * newResolution / (double)ms.resolution));  // このnewResolutionって何ですか・・・
+
                             if (!messageShown && dict.Contains(serialized))
                             {
+                                // todo: 表記が分かりづらいので修正
+
                                 if (DialogResult.Yes == MessageBox.Show(
                                     "トラック番号" + trackindex + ", " 
                                     + (1 + me.tick / (4 * (int)ms.resolution))  + "小節, "
