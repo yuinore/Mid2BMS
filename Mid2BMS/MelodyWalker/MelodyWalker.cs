@@ -32,7 +32,7 @@ namespace Mid2BMS
         /// MMLデータ(text0_stdout_part1.mml)を受け取り、text1～text8 他を生成します。
         /// </summary>
         public int MultiProcess(List<String> MMLs_, List<String> MidiTrackNames_,
-            List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, List<bool> isXChainList, List<bool> isGlobalList, bool sequenceLayer, String pathBase,
+            List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, List<bool> isXChainList, bool sequenceLayer, String pathBase,
             bool isRedMode, bool isPurpleMode, bool createExFiles, ref int VacantWavid, int timebase,
             String margintime_beats, out String trackCsv, out List<bool> isEmptyList, decimal bpm,
             ref double progressValue, double progressMin, double progressMax)

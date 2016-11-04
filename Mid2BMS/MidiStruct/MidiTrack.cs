@@ -80,7 +80,48 @@ namespace Mid2BMS
         {
             // TODO: Complete member initialization
         }
-        
+
+        /// <summary>
+        /// n個の配列の直和を求めます。
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static IEnumerable<MultiTrackMidiEvent> DirectSum(IEnumerable<IEnumerable<MidiEvent>> x)
+        {
+            int i = 0;
+            foreach (var x1 in x)
+            {
+                foreach (var element in x1)
+                {
+                    yield return new MultiTrackMidiEvent() { Event = element, TrackID = i };
+                }
+                i++;
+            }
+        }
+
+        /// <summary>
+        /// 直和を配列に復元します。
+        /// 遅延評価ではありません。
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static List<MidiTrack> DirectDifference(IEnumerable<MultiTrackMidiEvent> x)
+        {
+            List<List<MidiEvent>> y = new List<List<MidiEvent>>();
+            foreach (var tpl in x)
+            {
+                while (y.Count <= tpl.TrackID)
+                {
+                    y.Add(new List<MidiEvent>());
+                }
+
+                y[tpl.TrackID].Add(tpl.Event);
+            }
+
+            return y.Select(z => new MidiTrack(z)).ToList();
+        }
+
         /// <summary>
         /// 複製を返す。計算時間 O(n^2) 掛かる気がする。良くないのでは？
         /// 高速化するのは「計測」をしてから、って言うじゃないですか
@@ -89,9 +130,9 @@ namespace Mid2BMS
         public MidiTrack SplitNotes(MidiStruct midistruct, bool isChordMode)
         {
             return new MidiTrack(
-                MidiTrack.SplitNotes((new IEnumerable<MidiEvent>[] { 
-                    this.OrderBy(x => x.tick) 
-                }).DirectSum(), midistruct, new List<bool> { isChordMode }, new List<bool> { false }, new List<bool> { false }).Select(x => x.Item2)
+                MidiTrack.SplitNotes(MidiTrack.DirectSum(new IEnumerable<MidiEvent>[] {
+                    this.OrderBy(x => x.tick)
+                }), midistruct, new List<bool> { isChordMode }, new List<bool> { false }, new List<bool> { false }).Select(x => x.Event)
                 );
         }
 
@@ -100,39 +141,39 @@ namespace Mid2BMS
         /// 高速化するのは「計測」をしてから、って言うじゃないですか
         /// (もし)EndOfTrackが存在した場合は除去します。
         /// 
-        /// ソートされた順に、ノートが配置されます。ですから、 x => x.Item2.tick では絶対にソートしないでください。
+        /// ソートされた順に、ノートが配置されます。ですから、 x => x.Event.tick では絶対にソートしないでください。
         /// 
         /// プログラムを「一般化」した結果がこの三角カッコの嵐だよ！！！
         /// </summary>
-        public static IEnumerable<ArrTuple<int, MidiEvent>> SplitNotes(
-            IEnumerable<ArrTuple<int, MidiEvent>> tracks, MidiStruct midistruct, List<bool> isChordList, List<bool> isXChainList, List<bool> isGlobalList)
+        public static IEnumerable<MultiTrackMidiEvent> SplitNotes(
+            IEnumerable<MultiTrackMidiEvent> tracks, MidiStruct midistruct, List<bool> isChordList, List<bool> isXChainList, List<bool> isGlobalList)
         {
             // List<ArrTuple<int, MidiEvent>> とか書きたくないですね
             
-            List<ArrTuple<int, MidiEvent>> events = tracks.OrderBy(x => x.Item1).ToList();  // これはx.Item1, xItem2.tickの順にソートされている
-            List<ArrTuple<int, MidiEvent>> eventsOrderByTick = tracks.OrderBy(x => x.Item2.tick).ToList();
-            List<ArrTuple<int, MidiEvent>> NotNoteEventsOrderByTick =
+            List<MultiTrackMidiEvent> events = tracks.OrderBy(x => x.TrackID).ToList();  // これはx.Item1, xItem2.tickの順にソートされている
+            List<MultiTrackMidiEvent> eventsOrderByTick = tracks.OrderBy(x => x.Event.tick).ToList();
+            List<MultiTrackMidiEvent> NotNoteEventsOrderByTick =
                 eventsOrderByTick
-                .Where(mev => !(mev.Item2 is MidiEventNote))
-                .Where(mev => (!(mev.Item2 is MidiEventMeta) || (((MidiEventMeta)mev.Item2).id == 0x51)))
+                .Where(mev => !(mev.Event is MidiEventNote))
+                .Where(mev => (!(mev.Event is MidiEventMeta) || (((MidiEventMeta)mev.Event).id == 0x51)))
                 .ToList();
 
             // なんか間違っている気がする・・・MidiTrackの代わりにList<MidiEvent>使うべきな気がする・・・
             // というわけで使いました。ついでに IEnumerable の割合もかなり増えました。
-            List<ArrTuple<int, MidiEvent>> s1meta;  // これはx.Item1, xItem2.tick の順でソートされている
-            List<ArrTuple<int, MidiEvent>> s1a = new List<ArrTuple<int, MidiEvent>>();  // これはx.Item1, xItem2.tick の順の優先度でソートされている。Noteのみを含む
-            List<ArrTuple<int, MidiEvent>> s1b = new List<ArrTuple<int, MidiEvent>>();  // これはx.Item1, xItem2.tick の順の優先度でソートされている。Noteを含まない。
+            List<MultiTrackMidiEvent> s1meta;  // これはx.Item1, xItem2.tick の順でソートされている
+            List<MultiTrackMidiEvent> s1a = new List<MultiTrackMidiEvent>();  // これはx.Item1, xItem2.tick の順の優先度でソートされている。Noteのみを含む
+            List<MultiTrackMidiEvent> s1b = new List<MultiTrackMidiEvent>();  // これはx.Item1, xItem2.tick の順の優先度でソートされている。Noteを含まない。
             int deltatick = midistruct.BeatsToTicks(4 * 4);
 
             s1meta = (events.Where(mev => (
-                (mev.Item2 is MidiEventMeta) && (
-                    ((MidiEventMeta)mev.Item2).id == 0x03 ||  // Track Name
-                    ((MidiEventMeta)mev.Item2).id == 0x04 ||  // Instrument Name
-                    ((MidiEventMeta)mev.Item2).id == 0x05 ||  // Lyric
-                    ((MidiEventMeta)mev.Item2).id == 0x21 ||  // Port
-                //((MidiEventMeta)mev.Item2).id == 0x51 ||  // Tempo
-                    ((MidiEventMeta)mev.Item2).id == 0x58 ||  // Signature
-                    ((MidiEventMeta)mev.Item2).id == 0x59     // Key
+                (mev.Event is MidiEventMeta) && (
+                    ((MidiEventMeta)mev.Event).id == 0x03 ||  // Track Name
+                    ((MidiEventMeta)mev.Event).id == 0x04 ||  // Instrument Name
+                    ((MidiEventMeta)mev.Event).id == 0x05 ||  // Lyric
+                    ((MidiEventMeta)mev.Event).id == 0x21 ||  // Port
+                //((MidiEventMeta)mev.Event).id == 0x51 ||  // Tempo
+                    ((MidiEventMeta)mev.Event).id == 0x58 ||  // Signature
+                    ((MidiEventMeta)mev.Event).id == 0x59     // Key
                 )
                 )).ToList());  // これはx.Item1の順にソートされている
 
@@ -165,10 +206,10 @@ namespace Mid2BMS
                 }
 
                 MidiEventNote me;
-                if ((me = events[i].Item2 as MidiEventNote) != null)
+                if ((me = events[i].Event as MidiEventNote) != null)
                 {
-                    List<ArrTuple<int, MidiEvent>> chord = null;
-                    if (isChordList != null && isChordList[events[i].Item1])
+                    List<MultiTrackMidiEvent> chord = null;
+                    if (isChordList != null && isChordList[events[i].TrackID])
                     {
                         if (lasttick == me.tick) continue;
                         lasttick = me.tick;
@@ -176,13 +217,13 @@ namespace Mid2BMS
                         // Arr.ayはクソ、はっきりわかんだね
                         // (Item1とItem2が何を指しているのかわかりづらいため)
                         chord = events.Where(x =>
-                            x.Item1 == events[i].Item1
-                            && x.Item2.tick == events[i].Item2.tick
-                            && x.Item2 is MidiEventNote)
+                            x.TrackID == events[i].TrackID
+                            && x.Event.tick == events[i].Event.tick
+                            && x.Event is MidiEventNote)
                             .Select(x =>{
-                                MidiEvent m2 = x.Item2.Clone();
+                                MidiEvent m2 = x.Event.Clone();
                                 m2.tick = deltatick;
-                                return Arr.ay(x.Item1, m2);
+                                return new MultiTrackMidiEvent(x.TrackID, m2);
                             }).ToList();  // クローンしておく
 
                         // FindAll と Where のうまい使い分け方とかあるんだろうか
@@ -190,40 +231,40 @@ namespace Mid2BMS
 
                     // Note on & Note off pair
                     me = (MidiEventNote)me.Clone();  // dektatickだけ遅延させる
-                    var deltatickForEvents = deltatick - events[i].Item2.tick;
+                    var deltatickForEvents = deltatick - events[i].Event.tick;
 
                     int LTime = me.tick - (int)(midistruct.BeatsToTicks(1) * SPLIT_BEATS_AUTOMATIONLEFT);  // 負の数になることもある
                     int RTime = me.tick + (int)(midistruct.BeatsToTicks(1) * SPLIT_BEATS_AUTOMATIONRIGHT);
                     //me.tick += deltatick;
                     me.tick = deltatick;  // updated
-                    //me.tick += (deltatick - events[i].Item2.tick);  // updated 
+                    //me.tick += (deltatick - events[i].Event.tick);  // updated 
                     // これはme.tick = deltatick; でも同じ意味になる
 
 
-                    //s1.Add(Arr.ay(events[i].Item1, me));  // 型推論に失敗！！！
+                    //s1.Add(new MultiTrackMidiEvent(events[i].TrackID, me));  // 型推論に失敗！！！
                     int MaxLength = me.q;
-                    if (isChordList != null && isChordList[events[i].Item1])
+                    if (isChordList != null && isChordList[events[i].TrackID])
                     {
                         foreach (var me3 in chord)
                         {
                             s1a.Add(me3);
-                            MaxLength = Math.Max(MaxLength, (me3.Item2 as MidiEventNote).q);
+                            MaxLength = Math.Max(MaxLength, (me3.Event as MidiEventNote).q);
                         }
                     }
                     else
                     {
-                        s1a.Add(Arr.ay(events[i].Item1, (MidiEvent)me));  // 型推論に失敗！！！
+                        s1a.Add(new MultiTrackMidiEvent(events[i].TrackID, (MidiEvent)me));  // 型推論に失敗！！！
                     }
                     if (MaxLength == 0) throw new Exception("そもそもゲートが0っておかしいよね");  // デバッグ用
 
                     // オートメーションの切り出し
                     // この時点において、MidiTrackはソート済みではないがeventsOrderByTickはソート済み
                     var s2 = Clip(NotNoteEventsOrderByTick, LTime, RTime);  // filter ノートの削除
-                    if (s2.Any(x => x.Item2.tick < LTime)) throw new Exception("みゃ！？・・・///");
-                    if (s2.Any(x => x.Item2.tick >= RTime)) throw new Exception("みゃ！！・・・///");
+                    if (s2.Any(x => x.Event.tick < LTime)) throw new Exception("みゃ！？・・・///");
+                    if (s2.Any(x => x.Event.tick >= RTime)) throw new Exception("みゃ！！・・・///");
                     //foreach (MidiEvent mev in s2) mev.tick += deltatick;
-                    foreach (ArrTuple<int, MidiEvent> mev in s2) mev.Item2.tick += deltatickForEvents;  // updated
-                    //if (s2.Any(x => x.Item2.tick < 0)) throw new Exception("みゃ！？・・・///");
+                    foreach (MultiTrackMidiEvent mev in s2) mev.Event.tick += deltatickForEvents;  // updated
+                    //if (s2.Any(x => x.Event.tick < 0)) throw new Exception("みゃ！？・・・///");
                     s1b.AddRange(s2);
 
                     deltatick += MaxLength + (int)(midistruct.BeatsToTicks(1) * SPLIT_BEATS_INTERVAL);
@@ -234,34 +275,34 @@ namespace Mid2BMS
             //s1b = s1b;  // テンポチェンジを除くメタイベントを除去
 
             //s1meta.AddRange(s1);
-            //s1meta = s1meta.OrderBy(x => x.Item2).ToList();  // ここで非常に時間が掛かっている(32.9%)
+            //s1meta = s1meta.OrderBy(x => x.Event).ToList();  // ここで非常に時間が掛かっている(32.9%)
             // 今回の高速化で学んだこと：ソート(OrderBy関数)は遅い。不必要にソートしてはならない。
             // x.tickの順に安定ソートする
             //s1aとs1bとs1metaはそれぞれはソートされている
             // 最も要素数が少ないと思われる s1a と s1meta を先にマージする（重要）
             // s1meta → s1a → s1b の順にマージする(この順番はあまり重要ではない)
 
-            s1a = s1a.OrderBy(x => x.Item1).OrderBy(x => x.Item2.tick).ToList();
-            s1meta = s1meta.OrderBy(x => x.Item1).OrderBy(x => x.Item2.tick).ToList();
+            s1a = s1a.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick).ToList();
+            s1meta = s1meta.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick).ToList();
 
-            //if (!s1a.SequenceEqual(s1a.OrderBy(x => x.Item1).OrderBy(x => x.Item2.tick))) throw new Exception("でやー");
-            //if (!s1b.SequenceEqual(s1b.OrderBy(x => x.Item1).OrderBy(x => x.Item2.tick))) throw new Exception("うらー");  // 例外「うらー」が発生。理由は「tickよってソートされていたから」
-            //if (!s1meta.SequenceEqual(s1meta.OrderBy(x => x.Item1).OrderBy(x => x.Item2.tick))) throw new Exception("とあー");
+            //if (!s1a.SequenceEqual(s1a.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick))) throw new Exception("でやー");
+            //if (!s1b.SequenceEqual(s1b.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick))) throw new Exception("うらー");  // 例外「うらー」が発生。理由は「tickよってソートされていたから」
+            //if (!s1meta.SequenceEqual(s1meta.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick))) throw new Exception("とあー");
 
-            List<ArrTuple<int, MidiEvent>> merged2 = new List<ArrTuple<int, MidiEvent>>();
+            List<MultiTrackMidiEvent> merged2 = new List<MultiTrackMidiEvent>();
             {
                 MidiEvent dmy = new MidiEventNote();
                 dmy.tick = Int32.MaxValue;
-                s1meta.Add(Arr.ay(Int32.MaxValue, dmy));
-                s1a.Add(Arr.ay(Int32.MaxValue, dmy));
+                s1meta.Add(new MultiTrackMidiEvent(Int32.MaxValue, dmy));
+                s1a.Add(new MultiTrackMidiEvent(Int32.MaxValue, dmy));
 
-                List<ArrTuple<int, MidiEvent>> merged1 = new List<ArrTuple<int, MidiEvent>>();
+                List<MultiTrackMidiEvent> merged1 = new List<MultiTrackMidiEvent>();
                 {
                     int i1 = 0, i2 = 0;
                     while (i1 < s1meta.Count - 1 || i2 < s1a.Count - 1)
                     {
                         // ノートオフの方が先なので、同じ場合は ev2 が先にくる。
-                        if (s1meta[i1].Item2.tick < s1a[i2].Item2.tick || (s1meta[i1].Item2.tick < s1a[i2].Item2.tick) && s1meta[i1].Item1 < s1a[i2].Item1)
+                        if (s1meta[i1].Event.tick < s1a[i2].Event.tick || (s1meta[i1].Event.tick < s1a[i2].Event.tick) && s1meta[i1].TrackID < s1a[i2].TrackID)
                         {
                             merged1.Add(s1meta[i1++]);
                         }
@@ -271,16 +312,16 @@ namespace Mid2BMS
                         }
                     }
                 }
-                //if (!merged1.SequenceEqual(merged1.OrderBy(x => x.Item1).OrderBy(x => x.Item2.tick))) throw new Exception("にゃー");
+                //if (!merged1.SequenceEqual(merged1.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick))) throw new Exception("にゃー");
 
-                merged1.Add(Arr.ay(Int32.MaxValue, dmy));
-                s1b.Add(Arr.ay(Int32.MaxValue, dmy));
+                merged1.Add(new MultiTrackMidiEvent(Int32.MaxValue, dmy));
+                s1b.Add(new MultiTrackMidiEvent(Int32.MaxValue, dmy));
                 {
                     int i1 = 0, i2 = 0;
                     while (i1 < merged1.Count - 1 || i2 < s1b.Count - 1)
                     {
                         // ノートオフの方が先なので、同じ場合は ev2 が先にくる。
-                        if (merged1[i1].Item2.tick < s1b[i2].Item2.tick || (merged1[i1].Item2.tick == s1b[i2].Item2.tick && merged1[i1].Item1 < s1b[i2].Item1))
+                        if (merged1[i1].Event.tick < s1b[i2].Event.tick || (merged1[i1].Event.tick == s1b[i2].Event.tick && merged1[i1].TrackID < s1b[i2].TrackID))
                         {
                             merged2.Add(merged1[i1++]);
                         }
@@ -292,13 +333,13 @@ namespace Mid2BMS
                 }
             }
 
-            //if (!merged2.SequenceEqual(merged2.OrderBy(x => x.Item1).OrderBy(x => x.Item2.tick))) throw new Exception("みゃー");
+            //if (!merged2.SequenceEqual(merged2.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick))) throw new Exception("みゃー");
 
 
             /*
             for (int i = 0; i < Math.Min(1, s1meta.Count); i++)  // ソートしてからチェックする
             {
-                if (s1meta[i].Item2.tick < 0) throw new Exception("タイムシフトしたらマイナスになった（オーバーフローした）");
+                if (s1meta[i].Event.tick < 0) throw new Exception("タイムシフトしたらマイナスになった（オーバーフローした）");
             }
             */
 
@@ -339,27 +380,27 @@ namespace Mid2BMS
         /// <param name="LeftTick"></param>
         /// <param name="RightTick"></param>
         /// <returns></returns>
-        public static IEnumerable<ArrTuple<int, MidiEvent>> Clip(IEnumerable<ArrTuple<int, MidiEvent>> tracks, int LeftTick, int RightTick)
+        public static IEnumerable<MultiTrackMidiEvent> Clip(IEnumerable<MultiTrackMidiEvent> tracks, int LeftTick, int RightTick)
         {
-            //var events = sorted ? tracks.ToList() : tracks.OrderBy(x => x.Item2.tick).ToList();  // 時間順にソート
+            //var events = sorted ? tracks.ToList() : tracks.OrderBy(x => x.Event.tick).ToList();  // 時間順にソート
             var events = tracks.ToList();
 
-            var s1 = new List<ArrTuple<int, MidiEvent>>();
-            var sLeft = new List<ArrTuple<int, MidiEvent>>();  // tick が LeftTick と同じかそれより少ないもの
+            var s1 = new List<MultiTrackMidiEvent>();
+            var sLeft = new List<MultiTrackMidiEvent>();  // tick が LeftTick と同じかそれより少ないもの
 
             //int beginIndex;
             int endIndex;
             {
-                //var LeftTickTuple = new ArrTuple<int, MidiEvent>(0, new MidiEventNote());
-                //LeftTickTuple.Item2.tick = LeftTick - 1;
-                //beginIndex = events.BinarySearch(LeftTickTuple, x => x.Item2.tick);
+                //var LeftTickTuple = new MultiTrackMidiEvent(0, new MidiEventNote());
+                //LeftTickTuple.Event.tick = LeftTick - 1;
+                //beginIndex = events.BinarySearch(LeftTickTuple, x => x.Event.tick);
                 //if (beginIndex < 0) beginIndex = ~beginIndex;
                 // 見つかった場合は       0 以上 events.Count - 1 以下
                 // 見つからなかった場合は 0 以上 events.Count 以下
 
-                var RightTickTuple = new ArrTuple<int, MidiEvent>(0, new MidiEventNote());
-                RightTickTuple.Item2.tick = RightTick + 1;
-                endIndex = events.BinarySearch(RightTickTuple, x => x.Item2.tick);
+                var RightTickTuple = new MultiTrackMidiEvent(0, new MidiEventNote());
+                RightTickTuple.Event.tick = RightTick + 1;
+                endIndex = events.BinarySearch(RightTickTuple, x => x.Event.tick);
                 if (endIndex < 0) endIndex = ~endIndex;
                 // 見つかった場合は       0 以上 events.Count - 1 以下
                 // 見つからなかった場合は 0 以上 events.Count 以下
@@ -372,30 +413,30 @@ namespace Mid2BMS
             int i = endIndex - 1;
             for (; i >= 0; i--)  // while(me.tick >= RightTick)
             {
-                MidiEvent me = events[i].Item2;
+                MidiEvent me = events[i].Event;
                 if (me.tick < RightTick) break;
 
                 // do nothing
             }
             for (; i >= 0; i--)  // while(LeftTick < me.tick && me.tick < RightTick)
             {
-                MidiEvent me = events[i].Item2;
+                MidiEvent me = events[i].Event;
                 if (me.tick <= LeftTick) break;
 
-                s1.Add(Arr.ay(events[i].Item1, me.Clone()));  // ここが重い (25.8%)
+                s1.Add(new MultiTrackMidiEvent(events[i].TrackID, me.Clone()));  // ここが重い (25.8%)
                 //s1.Add(events[i]);  // これでいいのか!?・・・ダメだった
                 // 範囲より左(me.tick < LeftTick)に時間が掛かっているのかと思ったら、範囲内に時間がかかっているらしい
             }
             for (; i >= 0; i--)  // while(me.tick == LeftTick)
             {
-                MidiEvent me = events[i].Item2;
+                MidiEvent me = events[i].Event;
                 if (me.tick < LeftTick) break;
 
-                sLeft.Add(Arr.ay(events[i].Item1, me.Clone()));
+                sLeft.Add(new MultiTrackMidiEvent(events[i].TrackID, me.Clone()));
             }
             for (; i >= 0; i--)  // while(me.tick < LeftTick)
             {
-                MidiEvent me = events[i].Item2;
+                MidiEvent me = events[i].Event;
 
                 if (!(me is MidiEventNote)) // me.tick < LeftTick && !(me is MidiEventNote)
                 {
@@ -405,11 +446,11 @@ namespace Mid2BMS
                     bool found = false;
                     if (me is MidiEventCC)
                     {
-                        foreach (ArrTuple<int, MidiEvent> _me3 in sLeft)  // あれ？Listはforeachよりforの方が速いんだっけ
+                        foreach (MultiTrackMidiEvent _me3 in sLeft)  // あれ？Listはforeachよりforの方が速いんだっけ
                         {
-                            if (!(_me3.Item2 is MidiEventCC)) continue;
-                            if (_me3.Item1 != events[i].Item1) continue;
-                            var me3 = (MidiEventCC)_me3.Item2;
+                            if (!(_me3.Event is MidiEventCC)) continue;
+                            if (_me3.TrackID != events[i].TrackID) continue;
+                            var me3 = (MidiEventCC)_me3.Event;
 
                             if (me3.cc == ((MidiEventCC)me).cc)
                             {
@@ -420,11 +461,11 @@ namespace Mid2BMS
                     }
                     else if (me is MidiEventKeyPressure)
                     {
-                        foreach (ArrTuple<int, MidiEvent> _me3 in sLeft)
+                        foreach (MultiTrackMidiEvent _me3 in sLeft)
                         {
-                            if (!(_me3.Item2 is MidiEventKeyPressure)) continue;
-                            if (_me3.Item1 != events[i].Item1) continue;
-                            var me3 = (MidiEventKeyPressure)_me3.Item2;
+                            if (!(_me3.Event is MidiEventKeyPressure)) continue;
+                            if (_me3.TrackID != events[i].TrackID) continue;
+                            var me3 = (MidiEventKeyPressure)_me3.Event;
 
                             if (me3.n == ((MidiEventKeyPressure)me).n)
                             {
@@ -435,10 +476,10 @@ namespace Mid2BMS
                     }
                     else if (me is MidiEventChannelPressure)
                     {
-                        foreach (ArrTuple<int, MidiEvent> _me3 in sLeft)
+                        foreach (MultiTrackMidiEvent _me3 in sLeft)
                         {
-                            if (_me3.Item1 != events[i].Item1) continue;
-                            if (_me3.Item2 is MidiEventChannelPressure)
+                            if (_me3.TrackID != events[i].TrackID) continue;
+                            if (_me3.Event is MidiEventChannelPressure)
                             {
                                 found = true;
                                 break;
@@ -447,10 +488,10 @@ namespace Mid2BMS
                     }
                     else if (me is MidiEventPB)
                     {
-                        foreach (ArrTuple<int, MidiEvent> _me3 in sLeft)
+                        foreach (MultiTrackMidiEvent _me3 in sLeft)
                         {
-                            if (_me3.Item1 != events[i].Item1) continue;
-                            if (_me3.Item2 is MidiEventPB)
+                            if (_me3.TrackID != events[i].TrackID) continue;
+                            if (_me3.Event is MidiEventPB)
                             {
                                 found = true;
                                 break;
@@ -459,10 +500,10 @@ namespace Mid2BMS
                     }
                     else if (me is MidiEventProgram)
                     {
-                        foreach (ArrTuple<int, MidiEvent> _me3 in sLeft)
+                        foreach (MultiTrackMidiEvent _me3 in sLeft)
                         {
-                            if (_me3.Item1 != events[i].Item1) continue;
-                            if (_me3.Item2 is MidiEventProgram)
+                            if (_me3.TrackID != events[i].TrackID) continue;
+                            if (_me3.Event is MidiEventProgram)
                             {
                                 found = true;
                                 break;
@@ -471,10 +512,10 @@ namespace Mid2BMS
                     }
                     else if (me is MidiEventSysEx)
                     {
-                        foreach (ArrTuple<int, MidiEvent> _me3 in sLeft)
+                        foreach (MultiTrackMidiEvent _me3 in sLeft)
                         {
-                            if (_me3.Item1 != events[i].Item1) continue;
-                            if (_me3.Item2 is MidiEventSysEx)
+                            if (_me3.TrackID != events[i].TrackID) continue;
+                            if (_me3.Event is MidiEventSysEx)
                             {
                                 found = true;
                                 break;
@@ -483,11 +524,11 @@ namespace Mid2BMS
                     }
                     else if (me is MidiEventMeta)  // 主にテンポチェンジ(id==0x51)
                     {
-                        /*foreach (ArrTuple<int, MidiEvent> _me3 in sLeft)
+                        /*foreach (MultiTrackMidiEvent _me3 in sLeft)
                         {
-                            if (!(_me3.Item2 is MidiEventMeta)) continue;
-                            if (_me3.Item1 != events[i].Item1) continue;  // Item1は直和した際のトラック番号
-                            var me3 = (MidiEventMeta)_me3.Item2;
+                            if (!(_me3.Event is MidiEventMeta)) continue;
+                            if (_me3.TrackID != events[i].TrackID) continue;  // Item1は直和した際のトラック番号
+                            var me3 = (MidiEventMeta)_me3.Event;
 
                             if (me3.id == ((MidiEventMeta)me).id)
                             {
@@ -497,9 +538,9 @@ namespace Mid2BMS
                         }*/
 
                         found = sLeft
-                            .Where(me3 => me3.Item2 is MidiEventMeta)    // MidiEventMeta型で、
-                            .Where(me3 => me3.Item1 != events[i].Item1)  // Midiトラック番号が同じものの中に、
-                            .Select(me3 => (MidiEventMeta)me3.Item2)
+                            .Where(me3 => me3.Event is MidiEventMeta)    // MidiEventMeta型で、
+                            .Where(me3 => me3.TrackID != events[i].TrackID)  // Midiトラック番号が同じものの中に、
+                            .Select(me3 => (MidiEventMeta)me3.Event)
                             .Any(me3 => me3.id == ((MidiEventMeta)me).id); // idが同じものがあるかどうか
                     }
                     else
@@ -511,7 +552,7 @@ namespace Mid2BMS
                     {
                         MidiEvent me2 = me.Clone();
                         me2.tick = LeftTick;
-                        sLeft.Add(Arr.ay(events[i].Item1, me2));
+                        sLeft.Add(new MultiTrackMidiEvent(events[i].TrackID, me2));
                     }
                 }
             }

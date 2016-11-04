@@ -370,7 +370,7 @@ namespace Mid2BMS
             MelodyWalker mw = new MelodyWalker();
             mw.VacantBMSChannelIdx = DefaultVacantBMSChannelIdx;
             mw.WavidSpacing = WavidSpacing;
-            mw.MultiProcess(MMLs, MidiTrackIdentifier, isDrumsList, ignoreList, isChordList, isXChainList, isGlobalList, sequenceLayer, PathBase,
+            mw.MultiProcess(MMLs, MidiTrackIdentifier, isDrumsList, ignoreList, isChordList, isXChainList, sequenceLayer, PathBase,
                 isRedMode, isPurpleMode, createExFiles, ref VacantWavid, timebase, margintime_beats, out trackCsv, out isEmptyList, midi_bpm,
                 ref ProgressBarValue, 0.10, 1.00);
             #endregion
@@ -439,9 +439,9 @@ namespace Mid2BMS
                     // 小節数が9999を超える場合はさすがに中断しよう
                     try
                     {
-                        var directsum = ms2.tracks.DirectSum();
+                        var directsum = MidiTrack.DirectSum(ms2.tracks);
                         var splitted = MidiTrack.SplitNotes(directsum, ms2, isChordList, isXChainList, isGlobalList);
-                        ms2.tracks = splitted.DirectDifference().Select(x => new MidiTrack(x)).ToList();
+                        ms2.tracks = MidiTrack.DirectDifference(splitted);
                     }
                     catch (Exception e)
                     {

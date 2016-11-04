@@ -9,5 +9,13 @@ namespace Mid2BMS
     {
         public int TrackID;
         public MidiEvent Event;
+
+        public MultiTrackMidiEvent() { }
+
+        public MultiTrackMidiEvent(int trackID, MidiEvent Event)
+        {
+            this.TrackID = trackID;
+            this.Event = Event;
+        }
     }
 }
