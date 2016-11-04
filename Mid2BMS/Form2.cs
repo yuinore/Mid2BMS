@@ -26,6 +26,8 @@ namespace Mid2BMS
         public List<bool> IsDrumsList { get; set; }
         public List<bool> IgnoreList { get; set; }
         public List<bool> IsChordList { get; set; }
+        public List<bool> IsXChainList { get; set; }  // RedModeとシーケンスレイヤーの両方が（？）選択されている場合に、サイドチェイントリガノーツとして扱う
+        public List<bool> IsGlobalList { get; set; }  // RedModeとシーケンスレイヤーの両方が選択されている場合に、オートメーションをグローバルとして扱う
         public bool RedoRequired { get; private set; }  // 初期値はfalseかな？
         bool changeEnabled = false;
 
@@ -42,11 +44,14 @@ namespace Mid2BMS
 
                 TrackNames = new List<String>(TrackNames);
 
-                IsDrumsList = new List<bool>(TrackNames.Select(x => false));  // この書き方良くないけど良い(?)
-                IgnoreList = new List<bool>(TrackNames.Select(x => false));  // この書き方良くないけど良い(?)
-                IsChordList = new List<bool>(TrackNames.Select(x => false));  // この書き方良くないけど良い(?)
-                // というかtrueでもfalseでもいいんですよ
-                // こういう点を見ると、scilabのzeros(x)とかones(x)って便利だなって思う
+                // http://stackoverflow.com/questions/3363940/fill-listint-with-default-values
+                // Enumerable.Repeatよりもこの方が僅かに速いらしい
+
+                IsDrumsList = new List<bool>(new bool[TrackNames.Count]);
+                IgnoreList = new List<bool>(new bool[TrackNames.Count]);
+                IsChordList = new List<bool>(new bool[TrackNames.Count]);
+                IsXChainList = new List<bool>(new bool[TrackNames.Count]);
+                IsGlobalList = new List<bool>(new bool[TrackNames.Count]);
 
                 for (int i = 0; i < data_table.Rows.Count; i++)
                 {
@@ -55,10 +60,10 @@ namespace Mid2BMS
                     IsDrumsList[tracknumber] = (bool)data_table.Rows[i][6];
                     IgnoreList[tracknumber] = (bool)data_table.Rows[i][7];
                     IsChordList[tracknumber] = (bool)data_table.Rows[i][8];
+                    IsXChainList[tracknumber] = (bool)data_table.Rows[i][9];
+                    IsGlobalList[tracknumber] = (bool)data_table.Rows[i][10];
                 }
-
-                //MessageBox.Show("ねこ");
-
+                
                 this.Close();
             }
         }
@@ -122,12 +127,8 @@ namespace Mid2BMS
                 data_table.Columns.Add("Drums?", Type.GetType("System.Boolean"));
                 data_table.Columns.Add("Ignore?", Type.GetType("System.Boolean"));
                 data_table.Columns.Add("Chord?", Type.GetType("System.Boolean"));
-                /*{
-                    var cs = new DataGridBoolColumn();
-                    cs.MappingName = "Drums?";
-                    cs.AllowNull = false;
-                    data_table.Columns.Add(cs);//, Type.GetType("System.Boolean"));
-                }*/
+                data_table.Columns.Add("XChain?", Type.GetType("System.Boolean"));
+                data_table.Columns.Add("Global?", Type.GetType("System.Boolean"));
             }
             else
             {
@@ -159,6 +160,8 @@ namespace Mid2BMS
                         data_row[6] = false;
                         data_row[7] = false;
                         data_row[8] = false;
+                        data_row[9] = false;
+                        data_row[10] = true;  // IsGlobal はデフォルトでtrue
                     }
                     else
                     {
@@ -185,6 +188,8 @@ namespace Mid2BMS
                 dataGridView1.Columns[6].ReadOnly = false;
                 dataGridView1.Columns[7].ReadOnly = false;
                 dataGridView1.Columns[8].ReadOnly = false;
+                dataGridView1.Columns[9].ReadOnly = false;
+                dataGridView1.Columns[10].ReadOnly = false;
             }
             else
             {

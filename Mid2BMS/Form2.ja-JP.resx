@@ -117,21 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 140</value>
-  </data>
-  <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>656, 394</value>
-  </data>
   <data name="button1.Text" xml:space="preserve">
     <value>終了</value>
   </data>
   <data name="button2.Text" xml:space="preserve">
     <value>変更する</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 108</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>トラック名を確認し、問題が無ければ「終了」をクリックしてください。
@@ -144,6 +134,7 @@
 
 また、ドラムトラックを指定する場合でも、「変更する」をクリックしてください。</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAAAAAAAEAIAAoIAQAFgAAACgAAAAAAQAAAAIAAAEAIAAAAAAAACAEAAAAAAAAAAAAAAAAAAAA

@@ -86,6 +86,7 @@
     <Compile Include="Diff.cs" />
     <Compile Include="DupeDefinition.cs" />
     <Compile Include="Mid2mml\Mid2mml2.cs" />
+    <Compile Include="MidiStruct\MultiTrackMidiEvent.cs" />
     <Compile Include="SignalProcessing\Order.cs" />
     <Compile Include="SignalProcessing\TailCutPlus.cs" />
     <Compile Include="Util\Arr.cs" />

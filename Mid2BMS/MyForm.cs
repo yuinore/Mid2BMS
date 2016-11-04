@@ -146,6 +146,8 @@ namespace Mid2BMS
         /// <param name="isDrumsList">[nullable] 各音程に対し1つのBMSレーンを割り当てるかどうかを示すフラグの配列です。フラグのデフォルト値はfalseです。</param>
         /// <param name="ignoreList">[nullable] トラックを無視するかどうかを示すフラグの配列です。フラグのデフォルト値はfalseです。</param>
         /// <param name="isChordList">[nullable] 同時に発音された音を1つのキー音にまとめるかどうかを示すフラグの配列です。フラグのデフォルト値はfalseです。</param>
+        /// <param name="isXChainList">[nullable] RedModeとシーケンスレイヤーの両方が選択されている場合に、サイドチェイントリガノーツとして扱うかどうかを示すフラグの配列です。フラグのデフォルト値はfalseです。</param>
+        /// <param name="isGlobalList">[nullable] RedModeとシーケンスレイヤーの両方が選択されている場合に、オートメーションをグローバルとして扱うかどうかを示すフラグの配列です。フラグのデフォルト値はtrueです。</param>
         /// <param name="sequenceLayer">それぞれのトラックが重ならないように単音midiを時間的にずらすかどうかを示すフラグです。デフォルト値はfalseです。</param>
         /// <param name="ProgressBarValue">プログレスバーに対して値を反映させるための変数です。</param>
         /// <param name="ProgressBarFinished">プログレスバーの増加が終了したかどうかを示すフラグです。</param>
@@ -153,7 +155,7 @@ namespace Mid2BMS
             bool isRedMode, bool isPurpleMode, bool createExFiles, ref int VacantWavid, ref int DefaultVacantBMSChannelIdx,
             bool LookAtInstrumentName, String margintime_beats, int WavidSpacing,
             out String trackCsv, ref List<String> MidiTrackNames, out List<String> MidiInstrumentNames,
-            List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, bool sequenceLayer,
+            List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, List<bool> isXChainList, List<bool> isGlobalList, bool sequenceLayer,
             int newTimebase, int velocityStep,
             ref double ProgressBarValue, ref bool ProgressBarFinished)
         {
@@ -368,7 +370,7 @@ namespace Mid2BMS
             MelodyWalker mw = new MelodyWalker();
             mw.VacantBMSChannelIdx = DefaultVacantBMSChannelIdx;
             mw.WavidSpacing = WavidSpacing;
-            mw.MultiProcess(MMLs, MidiTrackIdentifier, isDrumsList, ignoreList, isChordList, sequenceLayer, PathBase,
+            mw.MultiProcess(MMLs, MidiTrackIdentifier, isDrumsList, ignoreList, isChordList, isXChainList, isGlobalList, sequenceLayer, PathBase,
                 isRedMode, isPurpleMode, createExFiles, ref VacantWavid, timebase, margintime_beats, out trackCsv, out isEmptyList, midi_bpm,
                 ref ProgressBarValue, 0.10, 1.00);
             #endregion
@@ -435,11 +437,10 @@ namespace Mid2BMS
                 {
                     // ノート数が5000を超える場合は中断しても良いと思う(でもノート数よりオートメーションが極端に多いと問題の解決にならない)
                     // 小節数が9999を超える場合はさすがに中断しよう
-                    // これをJava(7以前)で書き換えようとしたら大変だぞー(よく知らないのに知った顔)
                     try
                     {
                         var directsum = ms2.tracks.DirectSum();
-                        var splitted = MidiTrack.SplitNotes(directsum, ms2, isChordList);
+                        var splitted = MidiTrack.SplitNotes(directsum, ms2, isChordList, isXChainList, isGlobalList);
                         ms2.tracks = splitted.DirectDifference().Select(x => new MidiTrack(x)).ToList();
                     }
                     catch (Exception e)

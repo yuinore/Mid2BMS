@@ -32,7 +32,7 @@ namespace Mid2BMS
         /// MMLデータ(text0_stdout_part1.mml)を受け取り、text1～text8 他を生成します。
         /// </summary>
         public int MultiProcess(List<String> MMLs_, List<String> MidiTrackNames_,
-            List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, bool sequenceLayer, String pathBase,
+            List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, List<bool> isXChainList, List<bool> isGlobalList, bool sequenceLayer, String pathBase,
             bool isRedMode, bool isPurpleMode, bool createExFiles, ref int VacantWavid, int timebase,
             String margintime_beats, out String trackCsv, out List<bool> isEmptyList, decimal bpm,
             ref double progressValue, double progressMin, double progressMax)
@@ -94,7 +94,9 @@ namespace Mid2BMS
                     // ArrayかList<>かIEnumerableかで迷ったら、とりあえずList使っとけばいいみたいなのはある
                     bool isDrums = (isDrumsList == null) ? false : isDrumsList[i];
                     //progressValue = progressMin + (progressMax - progressMin) * i / mml_multi.Length;
-                    bool ignore = (ignoreList == null) ? false : ignoreList[i];
+                    bool xchainChecked = (isXChainList == null) ? false : isXChainList[i];
+                    bool ignoreChecked = (ignoreList == null) ? false : ignoreList[i];
+                    bool ignore = ignoreChecked || (isRedMode && sequenceLayer && xchainChecked);  // BMSおよびrenamer_array（およびpurpleまたはblueの場合はmidi）を出力するかどうか
                     bool isChordMode = (isChordList == null) ? false : isChordList[i];
                     if (ignore)
                     {
@@ -104,7 +106,7 @@ namespace Mid2BMS
 
                     if (!sequenceLayer) midiTime = new Frac(4);
 
-                    Process(i, (i < MidiTrackNames.Count) ? MidiTrackNames[i] : "MidiTrack" + (i + 1), MMLs[i], pathBase, text, tanon_ms,
+                    Process(i, (i < MidiTrackNames.Count) ? MidiTrackNames[i] : "MidiTrack " + (i + 1), MMLs[i], pathBase, text, tanon_ms,
                         0, 0, isRedMode, isPurpleMode, isDrums, isChordMode,
                         out isEmpty, midiTime, ref VacantWavid, timebase, margintime_beats,
                         ref progressValue,

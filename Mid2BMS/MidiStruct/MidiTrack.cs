@@ -91,7 +91,7 @@ namespace Mid2BMS
             return new MidiTrack(
                 MidiTrack.SplitNotes((new IEnumerable<MidiEvent>[] { 
                     this.OrderBy(x => x.tick) 
-                }).DirectSum(), midistruct, new List<bool> { isChordMode }).Select(x => x.Item2)
+                }).DirectSum(), midistruct, new List<bool> { isChordMode }, new List<bool> { false }, new List<bool> { false }).Select(x => x.Item2)
                 );
         }
 
@@ -105,10 +105,10 @@ namespace Mid2BMS
         /// プログラムを「一般化」した結果がこの三角カッコの嵐だよ！！！
         /// </summary>
         public static IEnumerable<ArrTuple<int, MidiEvent>> SplitNotes(
-            IEnumerable<ArrTuple<int, MidiEvent>> tracks, MidiStruct midistruct, List<bool> isChordList)
+            IEnumerable<ArrTuple<int, MidiEvent>> tracks, MidiStruct midistruct, List<bool> isChordList, List<bool> isXChainList, List<bool> isGlobalList)
         {
             // List<ArrTuple<int, MidiEvent>> とか書きたくないですね
-
+            
             List<ArrTuple<int, MidiEvent>> events = tracks.OrderBy(x => x.Item1).ToList();  // これはx.Item1, xItem2.tickの順にソートされている
             List<ArrTuple<int, MidiEvent>> eventsOrderByTick = tracks.OrderBy(x => x.Item2.tick).ToList();
             List<ArrTuple<int, MidiEvent>> NotNoteEventsOrderByTick =
@@ -120,8 +120,8 @@ namespace Mid2BMS
             // なんか間違っている気がする・・・MidiTrackの代わりにList<MidiEvent>使うべきな気がする・・・
             // というわけで使いました。ついでに IEnumerable の割合もかなり増えました。
             List<ArrTuple<int, MidiEvent>> s1meta;  // これはx.Item1, xItem2.tick の順でソートされている
-            List<ArrTuple<int, MidiEvent>> s1a = new List<ArrTuple<int, MidiEvent>>();  // これはx.Item1, xItem2.tick の順でソートされている。Noteのみを含む
-            List<ArrTuple<int, MidiEvent>> s1b = new List<ArrTuple<int, MidiEvent>>();  // これはx.Item1, xItem2.tick の順でソートされている。Noteを含まない。
+            List<ArrTuple<int, MidiEvent>> s1a = new List<ArrTuple<int, MidiEvent>>();  // これはx.Item1, xItem2.tick の順の優先度でソートされている。Noteのみを含む
+            List<ArrTuple<int, MidiEvent>> s1b = new List<ArrTuple<int, MidiEvent>>();  // これはx.Item1, xItem2.tick の順の優先度でソートされている。Noteを含まない。
             int deltatick = midistruct.BeatsToTicks(4 * 4);
 
             s1meta = (events.Where(mev => (
