@@ -1737,13 +1737,19 @@
             // 
             // textBox_renamedBMSPath
             // 
+            this.textBox_renamedBMSPath.AllowDrop = true;
             resources.ApplyResources(this.textBox_renamedBMSPath, "textBox_renamedBMSPath");
             this.textBox_renamedBMSPath.Name = "textBox_renamedBMSPath";
+            this.textBox_renamedBMSPath.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox_renamedBMSPath_DragDrop);
+            this.textBox_renamedBMSPath.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox_renamedBMSPath_DragEnter);
             // 
             // textBox_originalBMSPath
             // 
+            this.textBox_originalBMSPath.AllowDrop = true;
             resources.ApplyResources(this.textBox_originalBMSPath, "textBox_originalBMSPath");
             this.textBox_originalBMSPath.Name = "textBox_originalBMSPath";
+            this.textBox_originalBMSPath.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox_originalBMSPath_DragDrop);
+            this.textBox_originalBMSPath.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox_originalBMSPath_DragEnter);
             // 
             // label82
             // 

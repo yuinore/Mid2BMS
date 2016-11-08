@@ -1736,10 +1736,46 @@ namespace Mid2BMS
 
             anotherThread.Start();
         }
-    
+
         private void button3_Click_2(object sender, EventArgs e)
         {
             button3_Click_1(sender, e);
+        }
+
+        private void textBox_originalBMSPath_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+        }
+
+        private void textBox_renamedBMSPath_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+        }
+
+        private void textBox_originalBMSPath_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var s = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                if (s.Length >= 1)
+                {
+                    textBox_originalBMSPath.Text = File.Exists(s[0]) ? "【フォルダをドラッグしてください】" : s[0];
+                }
+            }
+        }
+
+        private void textBox_renamedBMSPath_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var s = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                if (s.Length >= 1)
+                {
+                    textBox_renamedBMSPath.Text = File.Exists(s[0]) ? "【フォルダをドラッグしてください】" : s[0];
+                }
+            }
         }
     }
 }
