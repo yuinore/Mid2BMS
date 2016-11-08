@@ -149,39 +149,53 @@ namespace Mid2BMS
             IEnumerable<MultiTrackMidiEvent> tracks, MidiStruct midistruct, List<bool> isChordList, List<bool> isXChainList, List<bool> isGlobalList)
         {
             // List<ArrTuple<int, MidiEvent>> とか書きたくないですね
-            
-            List<MultiTrackMidiEvent> events = tracks.OrderBy(x => x.TrackID).ToList();  // これはx.Item1, xItem2.tickの順にソートされている
-            List<MultiTrackMidiEvent> eventsOrderByTick = tracks.OrderBy(x => x.Event.tick).ToList();
-            List<MultiTrackMidiEvent> NotNoteEventsOrderByTick =
-                eventsOrderByTick
-                .Where(mev => !(mev.Event is MidiEventNote))
-                .Where(mev => (!(mev.Event is MidiEventMeta) || (((MidiEventMeta)mev.Event).id == 0x51)))
+
+            //######## TrackIDの順にソートされた入力
+            List<MultiTrackMidiEvent> eventsOrderByTrackID = tracks.OrderBy(x => x.TrackID).ToList();  // これはx.Item1, xItem2.tickの順にソートされている
+
+            //######## TrackIDの順にソートされたノーツ入力（サイドチェイントリガノーツを含まない）
+            List<MultiTrackMidiEvent> noteEventsOrderByTrackID = 
+                eventsOrderByTrackID
+                .Where(x => (x.Event is MidiEvent) && (isXChainList == null || !isXChainList[x.TrackID]))
+                .ToList();  // これはx.Item1, xItem2.tickの順にソートされている
+
+            //######## tickの順にソートされた非ノーツ入力（テンポチェンジ以外のメタデータを含まない。また、サイドチェイントリガノーツを含む）
+            List<MultiTrackMidiEvent> NonNoteEventsOrderByTick =
+                tracks
+                .OrderBy(x => x.Event.tick)
+                .Where(x => !(x.Event is MidiEventNote) || (isXChainList != null && isXChainList[x.TrackID]))
+                .Where(x => !(x.Event is MidiEventMeta) || (((MidiEventMeta)x.Event).id == 0x51))
                 .ToList();
 
-            // なんか間違っている気がする・・・MidiTrackの代わりにList<MidiEvent>使うべきな気がする・・・
-            // というわけで使いました。ついでに IEnumerable の割合もかなり増えました。
-            List<MultiTrackMidiEvent> s1meta;  // これはx.Item1, xItem2.tick の順でソートされている
-            List<MultiTrackMidiEvent> s1a = new List<MultiTrackMidiEvent>();  // これはx.Item1, xItem2.tick の順の優先度でソートされている。Noteのみを含む
-            List<MultiTrackMidiEvent> s1b = new List<MultiTrackMidiEvent>();  // これはx.Item1, xItem2.tick の順の優先度でソートされている。Noteを含まない。
-            int deltatick = midistruct.BeatsToTicks(4 * 4);
-
-            s1meta = (events.Where(mev => (
+            //######## メタイベントのうちトラック名等のオートメーションとして解釈されないもの（テンポチェンジは含まれない）
+            List<MultiTrackMidiEvent> metaEventsOrderByTrackID = (eventsOrderByTrackID.Where(mev => (
                 (mev.Event is MidiEventMeta) && (
                     ((MidiEventMeta)mev.Event).id == 0x03 ||  // Track Name
                     ((MidiEventMeta)mev.Event).id == 0x04 ||  // Instrument Name
                     ((MidiEventMeta)mev.Event).id == 0x05 ||  // Lyric
                     ((MidiEventMeta)mev.Event).id == 0x21 ||  // Port
-                //((MidiEventMeta)mev.Event).id == 0x51 ||  // Tempo
+                    //((MidiEventMeta)mev.Event).id == 0x51 ||  // Tempo
                     ((MidiEventMeta)mev.Event).id == 0x58 ||  // Signature
                     ((MidiEventMeta)mev.Event).id == 0x59     // Key
                 )
-                )).ToList());  // これはx.Item1の順にソートされている
+                )).ToList());
+
+            //----------------------------------------------------------------------------------------------//
+
+            //######## 最終的な出力結果のうち、ノートイベントであるもの
+            List<MultiTrackMidiEvent> outputEventsNote = new List<MultiTrackMidiEvent>();  // OrderByTrackID
+
+            //######## 最終的な出力結果のうち、ノートイベント以外のもの（サイドチェイントリガノーツを含む）
+            List<MultiTrackMidiEvent> outputEventsNonNote = new List<MultiTrackMidiEvent>();  // OrderByTrackID
+            int deltatick = midistruct.BeatsToTicks(4 * 4);
+            
+            //----------------------------------------------------------------------------------------------//
 
             bool messageShown = false;
             int lasttick = -1;
             var st = new Stopwatch();
             st.Start();
-            for (int i = 0; i < events.Count; i++)
+            for (int i = 0; i < eventsOrderByTrackID.Count; i++)
             {
                 if (!messageShown && deltatick > 9999 * 4 * midistruct.BeatsToTicks(1))
                 {
@@ -193,7 +207,7 @@ namespace Mid2BMS
                     }
                     messageShown = true;
                 }
-                int progress = i * 100 / events.Count;
+                int progress = i * 100 / eventsOrderByTrackID.Count;
                 if (!messageShown && st.ElapsedMilliseconds > 5000 && progress < 50)
                 {
                     if (DialogResult.Yes == MessageBox.Show(
@@ -206,144 +220,127 @@ namespace Mid2BMS
                 }
 
                 MidiEventNote me;
-                if ((me = events[i].Event as MidiEventNote) != null)
+                if ((me = eventsOrderByTrackID[i].Event as MidiEventNote) != null)  // ノーツイベントだった場合
                 {
+                    //################ outputEventsNoteへの要素追加 ################
+
+                    // サイドチェイントリガノーツだったのでスキップ
+                    if (isXChainList != null && isXChainList[eventsOrderByTrackID[i].TrackID]) continue;
+
                     List<MultiTrackMidiEvent> chord = null;
-                    if (isChordList != null && isChordList[events[i].TrackID])
+                    if (isChordList != null && isChordList[eventsOrderByTrackID[i].TrackID])
                     {
+                        // chordモード
                         if (lasttick == me.tick) continue;
                         lasttick = me.tick;
-
-                        // Arr.ayはクソ、はっきりわかんだね
-                        // (Item1とItem2が何を指しているのかわかりづらいため)
-                        chord = events.Where(x =>
-                            x.TrackID == events[i].TrackID
-                            && x.Event.tick == events[i].Event.tick
-                            && x.Event is MidiEventNote)
+                        
+                        chord = noteEventsOrderByTrackID.Where(x =>
+                            x.TrackID == eventsOrderByTrackID[i].TrackID
+                            && x.Event.tick == eventsOrderByTrackID[i].Event.tick)
                             .Select(x =>{
                                 MidiEvent m2 = x.Event.Clone();
                                 m2.tick = deltatick;
                                 return new MultiTrackMidiEvent(x.TrackID, m2);
                             }).ToList();  // クローンしておく
-
-                        // FindAll と Where のうまい使い分け方とかあるんだろうか
                     }
 
                     // Note on & Note off pair
                     me = (MidiEventNote)me.Clone();  // dektatickだけ遅延させる
-                    var deltatickForEvents = deltatick - events[i].Event.tick;
+                    var deltatickForEvents = deltatick - eventsOrderByTrackID[i].Event.tick;
 
-                    int LTime = me.tick - (int)(midistruct.BeatsToTicks(1) * SPLIT_BEATS_AUTOMATIONLEFT);  // 負の数になることもある
+                    // 後で必要になる、オートメーションの切り出し範囲
+                    int LTime = me.tick - (int)(midistruct.BeatsToTicks(1) * SPLIT_BEATS_AUTOMATIONLEFT);
                     int RTime = me.tick + (int)(midistruct.BeatsToTicks(1) * SPLIT_BEATS_AUTOMATIONRIGHT);
-                    //me.tick += deltatick;
                     me.tick = deltatick;  // updated
-                    //me.tick += (deltatick - events[i].Event.tick);  // updated 
-                    // これはme.tick = deltatick; でも同じ意味になる
-
-
-                    //s1.Add(new MultiTrackMidiEvent(events[i].TrackID, me));  // 型推論に失敗！！！
-                    int MaxLength = me.q;
-                    if (isChordList != null && isChordList[events[i].TrackID])
+                    
+                    int MaxLength = -1;
+                    if (isChordList != null && isChordList[eventsOrderByTrackID[i].TrackID])
                     {
-                        foreach (var me3 in chord)
-                        {
-                            s1a.Add(me3);
-                            MaxLength = Math.Max(MaxLength, (me3.Event as MidiEventNote).q);
-                        }
+                        // chordモード
+                        outputEventsNote.AddRange(chord);
+                        MaxLength = chord.Select(me3 => (me3.Event as MidiEventNote).q).Max();  // 最も長いノーツの長さ
                     }
                     else
                     {
-                        s1a.Add(new MultiTrackMidiEvent(events[i].TrackID, (MidiEvent)me));  // 型推論に失敗！！！
+                        // 非chordモード
+                        outputEventsNote.Add(new MultiTrackMidiEvent(eventsOrderByTrackID[i].TrackID, me));
+                        MaxLength = me.q;
                     }
-                    if (MaxLength == 0) throw new Exception("そもそもゲートが0っておかしいよね");  // デバッグ用
+                    if (MaxLength <= 0) throw new Exception("そもそもゲートが0以下っておかしいよね");  // デバッグ用
+
+                    //################ outputEventsNonNoteへの要素追加 ################
 
                     // オートメーションの切り出し
                     // この時点において、MidiTrackはソート済みではないがeventsOrderByTickはソート済み
-                    var s2 = Clip(NotNoteEventsOrderByTick, LTime, RTime);  // filter ノートの削除
+                    var s2 = Clip(NonNoteEventsOrderByTick, LTime, RTime);  // filter ノートの削除
                     if (s2.Any(x => x.Event.tick < LTime)) throw new Exception("みゃ！？・・・///");
                     if (s2.Any(x => x.Event.tick >= RTime)) throw new Exception("みゃ！！・・・///");
-                    //foreach (MidiEvent mev in s2) mev.tick += deltatick;
                     foreach (MultiTrackMidiEvent mev in s2) mev.Event.tick += deltatickForEvents;  // updated
-                    //if (s2.Any(x => x.Event.tick < 0)) throw new Exception("みゃ！？・・・///");
-                    s1b.AddRange(s2);
+                    outputEventsNonNote.AddRange(s2);
 
                     deltatick += MaxLength + (int)(midistruct.BeatsToTicks(1) * SPLIT_BEATS_INTERVAL);
                 }
             }
             st.Stop();
-
-            //s1b = s1b;  // テンポチェンジを除くメタイベントを除去
-
-            //s1meta.AddRange(s1);
-            //s1meta = s1meta.OrderBy(x => x.Event).ToList();  // ここで非常に時間が掛かっている(32.9%)
+            
             // 今回の高速化で学んだこと：ソート(OrderBy関数)は遅い。不必要にソートしてはならない。
             // x.tickの順に安定ソートする
-            //s1aとs1bとs1metaはそれぞれはソートされている
-            // 最も要素数が少ないと思われる s1a と s1meta を先にマージする（重要）
-            // s1meta → s1a → s1b の順にマージする(この順番はあまり重要ではない)
+            // outputEventsNote と outputEventsNonNote と metaEventsOrderByTrackID はそれぞれはソートされている
+            // 最も要素数が少ないと思われる outputEventsNote と metaEventsOrderByTrackID を先にマージする（重要）
+            // metaEventsOrderByTrackID → outputEventsNote → outputEventsNonNote の順にマージする(この順番はあまり重要ではない)
 
-            s1a = s1a.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick).ToList();
-            s1meta = s1meta.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick).ToList();
+            outputEventsNote = outputEventsNote.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick).ToList();
+            metaEventsOrderByTrackID = metaEventsOrderByTrackID.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick).ToList();
+            // outputEventsNonNote はソートされていることが保証されている・・・？
 
-            //if (!s1a.SequenceEqual(s1a.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick))) throw new Exception("でやー");
-            //if (!s1b.SequenceEqual(s1b.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick))) throw new Exception("うらー");  // 例外「うらー」が発生。理由は「tickよってソートされていたから」
-            //if (!s1meta.SequenceEqual(s1meta.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick))) throw new Exception("とあー");
+            //#### マージされた出力配列
+            List<MultiTrackMidiEvent> mergedOutputEvents2 = new List<MultiTrackMidiEvent>();
 
-            List<MultiTrackMidiEvent> merged2 = new List<MultiTrackMidiEvent>();
+            #region 出力配列のマージ
             {
                 MidiEvent dmy = new MidiEventNote();
                 dmy.tick = Int32.MaxValue;
-                s1meta.Add(new MultiTrackMidiEvent(Int32.MaxValue, dmy));
-                s1a.Add(new MultiTrackMidiEvent(Int32.MaxValue, dmy));
+                metaEventsOrderByTrackID.Add(new MultiTrackMidiEvent(Int32.MaxValue, dmy));
+                outputEventsNote.Add(new MultiTrackMidiEvent(Int32.MaxValue, dmy));
 
-                List<MultiTrackMidiEvent> merged1 = new List<MultiTrackMidiEvent>();
+                List<MultiTrackMidiEvent> mergedOutputEvents1 = new List<MultiTrackMidiEvent>();
                 {
                     int i1 = 0, i2 = 0;
-                    while (i1 < s1meta.Count - 1 || i2 < s1a.Count - 1)
+                    while (i1 < metaEventsOrderByTrackID.Count - 1 || i2 < outputEventsNote.Count - 1)
                     {
                         // ノートオフの方が先なので、同じ場合は ev2 が先にくる。
-                        if (s1meta[i1].Event.tick < s1a[i2].Event.tick || (s1meta[i1].Event.tick < s1a[i2].Event.tick) && s1meta[i1].TrackID < s1a[i2].TrackID)
+                        if (metaEventsOrderByTrackID[i1].Event.tick < outputEventsNote[i2].Event.tick || (metaEventsOrderByTrackID[i1].Event.tick < outputEventsNote[i2].Event.tick) && metaEventsOrderByTrackID[i1].TrackID < outputEventsNote[i2].TrackID)
                         {
-                            merged1.Add(s1meta[i1++]);
+                            mergedOutputEvents1.Add(metaEventsOrderByTrackID[i1++]);
                         }
                         else
                         {
-                            merged1.Add(s1a[i2++]);
+                            mergedOutputEvents1.Add(outputEventsNote[i2++]);
                         }
                     }
                 }
-                //if (!merged1.SequenceEqual(merged1.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick))) throw new Exception("にゃー");
 
-                merged1.Add(new MultiTrackMidiEvent(Int32.MaxValue, dmy));
-                s1b.Add(new MultiTrackMidiEvent(Int32.MaxValue, dmy));
+                mergedOutputEvents1.Add(new MultiTrackMidiEvent(Int32.MaxValue, dmy));
+                outputEventsNonNote.Add(new MultiTrackMidiEvent(Int32.MaxValue, dmy));
                 {
                     int i1 = 0, i2 = 0;
-                    while (i1 < merged1.Count - 1 || i2 < s1b.Count - 1)
+                    while (i1 < mergedOutputEvents1.Count - 1 || i2 < outputEventsNonNote.Count - 1)
                     {
                         // ノートオフの方が先なので、同じ場合は ev2 が先にくる。
-                        if (merged1[i1].Event.tick < s1b[i2].Event.tick || (merged1[i1].Event.tick == s1b[i2].Event.tick && merged1[i1].TrackID < s1b[i2].TrackID))
+                        if (mergedOutputEvents1[i1].Event.tick < outputEventsNonNote[i2].Event.tick || (mergedOutputEvents1[i1].Event.tick == outputEventsNonNote[i2].Event.tick && mergedOutputEvents1[i1].TrackID < outputEventsNonNote[i2].TrackID))
                         {
-                            merged2.Add(merged1[i1++]);
+                            mergedOutputEvents2.Add(mergedOutputEvents1[i1++]);
                         }
                         else
                         {
-                            merged2.Add(s1b[i2++]);
+                            mergedOutputEvents2.Add(outputEventsNonNote[i2++]);
                         }
                     }
                 }
             }
+            #endregion
 
-            //if (!merged2.SequenceEqual(merged2.OrderBy(x => x.TrackID).OrderBy(x => x.Event.tick))) throw new Exception("みゃー");
-
-
-            /*
-            for (int i = 0; i < Math.Min(1, s1meta.Count); i++)  // ソートしてからチェックする
-            {
-                if (s1meta[i].Event.tick < 0) throw new Exception("タイムシフトしたらマイナスになった（オーバーフローした）");
-            }
-            */
-
-            return merged2;
+            return mergedOutputEvents2;
         }
 
         public void AddTempo(double BPM, MidiStruct midistruct)
