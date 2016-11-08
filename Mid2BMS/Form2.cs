@@ -20,6 +20,16 @@ namespace Mid2BMS
         DataSet data_set;
         DataTable data_table;
 
+        //**************************************************
+        //********** 無効なチェックの組み合わせ ************
+        // Chord + Drums は不可 (意味がないため)
+        // Ignore + その他 は不可 (Ignoreが優先されるため)
+        // XChain + その他 は不可 (サイドチェイン以外は無視されるため)
+        // Purple + Chord は不可 (ポルタメントを適用する順序が一意でないため)
+        // XChain は RedMode かつシーケンスレイヤーの場合のみ可
+        //**************************************************
+
+        //################ 入出力パラメータ ################
         public String TrackName_csv { get; set; }  // 親フォーム(Form1)から値を受け取る
         public List<String> TrackNames { get; set; }
         public List<String> InstrumentNames { get; set; }
@@ -28,8 +38,32 @@ namespace Mid2BMS
         public List<bool> IsChordList { get; set; }
         public List<bool> IsXChainList { get; set; }  // RedModeとシーケンスレイヤーの両方が（？）選択されている場合に、サイドチェイントリガノーツとして扱う
         public List<bool> IsOneShotList { get; set; }  // Midiノーツの長さを無視して処理する
+
+        //################# 出力パラメータ #################
         public bool RedoRequired { get; private set; }  // 初期値はfalseかな？
+
+        //################# 入力パラメータ #################
+        private bool IsSequenceLayer;
+        private bool IsRedMode;
+        private bool IsPurpleMode;
+
+        //##################################################
+
         bool changeEnabled = false;
+
+        readonly int COLUMN_DRUMS = 6;  // 順序変更有り、また、この数値のみを変更しないこと
+        readonly int COLUMN_ONESHOT = 7;
+        readonly int COLUMN_CHORD = 8;
+        readonly int COLUMN_IGNORE = 9;
+        readonly int COLUMN_XCHAIN = 10;
+        
+        public void SetMode(bool isSequenceLayer, bool isRedMode, bool isPurpleMode)
+        {
+            // private get; set; は許されるのか！？ いや、許されない気がする・・・
+            IsSequenceLayer = isSequenceLayer;
+            IsRedMode = isRedMode;
+            IsPurpleMode = isPurpleMode;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -40,6 +74,35 @@ namespace Mid2BMS
             }
             else
             {
+                //######## パラメータの妥当性のチェック ########
+                for (int i = 0; i < data_table.Rows.Count; i++)
+                {
+                    bool isDrums = (bool)data_table.Rows[i][COLUMN_DRUMS];
+                    bool isOneShot = (bool)data_table.Rows[i][COLUMN_ONESHOT];
+                    bool isChord = (bool)data_table.Rows[i][COLUMN_CHORD];
+                    bool ignore = (bool)data_table.Rows[i][COLUMN_IGNORE];
+                    bool isXChain = (bool)data_table.Rows[i][COLUMN_XCHAIN];
+
+                    if (isChord && isDrums)
+                    {
+                        MessageBox.Show(this, "Chord? と Drums? を同時にチェックすることはできません。設定を確認してください。", "Invalid Parameter");
+                        return;
+                    }
+
+                    if (ignore && (isOneShot || isChord || isDrums || isXChain))
+                    {
+                        MessageBox.Show(this, "Ignore? がチェックされる場合、これは単独でチェックされなければなりません。設定を確認してください。", "Invalid Parameter");
+                        return;
+                    }
+
+                    if (isXChain && (isOneShot || isChord || isDrums))
+                    {
+                        MessageBox.Show(this, "XChain? がチェックされる場合、これは単独でチェックされなければなりません。設定を確認してください。", "Invalid Parameter");
+                        return;
+                    }
+                }
+
+                //######## 呼び出し元(Form1)への戻り値の設定 ########
                 RedoRequired = true;
 
                 TrackNames = new List<String>(TrackNames);
@@ -63,7 +126,8 @@ namespace Mid2BMS
                     IgnoreList[tracknumber] = (bool)data_table.Rows[i][9];
                     IsXChainList[tracknumber] = (bool)data_table.Rows[i][10];
                 }
-                
+
+                //######## フォームを閉じる ########
                 this.Close();
             }
         }
@@ -187,9 +251,12 @@ namespace Mid2BMS
                 dataGridView1.Columns[5].ReadOnly = false;
                 dataGridView1.Columns[6].ReadOnly = false;
                 dataGridView1.Columns[7].ReadOnly = false;  // 順序変更有り
-                dataGridView1.Columns[8].ReadOnly = false;
+                dataGridView1.Columns[8].Visible = false;  // Chord?
                 dataGridView1.Columns[9].ReadOnly = false;
                 dataGridView1.Columns[10].ReadOnly = false;
+
+                dataGridView1.Columns[COLUMN_CHORD].Visible = !IsPurpleMode;
+                dataGridView1.Columns[COLUMN_XCHAIN].Visible = IsRedMode && IsSequenceLayer;
             }
             else
             {

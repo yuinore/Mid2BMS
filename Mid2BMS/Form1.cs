@@ -230,6 +230,9 @@ namespace Mid2BMS
                                     f.IsDrumsList = null;
                                     f.IgnoreList = null;
                                     f.IsChordList = null;
+                                    f.IsOneShotList = null;
+                                    f.IsXChainList = null;
+                                    f.SetMode(sequenceLayer, isRedMode, isPurpleMode);
                                 }
                                 f.ShowDialog(this);
                                 if (f.RedoRequired)
