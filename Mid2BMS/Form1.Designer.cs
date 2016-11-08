@@ -228,6 +228,14 @@
             this.button29 = new System.Windows.Forms.Button();
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.tabPage15 = new System.Windows.Forms.TabPage();
+            this.label85 = new System.Windows.Forms.Label();
+            this.textBox_renamingExtension = new System.Windows.Forms.TextBox();
+            this.textBox_renamerConsole = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label84 = new System.Windows.Forms.Label();
+            this.label83 = new System.Windows.Forms.Label();
+            this.textBox_renamedBMSPath = new System.Windows.Forms.TextBox();
+            this.textBox_originalBMSPath = new System.Windows.Forms.TextBox();
             this.label82 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -236,14 +244,6 @@
             this.label32 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.textBox_originalBMSPath = new System.Windows.Forms.TextBox();
-            this.textBox_renamedBMSPath = new System.Windows.Forms.TextBox();
-            this.label83 = new System.Windows.Forms.Label();
-            this.label84 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox_renamerConsole = new System.Windows.Forms.TextBox();
-            this.textBox_renamingExtension = new System.Windows.Forms.TextBox();
-            this.label85 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -1702,6 +1702,49 @@
             this.tabPage15.Name = "tabPage15";
             this.tabPage15.UseVisualStyleBackColor = true;
             // 
+            // label85
+            // 
+            resources.ApplyResources(this.label85, "label85");
+            this.label85.Name = "label85";
+            // 
+            // textBox_renamingExtension
+            // 
+            resources.ApplyResources(this.textBox_renamingExtension, "textBox_renamingExtension");
+            this.textBox_renamingExtension.Name = "textBox_renamingExtension";
+            // 
+            // textBox_renamerConsole
+            // 
+            resources.ApplyResources(this.textBox_renamerConsole, "textBox_renamerConsole");
+            this.textBox_renamerConsole.Name = "textBox_renamerConsole";
+            this.textBox_renamerConsole.ReadOnly = true;
+            // 
+            // button3
+            // 
+            resources.ApplyResources(this.button3, "button3");
+            this.button3.Name = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_2);
+            // 
+            // label84
+            // 
+            resources.ApplyResources(this.label84, "label84");
+            this.label84.Name = "label84";
+            // 
+            // label83
+            // 
+            resources.ApplyResources(this.label83, "label83");
+            this.label83.Name = "label83";
+            // 
+            // textBox_renamedBMSPath
+            // 
+            resources.ApplyResources(this.textBox_renamedBMSPath, "textBox_renamedBMSPath");
+            this.textBox_renamedBMSPath.Name = "textBox_renamedBMSPath";
+            // 
+            // textBox_originalBMSPath
+            // 
+            resources.ApplyResources(this.textBox_originalBMSPath, "textBox_originalBMSPath");
+            this.textBox_originalBMSPath.Name = "textBox_originalBMSPath";
+            // 
             // label82
             // 
             resources.ApplyResources(this.label82, "label82");
@@ -1743,49 +1786,6 @@
             this.toolTip1.AutoPopDelay = 10000;
             this.toolTip1.InitialDelay = 250;
             this.toolTip1.ReshowDelay = 50;
-            // 
-            // textBox_originalBMSPath
-            // 
-            resources.ApplyResources(this.textBox_originalBMSPath, "textBox_originalBMSPath");
-            this.textBox_originalBMSPath.Name = "textBox_originalBMSPath";
-            // 
-            // textBox_renamedBMSPath
-            // 
-            resources.ApplyResources(this.textBox_renamedBMSPath, "textBox_renamedBMSPath");
-            this.textBox_renamedBMSPath.Name = "textBox_renamedBMSPath";
-            // 
-            // label83
-            // 
-            resources.ApplyResources(this.label83, "label83");
-            this.label83.Name = "label83";
-            // 
-            // label84
-            // 
-            resources.ApplyResources(this.label84, "label84");
-            this.label84.Name = "label84";
-            // 
-            // button3
-            // 
-            resources.ApplyResources(this.button3, "button3");
-            this.button3.Name = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_2);
-            // 
-            // textBox_renamerConsole
-            // 
-            resources.ApplyResources(this.textBox_renamerConsole, "textBox_renamerConsole");
-            this.textBox_renamerConsole.Name = "textBox_renamerConsole";
-            this.textBox_renamerConsole.ReadOnly = true;
-            // 
-            // textBox_renamingExtension
-            // 
-            resources.ApplyResources(this.textBox_renamingExtension, "textBox_renamingExtension");
-            this.textBox_renamingExtension.Name = "textBox_renamingExtension";
-            // 
-            // label85
-            // 
-            resources.ApplyResources(this.label85, "label85");
-            this.label85.Name = "label85";
             // 
             // Form1
             // 

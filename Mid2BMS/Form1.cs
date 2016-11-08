@@ -77,6 +77,14 @@ namespace Mid2BMS
             }
         }
 
+        //#################################################################
+        //## Progress Bar 管理ツールの使い方
+        //##   1. InitializeProgressBar() を呼び出します。
+        //##      監視スレッドが開始され、すべてのボタンが無効になります。
+        //##   2. ProgressBarValue を 0.0～1.0 の間で変化させます。
+        //##   3. ProgressBarFinished を true にします。
+        //#################################################################
+
         double ProgressBarValue = 0;
         bool ProgressBarFinished = true;
         Stopwatch SW;
@@ -1699,138 +1707,34 @@ namespace Mid2BMS
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            SHA512Managed hashComputer = new SHA512Managed();
+            InitializeProgressBar();
 
-            Func<string, string> GetFileHash = filename => hashComputer.ComputeHash(new FileStream(filename, FileMode.Open, FileAccess.Read)).Select(x => x.ToString("x2")).Join("");
-            // ラムダ式、(技術的に)やばいなあ・・・すごいなあ・・・
+            var kyoko = new TinyTinyRenamer();
 
-            var path1 = textBox_originalBMSPath.Text;  // old
-            var path2 = textBox_renamedBMSPath.Text;  // new
-            var ext = textBox_renamingExtension.Text.ToLower();
+            kyoko.OriginalBMSDirectory = textBox_originalBMSPath.Text;  // old
+            kyoko.RenamedBMSDirectory = textBox_renamedBMSPath.Text;  // new
+            kyoko.KeySoundFileExtension = textBox_renamingExtension.Text.ToLower();
 
-            var oldName_to_hash = new Dictionary<string, string>();
-            var hash_to_newName = new Dictionary<string, string>();
-
-            foreach (var filename in Directory.GetFiles(path1))
+            //Task.Run を使うためだけに .Net Framework を 4.5 にするべきかどうかについて
+            Thread anotherThread = new Thread(new ThreadStart(() =>
             {
-                if (Path.GetExtension(filename).ToLower() != ext) continue;
-
-                var hash = GetFileHash(filename);
-
-                oldName_to_hash.Add(Path.GetFileName(filename), hash);
-            }
-
-            // 並列版selectの使い方がわからなくてブチ切れた（とてもつらい）
-
-            foreach (var filename in Directory.GetFiles(path2))
-            {
-                if (Path.GetExtension(filename).ToLower() != ext) continue;
-
-                var hash = GetFileHash(filename);
-
                 try
                 {
-                    hash_to_newName.Add(hash, Path.GetFileName(filename));
-                }
-                catch
-                {
-                    string f1 = hash_to_newName[hash];
-                    string f2 = filename;
+                    kyoko.Rename(ref ProgressBarValue);
 
-                    if (MessageBox.Show("中身の等しいキー音が宛先フォルダに2つ存在します。\""
-                        + f1 + "\" と \"" + f2 + "\" です。キー音を統合して続行しますか？",
-                        "Confirm",
-                        MessageBoxButtons.OKCancel) != DialogResult.OK)
+                    this.Invoke(new Action(() =>
                     {
-                        // 処理中断
-                        return;
-                    }
+                        textBox_renamerConsole.Text = kyoko.RenameResultMultilineText;
+                    }));
+
                 }
-            }
-
-            StringBuilder s = new StringBuilder();
-
-            foreach (var kvpair in oldName_to_hash)
-            {
-                if (!hash_to_newName.ContainsKey(kvpair.Value))
+                finally
                 {
-                    string f1 = Path.GetFileName(kvpair.Key);
-                    if (MessageBox.Show("消失してしまったキー音が存在するようです。\""
-                        + f1 + "\" です。この音を無視して続行しますか？ キャンセルを押すと中断します。",
-                        "Confirm",
-                        MessageBoxButtons.OKCancel) != DialogResult.OK)
-                    {
-                        // 処理中断
-                        return;
-                    }
-
-                    continue;  // 消失したキー音の処遇は後で考える
+                    ProgressBarFinished = true;
                 }
-                s.Append(kvpair.Key + " ---> " + hash_to_newName[kvpair.Value] + "\r\n");
+            }));
 
-            }
-
-            textBox_renamerConsole.Text = s.ToString();
-
-            hashComputer.Clear();
-
-            foreach (var bmsfilename in Directory.GetFiles(path2))
-            {
-                var currentFileExt = Path.GetExtension(bmsfilename).ToLower();
-                if (currentFileExt != ".bms" && currentFileExt != ".bme" && currentFileExt != ".bml" && currentFileExt != ".pms") continue;
-
-                int i = 0;
-                string movedFileName = bmsfilename + "_old";
-                while (File.Exists(movedFileName))
-                {
-                    i++;
-                    movedFileName = bmsfilename + "_old" + i;  // i >= 1
-                }
-                File.Move(bmsfilename, movedFileName);
-            }
-
-            foreach (var bmsfilename in Directory.GetFiles(path1))
-            {
-                var currentFileExt = Path.GetExtension(bmsfilename).ToLower();
-                if (currentFileExt != ".bms" && currentFileExt != ".bme" && currentFileExt != ".bml" && currentFileExt != ".pms") continue;
-
-                var bmsAllText = File.ReadAllText(bmsfilename, HatoEnc.Encoding).Replace("\r\n", "\n");
-
-                // http://stackoverflow.com/questions/31326451/replacing-regex-matches-using-lambda-expression
-                var newBMSText = Regex.Replace(bmsAllText, @"^(#WAV[0-9A-Za-z][0-9A-Za-z] )(.+)$", match =>
-                {
-                    try
-                    {
-
-                        var prefix = match.Groups[1].Captures[0].Value;
-                        var old_filename = match.Groups[2].Captures[0].Value;
-                        var new_filename = hash_to_newName[oldName_to_hash[old_filename]];
-
-                        if(new_filename == "bass_000.wav")
-                        {
-                            Console.WriteLine(match.Groups.Count + ", " + match.Groups[1].Captures.Count + ", " + match.Groups[2].Captures.Count + "");
-                        }
-
-                        return prefix + new_filename;
-                    }
-                    catch(KeyNotFoundException)
-                    {
-                        // 全キャッチは良くない
-                        return match.Value;
-                    }
-                }, RegexOptions.Multiline);
-
-                string newBMSFilename = Path.Combine(path2, Path.GetFileName(bmsfilename));
-                if (File.Exists(newBMSFilename))
-                {
-                    //****************** 何らかの処理 ********************
-                    MessageBox.Show("何らかの処理");
-                }
-                else
-                {
-                    File.WriteAllText(newBMSFilename, newBMSText.Replace("\n", "\r\n"), HatoEnc.Encoding);
-                }
-            }
+            anotherThread.Start();
         }
     
         private void button3_Click_2(object sender, EventArgs e)

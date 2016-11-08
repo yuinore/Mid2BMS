@@ -89,6 +89,7 @@
     <Compile Include="MidiStruct\MultiTrackMidiEvent.cs" />
     <Compile Include="SignalProcessing\Order.cs" />
     <Compile Include="SignalProcessing\TailCutPlus.cs" />
+    <Compile Include="TinyTinyRenamer.cs" />
     <Compile Include="Util\Arr.cs" />
     <Compile Include="Util\CompareSelector.cs" />
     <Compile Include="DynamicJson\DynamicJson.cs" />
