@@ -151,7 +151,7 @@ namespace Mid2BMS
             List<bool> ignoreList = null;
             List<bool> isChordList = null;
             List<bool> isXChainList = null;
-            List<bool> isGlobalList = null;
+            List<bool> isOneShotList = null;
 
             if (newtimebase > 1000)
             {
@@ -185,7 +185,7 @@ namespace Mid2BMS
                 MyFormInstance.Mid2BMS_Process(
                     isRedMode, isPurpleMode, createExFiles, ref VacantWavid, ref DefVacantBMSChIdx,
                     LookAtInstrumentName, margintime_beats, WavidSpacing, out trackCsv, ref MidiTrackNames, out MidiInstrumentNames,
-                    isDrumsList, ignoreList, isChordList, isXChainList, isGlobalList, sequenceLayer, newtimebase, velocityStep,
+                    isDrumsList, ignoreList, isChordList, isXChainList, isOneShotList, sequenceLayer, newtimebase, velocityStep,
                     ref ProgressBarValue, ref ProgressBarFinished);
 
             InitializeProgressBar();  // これを実行したら必ずanotherThreadが走るようにする
@@ -242,7 +242,7 @@ namespace Mid2BMS
                                     ignoreList = f.IgnoreList;
                                     isChordList = f.IsChordList;
                                     isXChainList = f.IsXChainList;
-                                    isGlobalList = f.IsGlobalList;
+                                    isOneShotList = f.IsOneShotList;
                                     f.Dispose();
 
                                     this.Invoke(new Action(() => InitializeProgressBar()), new object[] { });

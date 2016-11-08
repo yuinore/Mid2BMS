@@ -72,7 +72,7 @@ namespace Mid2BMS
         public bool ChordModeEnabled = true;
 
 
-        public String walkOnAMelodyV2(MidiStruct tanon_ms, int TrackIndex, String TrackName, String s, Frac midiTime, bool isPurpleMode)
+        public String walkOnAMelodyV2(MidiStruct tanon_ms, int TrackIndex, String TrackName, String s, Frac midiTime, bool isPurpleMode, bool isOneShot)
         {
             // Mid2BMS、WaveSplitter、そしてその他のすべての、
             // すべてのはじまり
@@ -88,7 +88,7 @@ namespace Mid2BMS
             //long[] lastDt = new long[2] { 0, 0 };  // obsoleteです。voiNを使用していた頃の名残。
             Frac subTiming = new Frac(0, 1);  // Sub{～}は入れ子には出来ません
             int quartDash = 1;  // 0 でオン。''を使用した和音
-            MNote prevnote = null; // for purple mode
+            MNote previousNoteWithoutTime = null; // for purple mode
 
             //t.Add(midiTime);// バグだね
             t.Add(1);  // 重要ぽい
@@ -128,18 +128,31 @@ namespace Mid2BMS
                         //ntm.Add(getNextNote2EX(s, j, o + ddo, l, v,  k, t, voiN, quartDash));
                         if (!isPurpleMode)
                         {
-                            // なぜお前は同じような関数を3回も呼んでいるんだ？
-                            ntm.Add(getNextNote2EX(s, j, o + ddo, l, v, k, t, quartDash));
-                            if (INeed(getNextNote(s, j, o + ddo, l, v, k), isPurpleMode))
+                            // なぜお前は同じような関数を3回も呼んでいるんだ？ ←はぁ～クソクソクソクソ(とりあえず2回に減らした)
+
+                            var currentNoteWithTime = getNextNote2EX(s, j, o + ddo, l, v, k, t, quartDash);  // 注：ここで t に変更が加わる
+                            var currentNoteWithoutTime = getNextNote(s, j, o + ddo, l, v, k);
+
+                            if (isOneShot)
                             {
-                                nts.Add(getNextNote(s, j, o + ddo, l, v, k));
+                                currentNoteWithTime.l = new Frac(1, 4);
+                                currentNoteWithoutTime.l = new Frac(1, 4);
                             }
+
+                            ntm.Add(currentNoteWithTime);
+                            if (INeed(currentNoteWithoutTime, isPurpleMode))
+                            {
+                                nts.Add(currentNoteWithoutTime);
+                            }
+
                             // JavaScriptにもセットってあったんだろうか（過去形
                             // まあどうせ多くても数千ノーツだから速度的にはこれ↑で問題ないんだろうけど
                             // purple modeのchord modeは未対応(常識的に考えて)
 
                             if (ChordModeEnabled)
                             {
+                                //#### blue chord mode ####
+
                                 MNote mn = ntm[ntm.Count - 1];  // 時間情報(t)付き
                                 HashSet<MNote> set1;
                                 if (ntmChordSet.TryGetValue(mn.t, out set1) == false)
@@ -148,36 +161,47 @@ namespace Mid2BMS
                                 }
                                 // 不変型でないオブジェクトをdictionaryのキーにして良いのか？？？？？
 
-                                //MNote note = ntm.Last();  // ←遅そう
-                                //MNote note = new MNote(mn);
-
-                                //note.availability = 0;  // クソ
-                                //note.t = new Frac(0);  // まだだ、まだ情報を消す時間じゃない
+                                // ここではまだ mn の時間情報は消去しない
 
                                 set1.Add(new MNote(mn));
                                 // ↑重複する場合は追加されない（まあ重複は絶対にしないわけだが
+                                //   ↑例外が飛ぶんじゃないですか？
                                 // setを使う理由はSetComparerが使いたいからですね
                             }
                         }
                         else
                         {
-                            // prevnote2 は null であってはならない
-                            MNote prevnote2 = prevnote;  // previous note (for portament)
+                            //#### purple mode ####
+                            if (ChordModeEnabled) { throw new Exception("purpleとchordの同時はムリ・・・"); }
 
-                            MNote nextnote_time = new MNote(getNextNote2EX(s, j, o + ddo, l, v, k, t, quartDash), prevnote2);  // an element of "ntm"
-                            MNote nextnote_prev = new MNote(getNextNote(s, j, o + ddo, l, v, k), prevnote2);  // an element of "nts"
+                            // トラックの最初のノートを処理する場合、 previousNoteWithoutTime は null である可能性がある。
+                            // このため、 .prev フィールドを null のままにしてはならないため、特別な処理が入る。
+                            // その場合は、currentNoteWithTime への自己参照が発生するが、バグではない。
 
-                            if (prevnote2 == null) prevnote2 = nextnote_prev;
-                            nextnote_time.prev = prevnote2;
-                            nextnote_prev.prev = prevnote2;
-
-                            ntm.Add(nextnote_time);
-                            if (INeed(nextnote_prev, isPurpleMode))
+                            MNote currentNoteWithTime = new MNote(getNextNote2EX(s, j, o + ddo, l, v, k, t, quartDash), previousNoteWithoutTime);  // an element of "ntm"
+                            MNote currentNoteWithoutTime = new MNote(getNextNote(s, j, o + ddo, l, v, k), previousNoteWithoutTime);  // an element of "nts"
+                            
+                            if (isOneShot)
                             {
-                                nts.Add(nextnote_prev);
+                                currentNoteWithTime.l = new Frac(1, 4);
+                                currentNoteWithoutTime.l = new Frac(1, 4);
                             }
 
-                            prevnote = nextnote_prev;  // update nextnote
+                            if (previousNoteWithoutTime == null)
+                            {
+                                // トラックの最初のノートの場合
+                                previousNoteWithoutTime = currentNoteWithoutTime;
+                                currentNoteWithTime.prev = previousNoteWithoutTime;
+                                currentNoteWithoutTime.prev = previousNoteWithoutTime;  // 自己参照
+                            }
+
+                            ntm.Add(currentNoteWithTime);
+                            if (INeed(currentNoteWithoutTime, isPurpleMode))
+                            {
+                                nts.Add(currentNoteWithoutTime);
+                            }
+
+                            previousNoteWithoutTime = currentNoteWithoutTime;
                         }
                         ddo = 0;
                         continue;

@@ -93,7 +93,7 @@ namespace Mid2BMS
             {
                 foreach (var element in x1)
                 {
-                    yield return new MultiTrackMidiEvent() { Event = element, TrackID = i };
+                    yield return new MultiTrackMidiEvent(i, element);
                 }
                 i++;
             }
@@ -132,7 +132,7 @@ namespace Mid2BMS
             return new MidiTrack(
                 MidiTrack.SplitNotes(MidiTrack.DirectSum(new IEnumerable<MidiEvent>[] {
                     this.OrderBy(x => x.tick)
-                }), midistruct, new List<bool> { isChordMode }, new List<bool> { false }, new List<bool> { false }).Select(x => x.Event)
+                }), midistruct, new List<bool> { isChordMode }, new List<bool> { false }).Select(x => x.Event)
                 );
         }
 
@@ -146,7 +146,7 @@ namespace Mid2BMS
         /// プログラムを「一般化」した結果がこの三角カッコの嵐だよ！！！
         /// </summary>
         public static IEnumerable<MultiTrackMidiEvent> SplitNotes(
-            IEnumerable<MultiTrackMidiEvent> tracks, MidiStruct midistruct, List<bool> isChordList, List<bool> isXChainList, List<bool> isGlobalList)
+            IEnumerable<MultiTrackMidiEvent> tracks, MidiStruct midistruct, List<bool> isChordList, List<bool> isXChainList)
         {
             // List<ArrTuple<int, MidiEvent>> とか書きたくないですね
 
@@ -382,7 +382,7 @@ namespace Mid2BMS
             //var events = sorted ? tracks.ToList() : tracks.OrderBy(x => x.Event.tick).ToList();  // 時間順にソート
             var events = tracks.ToList();
 
-            var s1 = new List<MultiTrackMidiEvent>();
+            var sMiddle = new List<MultiTrackMidiEvent>();  // tick が LeftTick より大きいもの
             var sLeft = new List<MultiTrackMidiEvent>();  // tick が LeftTick と同じかそれより少ないもの
 
             //int beginIndex;
@@ -420,8 +420,15 @@ namespace Mid2BMS
                 MidiEvent me = events[i].Event;
                 if (me.tick <= LeftTick) break;
 
-                s1.Add(new MultiTrackMidiEvent(events[i].TrackID, me.Clone()));  // ここが重い (25.8%)
-                //s1.Add(events[i]);  // これでいいのか!?・・・ダメだった
+                MidiEvent me2 = me.Clone();
+                if (me2 is MidiEventNote)
+                {
+                    MidiEventNote me3 = me2 as MidiEventNote;
+                    me3.q = Math.Min(me3.q, RightTick - me3.tick);  // me2の値に変更を加える
+                }
+
+                sMiddle.Add(new MultiTrackMidiEvent(events[i].TrackID, me2));  // ここが重い (25.8%)
+                // Clone()しなくてもいいのか!?・・・ダメだった
                 // 範囲より左(me.tick < LeftTick)に時間が掛かっているのかと思ったら、範囲内に時間がかかっているらしい
             }
             for (; i >= 0; i--)  // while(me.tick == LeftTick)
@@ -429,7 +436,14 @@ namespace Mid2BMS
                 MidiEvent me = events[i].Event;
                 if (me.tick < LeftTick) break;
 
-                sLeft.Add(new MultiTrackMidiEvent(events[i].TrackID, me.Clone()));
+                MidiEvent me2 = me.Clone();
+                if (me2 is MidiEventNote)
+                {
+                    MidiEventNote me3 = me2 as MidiEventNote;
+                    me3.q = Math.Min(me3.q, RightTick - me3.tick);  // me2の値に変更を加える
+                }
+
+                sLeft.Add(new MultiTrackMidiEvent(events[i].TrackID, me2));
             }
             for (; i >= 0; i--)  // while(me.tick < LeftTick)
             {
@@ -554,9 +568,9 @@ namespace Mid2BMS
                 }
             }
 
-            s1.AddRange(sLeft);
-            s1.Reverse();
-            return s1;
+            sMiddle.AddRange(sLeft);
+            sMiddle.Reverse();
+            return sMiddle;
         }
 
         /// <summary>

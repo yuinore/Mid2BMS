@@ -7,8 +7,8 @@ namespace Mid2BMS
 {
     class MultiTrackMidiEvent
     {
-        public int TrackID;
-        public MidiEvent Event;
+        public readonly int TrackID;
+        public readonly MidiEvent Event;
 
         public MultiTrackMidiEvent() { }
 

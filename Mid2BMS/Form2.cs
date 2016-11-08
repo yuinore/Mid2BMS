@@ -27,7 +27,7 @@ namespace Mid2BMS
         public List<bool> IgnoreList { get; set; }
         public List<bool> IsChordList { get; set; }
         public List<bool> IsXChainList { get; set; }  // RedModeとシーケンスレイヤーの両方が（？）選択されている場合に、サイドチェイントリガノーツとして扱う
-        public List<bool> IsGlobalList { get; set; }  // RedModeとシーケンスレイヤーの両方が選択されている場合に、オートメーションをグローバルとして扱う
+        public List<bool> IsOneShotList { get; set; }  // Midiノーツの長さを無視して処理する
         public bool RedoRequired { get; private set; }  // 初期値はfalseかな？
         bool changeEnabled = false;
 
@@ -51,17 +51,17 @@ namespace Mid2BMS
                 IgnoreList = new List<bool>(new bool[TrackNames.Count]);
                 IsChordList = new List<bool>(new bool[TrackNames.Count]);
                 IsXChainList = new List<bool>(new bool[TrackNames.Count]);
-                IsGlobalList = new List<bool>(new bool[TrackNames.Count]);
+                IsOneShotList = new List<bool>(new bool[TrackNames.Count]);
 
                 for (int i = 0; i < data_table.Rows.Count; i++)
                 {
                     int tracknumber = (System.Int32)(data_table.Rows[i][0]);
                     TrackNames[tracknumber] = data_table.Rows[i][5].ToString();
                     IsDrumsList[tracknumber] = (bool)data_table.Rows[i][6];
-                    IgnoreList[tracknumber] = (bool)data_table.Rows[i][7];
+                    IsOneShotList[tracknumber] = (bool)data_table.Rows[i][7];  // 順序変更有り
                     IsChordList[tracknumber] = (bool)data_table.Rows[i][8];
-                    IsXChainList[tracknumber] = (bool)data_table.Rows[i][9];
-                    IsGlobalList[tracknumber] = (bool)data_table.Rows[i][10];
+                    IgnoreList[tracknumber] = (bool)data_table.Rows[i][9];
+                    IsXChainList[tracknumber] = (bool)data_table.Rows[i][10];
                 }
                 
                 this.Close();
@@ -125,10 +125,10 @@ namespace Mid2BMS
                 data_table.Columns.Add("InstName", Type.GetType("System.String"));
                 data_table.Columns.Add("New TrackName (Edit This Col)", Type.GetType("System.String"));
                 data_table.Columns.Add("Drums?", Type.GetType("System.Boolean"));
-                data_table.Columns.Add("Ignore?", Type.GetType("System.Boolean"));
+                data_table.Columns.Add("OheShot?", Type.GetType("System.Boolean"));  // 順序変更有り
                 data_table.Columns.Add("Chord?", Type.GetType("System.Boolean"));
+                data_table.Columns.Add("Ignore?", Type.GetType("System.Boolean"));
                 data_table.Columns.Add("XChain?", Type.GetType("System.Boolean"));
-                data_table.Columns.Add("Global?", Type.GetType("System.Boolean"));
             }
             else
             {
@@ -158,10 +158,10 @@ namespace Mid2BMS
                         data_row[4] = InstrumentNames[rowi];
                         data_row[5] = mycells[3];
                         data_row[6] = false;
-                        data_row[7] = false;
+                        data_row[7] = false;  // 順序変更有り
                         data_row[8] = false;
                         data_row[9] = false;
-                        data_row[10] = true;  // IsGlobal はデフォルトでtrue
+                        data_row[10] = false;
                     }
                     else
                     {
@@ -186,7 +186,7 @@ namespace Mid2BMS
                 dataGridView1.Columns[4].ReadOnly = true;
                 dataGridView1.Columns[5].ReadOnly = false;
                 dataGridView1.Columns[6].ReadOnly = false;
-                dataGridView1.Columns[7].ReadOnly = false;
+                dataGridView1.Columns[7].ReadOnly = false;  // 順序変更有り
                 dataGridView1.Columns[8].ReadOnly = false;
                 dataGridView1.Columns[9].ReadOnly = false;
                 dataGridView1.Columns[10].ReadOnly = false;

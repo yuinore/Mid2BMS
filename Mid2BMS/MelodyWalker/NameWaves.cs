@@ -30,7 +30,7 @@ namespace Mid2BMS
             return "";
         }
 
-        String getNoteString(int namingway, int nt, long Ln1, long Ln2, int velo)
+        String getNoteString(int namingway, int nt, long Ln1, long Ln2, int velo, bool isOneShot)
         {
             if (namingway == 0)
             {
@@ -40,7 +40,7 @@ namespace Mid2BMS
                 //}
                 //else
                 //{
-                return "v" + velo + "l" + Ln2 + (Ln1 == 1 ? "" : ("-" + Ln1)) + "" + "o" + (nt / 12) + getNoteHeight(nt);
+                return "v" + velo + (isOneShot ? "" : ("l" + Ln2 + (Ln1 == 1 ? "" : ("-" + Ln1)))) + "" + "o" + (nt / 12) + getNoteHeight(nt);
                 //}
             }
             if (namingway == 1)
@@ -50,7 +50,7 @@ namespace Mid2BMS
             return "NULL";
         }
 
-        String getNoteStringPurpleMode(int namingway, int nt, long Ln1, long Ln2, int velo, int prevNoteN)
+        String getNoteStringPurpleMode(int namingway, int nt, long Ln1, long Ln2, int velo, int prevNoteN, bool isOneShot)
         {
             if (namingway == 0)
             {
@@ -60,7 +60,7 @@ namespace Mid2BMS
                 //}
                 //else
                 //{
-                return "v" + velo + "l" + Ln2 + (Ln1 == 1 ? "" : ("-" + Ln1)) + "" + "o" + (nt / 12) + getNoteHeight(nt) + "-" + "o" + (prevNoteN / 12) + getNoteHeight(prevNoteN);
+                return "v" + velo + (isOneShot ? "" : ("l" + Ln2 + (Ln1 == 1 ? "" : ("-" + Ln1)))) + "" + "o" + (nt / 12) + getNoteHeight(nt) + "-" + "o" + (prevNoteN / 12) + getNoteHeight(prevNoteN);
                 //}
             }
             if (namingway == 1)
@@ -70,7 +70,7 @@ namespace Mid2BMS
             return "NULL";
         }
 
-        String getNoteStringRedMode(int namingway, int number, int nt, long Ln1, long Ln2, int velo)
+        String getNoteStringRedMode(int namingway, int number, int nt, long Ln1, long Ln2, int velo, bool isOneShot)
         {
             if (namingway == 0)
             {
@@ -80,7 +80,7 @@ namespace Mid2BMS
                 //}
                 //else
                 //{
-                return String.Format("{0:D5}_", number + 1) + "v" + velo + "l" + Ln2 + (Ln1 == 1 ? "" : ("-" + Ln1)) + "" + "o" + (nt / 12) + getNoteHeight(nt);
+                return String.Format("{0:D5}_", number + 1) + "v" + velo + (isOneShot ? "" : ("l" + Ln2 + (Ln1 == 1 ? "" : ("-" + Ln1)))) + "" + "o" + (nt / 12) + getNoteHeight(nt);
                 //}
             }
             if (namingway == 1)
@@ -176,7 +176,7 @@ namespace Mid2BMS
         /// <returns></returns>
         public String AllNoteToName(
             int namingway, String ib, String ia, String ob, String oa, String bb, String ba,
-            out String OutputInArrayFormat, bool isRedMode, bool isPurpleMode, List<MNote> ntantm)
+            out String OutputInArrayFormat, bool isRedMode, bool isPurpleMode, List<MNote> ntantm, bool isOneShot)
         {
             IsRedMode = isRedMode;
 
@@ -201,7 +201,7 @@ namespace Mid2BMS
                 for (i = 0; i < ntantm.Count; i++)
                 {
                     //s0 = getNoteString(namingway, ntantm[i].VoiceN, ntantm[i].n, ntantm[i].l.n, ntantm[i].l.d, ntantm[i].v);
-                    s0 = getNoteString(namingway, ntantm[i].n, ntantm[i].l.n, ntantm[i].l.d, ntantm[i].v);
+                    s0 = getNoteString(namingway, ntantm[i].n, ntantm[i].l.n, ntantm[i].l.d, ntantm[i].v, isOneShot);
                     wavnms.Add(bb + s0 + ba);
                     w = ob + s0 + oa;
                     s2.Append(w + "\r\n");
@@ -212,7 +212,7 @@ namespace Mid2BMS
                 for (i = 0; i < ntantm.Count; i++)
                 {
                     //s0 = getNoteStringRedMode(namingway, i, ntantm[i].VoiceN, ntantm[i].n, ntantm[i].l.n, ntantm[i].l.d, ntantm[i].v);
-                    s0 = getNoteStringPurpleMode(namingway, ntantm[i].n, ntantm[i].l.n, ntantm[i].l.d, ntantm[i].v, ntantm[i].prev.n);
+                    s0 = getNoteStringPurpleMode(namingway, ntantm[i].n, ntantm[i].l.n, ntantm[i].l.d, ntantm[i].v, ntantm[i].prev.n, isOneShot);
                     wavnms.Add(bb + s0 + ba);
                     w = ob + s0 + oa;
 
@@ -228,7 +228,7 @@ namespace Mid2BMS
                 for (i = 0; i < ntantm.Count; i++)
                 {
                     //s0 = getNoteStringRedMode(namingway, i, ntantm[i].VoiceN, ntantm[i].n, ntantm[i].l.n, ntantm[i].l.d, ntantm[i].v);
-                    s0 = getNoteStringRedMode(namingway, i, ntantm[i].n, ntantm[i].l.n, ntantm[i].l.d, ntantm[i].v);
+                    s0 = getNoteStringRedMode(namingway, i, ntantm[i].n, ntantm[i].l.n, ntantm[i].l.d, ntantm[i].v, isOneShot);
                     wavnms.Add(bb + s0 + ba);
                     w = ob + s0 + oa;
                     s2.Append(w + "\r\n");

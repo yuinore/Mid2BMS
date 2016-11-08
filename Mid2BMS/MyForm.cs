@@ -147,7 +147,7 @@ namespace Mid2BMS
         /// <param name="ignoreList">[nullable] トラックを無視するかどうかを示すフラグの配列です。フラグのデフォルト値はfalseです。</param>
         /// <param name="isChordList">[nullable] 同時に発音された音を1つのキー音にまとめるかどうかを示すフラグの配列です。フラグのデフォルト値はfalseです。</param>
         /// <param name="isXChainList">[nullable] RedModeとシーケンスレイヤーの両方が選択されている場合に、サイドチェイントリガノーツとして扱うかどうかを示すフラグの配列です。フラグのデフォルト値はfalseです。</param>
-        /// <param name="isGlobalList">[nullable] RedModeとシーケンスレイヤーの両方が選択されている場合に、オートメーションをグローバルとして扱うかどうかを示すフラグの配列です。フラグのデフォルト値はtrueです。</param>
+        /// <param name="isOneShotList">[nullable] RedModeとシーケンスレイヤーの両方が選択されている場合に、オートメーションをグローバルとして扱うかどうかを示すフラグの配列です。フラグのデフォルト値はtrueです。</param>
         /// <param name="sequenceLayer">それぞれのトラックが重ならないように単音midiを時間的にずらすかどうかを示すフラグです。デフォルト値はfalseです。</param>
         /// <param name="ProgressBarValue">プログレスバーに対して値を反映させるための変数です。</param>
         /// <param name="ProgressBarFinished">プログレスバーの増加が終了したかどうかを示すフラグです。</param>
@@ -155,7 +155,7 @@ namespace Mid2BMS
             bool isRedMode, bool isPurpleMode, bool createExFiles, ref int VacantWavid, ref int DefaultVacantBMSChannelIdx,
             bool LookAtInstrumentName, String margintime_beats, int WavidSpacing,
             out String trackCsv, ref List<String> MidiTrackNames, out List<String> MidiInstrumentNames,
-            List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, List<bool> isXChainList, List<bool> isGlobalList, bool sequenceLayer,
+            List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, List<bool> isXChainList, List<bool> isOneShotList, bool sequenceLayer,
             int newTimebase, int velocityStep,
             ref double ProgressBarValue, ref bool ProgressBarFinished)
         {
@@ -370,7 +370,7 @@ namespace Mid2BMS
             MelodyWalker mw = new MelodyWalker();
             mw.VacantBMSChannelIdx = DefaultVacantBMSChannelIdx;
             mw.WavidSpacing = WavidSpacing;
-            mw.MultiProcess(MMLs, MidiTrackIdentifier, isDrumsList, ignoreList, isChordList, isXChainList, sequenceLayer, PathBase,
+            mw.MultiProcess(MMLs, MidiTrackIdentifier, isDrumsList, ignoreList, isChordList, isXChainList, isOneShotList, sequenceLayer, PathBase,
                 isRedMode, isPurpleMode, createExFiles, ref VacantWavid, timebase, margintime_beats, out trackCsv, out isEmptyList, midi_bpm,
                 ref ProgressBarValue, 0.10, 1.00);
             #endregion
@@ -411,8 +411,8 @@ namespace Mid2BMS
 
                 int margintime_beats_int = (int)Math.Ceiling(Convert.ToDouble(margintime_beats));
                 MidiTrack.SPLIT_BEATS_INTERVAL = margintime_beats_int + 4;
-                MidiTrack.SPLIT_BEATS_AUTOMATIONLEFT = 1;
-                MidiTrack.SPLIT_BEATS_AUTOMATIONRIGHT = margintime_beats_int + 2;
+                MidiTrack.SPLIT_BEATS_AUTOMATIONLEFT = 2;
+                MidiTrack.SPLIT_BEATS_AUTOMATIONRIGHT = margintime_beats_int + 0;
 
                 if (ignoreList != null)
                 {
@@ -440,7 +440,7 @@ namespace Mid2BMS
                     try
                     {
                         var directsum = MidiTrack.DirectSum(ms2.tracks);
-                        var splitted = MidiTrack.SplitNotes(directsum, ms2, isChordList, isXChainList, isGlobalList);
+                        var splitted = MidiTrack.SplitNotes(directsum, ms2, isChordList, isXChainList);
                         ms2.tracks = MidiTrack.DirectDifference(splitted);
                     }
                     catch (Exception e)

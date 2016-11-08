@@ -32,7 +32,7 @@ namespace Mid2BMS
         /// MMLデータ(text0_stdout_part1.mml)を受け取り、text1～text8 他を生成します。
         /// </summary>
         public int MultiProcess(List<String> MMLs_, List<String> MidiTrackNames_,
-            List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, List<bool> isXChainList, bool sequenceLayer, String pathBase,
+            List<bool> isDrumsList, List<bool> ignoreList, List<bool> isChordList, List<bool> isXChainList, List<bool> isOneShotList, bool sequenceLayer, String pathBase,
             bool isRedMode, bool isPurpleMode, bool createExFiles, ref int VacantWavid, int timebase,
             String margintime_beats, out String trackCsv, out List<bool> isEmptyList, decimal bpm,
             ref double progressValue, double progressMin, double progressMax)
@@ -98,6 +98,8 @@ namespace Mid2BMS
                     bool ignoreChecked = (ignoreList == null) ? false : ignoreList[i];
                     bool ignore = ignoreChecked || (isRedMode && sequenceLayer && xchainChecked);  // BMSおよびrenamer_array（およびpurpleまたはblueの場合はmidi）を出力するかどうか
                     bool isChordMode = (isChordList == null) ? false : isChordList[i];
+                    bool isOneShot = (isOneShotList == null) ? false : isOneShotList[i];
+                    
                     if (ignore)
                     {
                         //isEmptyList.Add(true);  // バグ・・・フローの改善を求めます・・・
@@ -107,7 +109,7 @@ namespace Mid2BMS
                     if (!sequenceLayer) midiTime = new Frac(4);
 
                     Process(i, (i < MidiTrackNames.Count) ? MidiTrackNames[i] : "MidiTrack " + (i + 1), MMLs[i], pathBase, text, tanon_ms,
-                        0, 0, isRedMode, isPurpleMode, isDrums, isChordMode,
+                        0, 0, isRedMode, isPurpleMode, isDrums, isChordMode, isOneShot,
                         out isEmpty, midiTime, ref VacantWavid, timebase, margintime_beats,
                         ref progressValue,
                         progressMin + (progressMax - progressMin) * i / MMLs.Count,
@@ -173,7 +175,7 @@ namespace Mid2BMS
         }
         public int Process(int TrackIndex, String MidiTrackName, String mml, String pathBase, StringSuruyatu[] text, MidiStruct tanon_ms,
             int channel, int wavid, bool isRedMode, bool isPurpleMode,
-            bool isDrums, bool isChordMode, out bool isEmpty, Frac midiTime, ref int VacantWavid, int timebase, String margintime_beats,
+            bool isDrums, bool isChordMode, bool isOneShot, out bool isEmpty, Frac midiTime, ref int VacantWavid, int timebase, String margintime_beats,
             ref double progressValue, double progressMin, double progressMax)
         {
             MidInterpreter mi;
@@ -212,7 +214,7 @@ namespace Mid2BMS
             mi3 = new MidInterpreter3();  // ここがほとんどメインの処理です
             mi3.ChordModeEnabled = isChordMode;
             mi3.margintime_beats = margintime_beats;
-            text[2] += mi3.walkOnAMelodyV2(tanon_ms, TrackIndex, MidiTrackName, midtable2, midiTime, isPurpleMode);
+            text[2] += mi3.walkOnAMelodyV2(tanon_ms, TrackIndex, MidiTrackName, midtable2, midiTime, isPurpleMode, isOneShot);
             progressValue = progressMin + (progressMax - progressMin) * 0.40;
             isEmpty = isChordMode ? (mi3.ntaChord.Count == 0) : (mi3.nta.Count == 0);
 
@@ -237,7 +239,7 @@ namespace Mid2BMS
                     BMSTrackName, ".wav",
                     WavFileName_Prefix + BMSTrackName + WavFileName_Out, ".wav",
                     WavFileName_Prefix + BMSTrackName + WavFileName_Bms, ".wav",
-                    out outInArray, isRedMode, isPurpleMode, isRedMode ? mi3.ntm : mi3.nta);
+                    out outInArray, isRedMode, isPurpleMode, isRedMode ? mi3.ntm : mi3.nta, isOneShot);
             }
             progressValue = progressMin + (progressMax - progressMin) * 0.60;
             text[4] += outInArray;
