@@ -156,7 +156,7 @@ namespace Mid2BMS
             //######## TrackIDの順にソートされたノーツ入力（サイドチェイントリガノーツを含まない）
             List<MultiTrackMidiEvent> noteEventsOrderByTrackID = 
                 eventsOrderByTrackID
-                .Where(x => (x.Event is MidiEvent) && (isXChainList == null || !isXChainList[x.TrackID]))
+                .Where(x => (x.Event is MidiEventNote) && (isXChainList == null || !isXChainList[x.TrackID]))
                 .ToList();  // これはx.Item1, xItem2.tickの順にソートされている
 
             //######## tickの順にソートされた非ノーツ入力（テンポチェンジ以外のメタデータを含まない。また、サイドチェイントリガノーツを含む）
