@@ -1715,8 +1715,10 @@ namespace Mid2BMS
             kyoko.RenamedBMSDirectory = textBox_renamedBMSPath.Text;  // new
             kyoko.KeySoundFileExtension = textBox_renamingExtension.Text.ToLower();
 
-            //Task.Run を使うためだけに .Net Framework を 4.5 にするべきかどうかについて
-            Thread anotherThread = new Thread(new ThreadStart(() =>
+            // Task.Run を使うためだけに .Net Framework を 4.5 にするべきかどうかについて
+            // ↑ TaskFactory.StartNewが使える魔剤！？
+            //    http://devlights.hatenablog.com/entry/2014/01/14/050000
+            Task.Factory.StartNew(() =>
             {
                 try
                 {
@@ -1726,15 +1728,12 @@ namespace Mid2BMS
                     {
                         textBox_renamerConsole.Text = kyoko.RenameResultMultilineText;
                     }));
-
                 }
                 finally
                 {
                     ProgressBarFinished = true;
                 }
-            }));
-
-            anotherThread.Start();
+            });
         }
 
         private void button3_Click_2(object sender, EventArgs e)

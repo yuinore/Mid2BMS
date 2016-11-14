@@ -237,6 +237,17 @@
             this.textBox_renamedBMSPath = new System.Windows.Forms.TextBox();
             this.textBox_originalBMSPath = new System.Windows.Forms.TextBox();
             this.label82 = new System.Windows.Forms.Label();
+            this.tabPage16 = new System.Windows.Forms.TabPage();
+            this.label90 = new System.Windows.Forms.Label();
+            this.button12 = new System.Windows.Forms.Button();
+            this.label89 = new System.Windows.Forms.Label();
+            this.label88 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.radioButton_horizontal = new System.Windows.Forms.RadioButton();
+            this.label87 = new System.Windows.Forms.Label();
+            this.label86 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -264,6 +275,8 @@
             this.tabPage13.SuspendLayout();
             this.tabPage14.SuspendLayout();
             this.tabPage15.SuspendLayout();
+            this.tabPage16.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -283,6 +296,7 @@
             this.tabControl1.Controls.Add(this.tabPage13);
             this.tabControl1.Controls.Add(this.tabPage14);
             this.tabControl1.Controls.Add(this.tabPage15);
+            this.tabControl1.Controls.Add(this.tabPage16);
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
@@ -1756,6 +1770,76 @@
             resources.ApplyResources(this.label82, "label82");
             this.label82.Name = "label82";
             // 
+            // tabPage16
+            // 
+            this.tabPage16.Controls.Add(this.label90);
+            this.tabPage16.Controls.Add(this.button12);
+            this.tabPage16.Controls.Add(this.label89);
+            this.tabPage16.Controls.Add(this.label88);
+            this.tabPage16.Controls.Add(this.textBox8);
+            this.tabPage16.Controls.Add(this.textBox7);
+            this.tabPage16.Controls.Add(this.panel3);
+            this.tabPage16.Controls.Add(this.label86);
+            resources.ApplyResources(this.tabPage16, "tabPage16");
+            this.tabPage16.Name = "tabPage16";
+            this.tabPage16.UseVisualStyleBackColor = true;
+            // 
+            // label90
+            // 
+            resources.ApplyResources(this.label90, "label90");
+            this.label90.Name = "label90";
+            // 
+            // button12
+            // 
+            resources.ApplyResources(this.button12, "button12");
+            this.button12.Name = "button12";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // label89
+            // 
+            resources.ApplyResources(this.label89, "label89");
+            this.label89.Name = "label89";
+            // 
+            // label88
+            // 
+            resources.ApplyResources(this.label88, "label88");
+            this.label88.Name = "label88";
+            // 
+            // textBox8
+            // 
+            resources.ApplyResources(this.textBox8, "textBox8");
+            this.textBox8.Name = "textBox8";
+            // 
+            // textBox7
+            // 
+            resources.ApplyResources(this.textBox7, "textBox7");
+            this.textBox7.Name = "textBox7";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.radioButton_horizontal);
+            this.panel3.Controls.Add(this.label87);
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Name = "panel3";
+            // 
+            // radioButton_horizontal
+            // 
+            resources.ApplyResources(this.radioButton_horizontal, "radioButton_horizontal");
+            this.radioButton_horizontal.Checked = true;
+            this.radioButton_horizontal.Name = "radioButton_horizontal";
+            this.radioButton_horizontal.TabStop = true;
+            this.radioButton_horizontal.UseVisualStyleBackColor = true;
+            // 
+            // label87
+            // 
+            resources.ApplyResources(this.label87, "label87");
+            this.label87.Name = "label87";
+            // 
+            // label86
+            // 
+            resources.ApplyResources(this.label86, "label86");
+            this.label86.Name = "label86";
+            // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
@@ -1845,6 +1929,10 @@
             this.tabPage14.PerformLayout();
             this.tabPage15.ResumeLayout(false);
             this.tabPage15.PerformLayout();
+            this.tabPage16.ResumeLayout(false);
+            this.tabPage16.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2066,6 +2154,17 @@
         private System.Windows.Forms.TextBox textBox_renamerConsole;
         private System.Windows.Forms.Label label85;
         private System.Windows.Forms.TextBox textBox_renamingExtension;
+        private System.Windows.Forms.TabPage tabPage16;
+        private System.Windows.Forms.Label label90;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Label label89;
+        private System.Windows.Forms.Label label88;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.RadioButton radioButton_horizontal;
+        private System.Windows.Forms.Label label87;
+        private System.Windows.Forms.Label label86;
     }
 }
 

@@ -2163,21 +2163,6 @@
   <data name="&gt;&gt;tabPage14.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="label85.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label85.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 161</value>
-  </data>
-  <data name="label85.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 12</value>
-  </data>
-  <data name="label85.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="label85.Text" xml:space="preserve">
-    <value>Extension</value>
-  </data>
   <data name="&gt;&gt;label85.Name" xml:space="preserve">
     <value>label85</value>
   </data>
@@ -2189,18 +2174,6 @@
   </data>
   <data name="&gt;&gt;label85.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="textBox_renamingExtension.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 158</value>
-  </data>
-  <data name="textBox_renamingExtension.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 19</value>
-  </data>
-  <data name="textBox_renamingExtension.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="textBox_renamingExtension.Text" xml:space="preserve">
-    <value>.wav</value>
   </data>
   <data name="&gt;&gt;textBox_renamingExtension.Name" xml:space="preserve">
     <value>textBox_renamingExtension</value>
@@ -2214,24 +2187,6 @@
   <data name="&gt;&gt;textBox_renamingExtension.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="textBox_renamerConsole.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="textBox_renamerConsole.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 206</value>
-  </data>
-  <data name="textBox_renamerConsole.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="textBox_renamerConsole.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Both</value>
-  </data>
-  <data name="textBox_renamerConsole.Size" type="System.Drawing.Size, System.Drawing">
-    <value>677, 180</value>
-  </data>
-  <data name="textBox_renamerConsole.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
   <data name="&gt;&gt;textBox_renamerConsole.Name" xml:space="preserve">
     <value>textBox_renamerConsole</value>
   </data>
@@ -2243,21 +2198,6 @@
   </data>
   <data name="&gt;&gt;textBox_renamerConsole.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="button3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>631, 406</value>
-  </data>
-  <data name="button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="button3.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="button3.Text" xml:space="preserve">
-    <value>GO!</value>
   </data>
   <data name="&gt;&gt;button3.Name" xml:space="preserve">
     <value>button3</value>
@@ -2271,21 +2211,6 @@
   <data name="&gt;&gt;button3.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="label84.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label84.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 115</value>
-  </data>
-  <data name="label84.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 12</value>
-  </data>
-  <data name="label84.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="label84.Text" xml:space="preserve">
-    <value>Renamed BMS</value>
-  </data>
   <data name="&gt;&gt;label84.Name" xml:space="preserve">
     <value>label84</value>
   </data>
@@ -2297,21 +2222,6 @@
   </data>
   <data name="&gt;&gt;label84.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="label83.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label83.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 72</value>
-  </data>
-  <data name="label83.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 12</value>
-  </data>
-  <data name="label83.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="label83.Text" xml:space="preserve">
-    <value>Original BMS</value>
   </data>
   <data name="&gt;&gt;label83.Name" xml:space="preserve">
     <value>label83</value>
@@ -2325,18 +2235,6 @@
   <data name="&gt;&gt;label83.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="textBox_renamedBMSPath.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textBox_renamedBMSPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 112</value>
-  </data>
-  <data name="textBox_renamedBMSPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 19</value>
-  </data>
-  <data name="textBox_renamedBMSPath.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
   <data name="&gt;&gt;textBox_renamedBMSPath.Name" xml:space="preserve">
     <value>textBox_renamedBMSPath</value>
   </data>
@@ -2349,18 +2247,6 @@
   <data name="&gt;&gt;textBox_renamedBMSPath.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="textBox_originalBMSPath.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textBox_originalBMSPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 69</value>
-  </data>
-  <data name="textBox_originalBMSPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 19</value>
-  </data>
-  <data name="textBox_originalBMSPath.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;textBox_originalBMSPath.Name" xml:space="preserve">
     <value>textBox_originalBMSPath</value>
   </data>
@@ -2372,21 +2258,6 @@
   </data>
   <data name="&gt;&gt;textBox_originalBMSPath.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="label82.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label82.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 26</value>
-  </data>
-  <data name="label82.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 12</value>
-  </data>
-  <data name="label82.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label82.Text" xml:space="preserve">
-    <value>お掃除、得意なんです！</value>
   </data>
   <data name="&gt;&gt;label82.Name" xml:space="preserve">
     <value>label82</value>
@@ -2410,7 +2281,7 @@
     <value>15</value>
   </data>
   <data name="tabPage15.Text" xml:space="preserve">
-    <value>[tool] Tiny Tiny Renamer</value>
+    <value>[tool]TinyTinyRenamer</value>
   </data>
   <data name="&gt;&gt;tabPage15.Name" xml:space="preserve">
     <value>tabPage15</value>
@@ -2423,6 +2294,258 @@
   </data>
   <data name="&gt;&gt;tabPage15.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="label90.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label90.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 96</value>
+  </data>
+  <data name="label90.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 12</value>
+  </data>
+  <data name="label90.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="label90.Text" xml:space="preserve">
+    <value>同じフォルダに x_equivalence_table.csv を生成します。</value>
+  </data>
+  <data name="&gt;&gt;label90.Name" xml:space="preserve">
+    <value>label90</value>
+  </data>
+  <data name="&gt;&gt;label90.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label90.Parent" xml:space="preserve">
+    <value>tabPage16</value>
+  </data>
+  <data name="&gt;&gt;label90.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="button12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>600, 400</value>
+  </data>
+  <data name="button12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 23</value>
+  </data>
+  <data name="button12.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="button12.Text" xml:space="preserve">
+    <value>Merge</value>
+  </data>
+  <data name="&gt;&gt;button12.Name" xml:space="preserve">
+    <value>button12</value>
+  </data>
+  <data name="&gt;&gt;button12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button12.Parent" xml:space="preserve">
+    <value>tabPage16</value>
+  </data>
+  <data name="&gt;&gt;button12.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label89.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label89.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label89.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 140</value>
+  </data>
+  <data name="label89.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 12</value>
+  </data>
+  <data name="label89.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label89.Text" xml:space="preserve">
+    <value>命名規則</value>
+  </data>
+  <data name="&gt;&gt;label89.Name" xml:space="preserve">
+    <value>label89</value>
+  </data>
+  <data name="&gt;&gt;label89.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label89.Parent" xml:space="preserve">
+    <value>tabPage16</value>
+  </data>
+  <data name="&gt;&gt;label89.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label88.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label88.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 67</value>
+  </data>
+  <data name="label88.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 12</value>
+  </data>
+  <data name="label88.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label88.Text" xml:space="preserve">
+    <value>入力BMS</value>
+  </data>
+  <data name="&gt;&gt;label88.Name" xml:space="preserve">
+    <value>label88</value>
+  </data>
+  <data name="&gt;&gt;label88.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label88.Parent" xml:space="preserve">
+    <value>tabPage16</value>
+  </data>
+  <data name="&gt;&gt;label88.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="textBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 137</value>
+  </data>
+  <data name="textBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 19</value>
+  </data>
+  <data name="textBox8.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBox8.Text" xml:space="preserve">
+    <value>m_merged_{0:000}.wav</value>
+  </data>
+  <data name="&gt;&gt;textBox8.Name" xml:space="preserve">
+    <value>textBox8</value>
+  </data>
+  <data name="&gt;&gt;textBox8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox8.Parent" xml:space="preserve">
+    <value>tabPage16</value>
+  </data>
+  <data name="&gt;&gt;textBox8.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="textBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 64</value>
+  </data>
+  <data name="textBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>575, 19</value>
+  </data>
+  <data name="textBox7.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;textBox7.Name" xml:space="preserve">
+    <value>textBox7</value>
+  </data>
+  <data name="&gt;&gt;textBox7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox7.Parent" xml:space="preserve">
+    <value>tabPage16</value>
+  </data>
+  <data name="&gt;&gt;textBox7.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;radioButton_horizontal.Name" xml:space="preserve">
+    <value>radioButton_horizontal</value>
+  </data>
+  <data name="&gt;&gt;radioButton_horizontal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButton_horizontal.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;radioButton_horizontal.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label87.Name" xml:space="preserve">
+    <value>label87</value>
+  </data>
+  <data name="&gt;&gt;label87.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label87.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;label87.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 173</value>
+  </data>
+  <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>618, 76</value>
+  </data>
+  <data name="panel3.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panel3.Name" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;panel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel3.Parent" xml:space="preserve">
+    <value>tabPage16</value>
+  </data>
+  <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="label86.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label86.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 27</value>
+  </data>
+  <data name="label86.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 12</value>
+  </data>
+  <data name="label86.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label86.Text" xml:space="preserve">
+    <value>複数の Key Sound を併合（へいごう）します</value>
+  </data>
+  <data name="&gt;&gt;label86.Name" xml:space="preserve">
+    <value>label86</value>
+  </data>
+  <data name="&gt;&gt;label86.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label86.Parent" xml:space="preserve">
+    <value>tabPage16</value>
+  </data>
+  <data name="&gt;&gt;label86.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tabPage16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 40</value>
+  </data>
+  <data name="tabPage16.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>737, 455</value>
+  </data>
+  <data name="tabPage16.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="tabPage16.Text" xml:space="preserve">
+    <value>[tool]SMMMerger</value>
+  </data>
+  <data name="&gt;&gt;tabPage16.Name" xml:space="preserve">
+    <value>tabPage16</value>
+  </data>
+  <data name="&gt;&gt;tabPage16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage16.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage16.ZOrder" xml:space="preserve">
+    <value>15</value>
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
@@ -7916,6 +8039,297 @@ redモードの場合はmidiのファイルサイズが非常に大きくなっ�
   </data>
   <data name="&gt;&gt;listBox3.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="label85.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label85.Location" type="System.Drawing.Point, System.Drawing">
+    <value>29, 161</value>
+  </data>
+  <data name="label85.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 12</value>
+  </data>
+  <data name="label85.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="label85.Text" xml:space="preserve">
+    <value>Extension</value>
+  </data>
+  <data name="&gt;&gt;label85.Name" xml:space="preserve">
+    <value>label85</value>
+  </data>
+  <data name="&gt;&gt;label85.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label85.Parent" xml:space="preserve">
+    <value>tabPage15</value>
+  </data>
+  <data name="&gt;&gt;label85.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="textBox_renamingExtension.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 158</value>
+  </data>
+  <data name="textBox_renamingExtension.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 19</value>
+  </data>
+  <data name="textBox_renamingExtension.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="textBox_renamingExtension.Text" xml:space="preserve">
+    <value>.wav</value>
+  </data>
+  <data name="&gt;&gt;textBox_renamingExtension.Name" xml:space="preserve">
+    <value>textBox_renamingExtension</value>
+  </data>
+  <data name="&gt;&gt;textBox_renamingExtension.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox_renamingExtension.Parent" xml:space="preserve">
+    <value>tabPage15</value>
+  </data>
+  <data name="&gt;&gt;textBox_renamingExtension.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="textBox_renamerConsole.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="textBox_renamerConsole.Location" type="System.Drawing.Point, System.Drawing">
+    <value>29, 206</value>
+  </data>
+  <data name="textBox_renamerConsole.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="textBox_renamerConsole.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
+  </data>
+  <data name="textBox_renamerConsole.Size" type="System.Drawing.Size, System.Drawing">
+    <value>677, 180</value>
+  </data>
+  <data name="textBox_renamerConsole.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;textBox_renamerConsole.Name" xml:space="preserve">
+    <value>textBox_renamerConsole</value>
+  </data>
+  <data name="&gt;&gt;textBox_renamerConsole.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox_renamerConsole.Parent" xml:space="preserve">
+    <value>tabPage15</value>
+  </data>
+  <data name="&gt;&gt;textBox_renamerConsole.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="button3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>631, 406</value>
+  </data>
+  <data name="button3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="button3.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="button3.Text" xml:space="preserve">
+    <value>GO!</value>
+  </data>
+  <data name="&gt;&gt;button3.Name" xml:space="preserve">
+    <value>button3</value>
+  </data>
+  <data name="&gt;&gt;button3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button3.Parent" xml:space="preserve">
+    <value>tabPage15</value>
+  </data>
+  <data name="&gt;&gt;button3.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label84.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label84.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 115</value>
+  </data>
+  <data name="label84.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 12</value>
+  </data>
+  <data name="label84.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label84.Text" xml:space="preserve">
+    <value>Renamed BMS</value>
+  </data>
+  <data name="&gt;&gt;label84.Name" xml:space="preserve">
+    <value>label84</value>
+  </data>
+  <data name="&gt;&gt;label84.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label84.Parent" xml:space="preserve">
+    <value>tabPage15</value>
+  </data>
+  <data name="&gt;&gt;label84.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="label83.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label83.Location" type="System.Drawing.Point, System.Drawing">
+    <value>27, 72</value>
+  </data>
+  <data name="label83.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 12</value>
+  </data>
+  <data name="label83.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label83.Text" xml:space="preserve">
+    <value>Original BMS</value>
+  </data>
+  <data name="&gt;&gt;label83.Name" xml:space="preserve">
+    <value>label83</value>
+  </data>
+  <data name="&gt;&gt;label83.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label83.Parent" xml:space="preserve">
+    <value>tabPage15</value>
+  </data>
+  <data name="&gt;&gt;label83.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="textBox_renamedBMSPath.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBox_renamedBMSPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 112</value>
+  </data>
+  <data name="textBox_renamedBMSPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 19</value>
+  </data>
+  <data name="textBox_renamedBMSPath.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;textBox_renamedBMSPath.Name" xml:space="preserve">
+    <value>textBox_renamedBMSPath</value>
+  </data>
+  <data name="&gt;&gt;textBox_renamedBMSPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox_renamedBMSPath.Parent" xml:space="preserve">
+    <value>tabPage15</value>
+  </data>
+  <data name="&gt;&gt;textBox_renamedBMSPath.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="textBox_originalBMSPath.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBox_originalBMSPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 69</value>
+  </data>
+  <data name="textBox_originalBMSPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 19</value>
+  </data>
+  <data name="textBox_originalBMSPath.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;textBox_originalBMSPath.Name" xml:space="preserve">
+    <value>textBox_originalBMSPath</value>
+  </data>
+  <data name="&gt;&gt;textBox_originalBMSPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox_originalBMSPath.Parent" xml:space="preserve">
+    <value>tabPage15</value>
+  </data>
+  <data name="&gt;&gt;textBox_originalBMSPath.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="label82.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label82.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 26</value>
+  </data>
+  <data name="label82.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 12</value>
+  </data>
+  <data name="label82.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label82.Text" xml:space="preserve">
+    <value>お掃除、得意なんです！</value>
+  </data>
+  <data name="&gt;&gt;label82.Name" xml:space="preserve">
+    <value>label82</value>
+  </data>
+  <data name="&gt;&gt;label82.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label82.Parent" xml:space="preserve">
+    <value>tabPage15</value>
+  </data>
+  <data name="&gt;&gt;label82.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="radioButton_horizontal.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton_horizontal.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 40</value>
+  </data>
+  <data name="radioButton_horizontal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 16</value>
+  </data>
+  <data name="radioButton_horizontal.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="radioButton_horizontal.Text" xml:space="preserve">
+    <value>水平併合</value>
+  </data>
+  <data name="&gt;&gt;radioButton_horizontal.Name" xml:space="preserve">
+    <value>radioButton_horizontal</value>
+  </data>
+  <data name="&gt;&gt;radioButton_horizontal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButton_horizontal.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;radioButton_horizontal.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label87.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label87.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 15</value>
+  </data>
+  <data name="label87.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 12</value>
+  </data>
+  <data name="label87.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label87.Text" xml:space="preserve">
+    <value>併合アルゴリズム</value>
+  </data>
+  <data name="&gt;&gt;label87.Name" xml:space="preserve">
+    <value>label87</value>
+  </data>
+  <data name="&gt;&gt;label87.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label87.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;label87.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
