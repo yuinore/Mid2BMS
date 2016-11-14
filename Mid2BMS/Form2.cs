@@ -27,6 +27,7 @@ namespace Mid2BMS
         // XChain + その他 は不可 (サイドチェイン以外は無視されるため)
         // Purple + Chord は不可 (ポルタメントを適用する順序が一意でないため)
         // XChain は RedMode かつシーケンスレイヤーの場合のみ可
+        // RedMode + OneShot は意味が無いので一応不可
         //**************************************************
 
         //################ 入出力パラメータ ################
@@ -251,12 +252,13 @@ namespace Mid2BMS
                 dataGridView1.Columns[5].ReadOnly = false;
                 dataGridView1.Columns[6].ReadOnly = false;
                 dataGridView1.Columns[7].ReadOnly = false;  // 順序変更有り
-                dataGridView1.Columns[8].Visible = false;  // Chord?
+                dataGridView1.Columns[8].ReadOnly = false;  // Chord?
                 dataGridView1.Columns[9].ReadOnly = false;
                 dataGridView1.Columns[10].ReadOnly = false;
 
                 dataGridView1.Columns[COLUMN_CHORD].Visible = !IsPurpleMode;
                 dataGridView1.Columns[COLUMN_XCHAIN].Visible = IsRedMode && IsSequenceLayer;
+                dataGridView1.Columns[COLUMN_ONESHOT].Visible = !IsRedMode;
             }
             else
             {
