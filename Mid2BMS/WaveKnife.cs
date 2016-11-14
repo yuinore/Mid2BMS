@@ -13,7 +13,7 @@ namespace Mid2BMS
         // WaveReaderとWaveWriterを早く作れよ
         public void Knife(
             String BasePath, String srcFilename, String filenamebase,
-            double bpm, double prebeats, double intervalbeats
+            double bpm, IEnumerable<double> cuttingPointBeats
             )
         {
             WaveFileReader r = null;
@@ -37,17 +37,29 @@ namespace Mid2BMS
 
                 double sample_per_beat = 60.0 * r.SamplingRate / bpm;
 
-                int pre_samples = (int)((prebeats - crossfadebeats) * sample_per_beat + 0.5);
+                var cuttingPointBeatsEnumerator = cuttingPointBeats.GetEnumerator();
+
+                int pre_samples = Int32.MaxValue;
+                double lastCuttingPointBeats = 0;
+                if (cuttingPointBeatsEnumerator.MoveNext())
+                {
+                    pre_samples = (int)(cuttingPointBeatsEnumerator.Current * sample_per_beat + 0.5);
+                    // cutting point の後ろにxfadeが作成されるため注意
+
+                    lastCuttingPointBeats = cuttingPointBeatsEnumerator.Current;
+                }
+
                 int crossfade_samples = (int)(crossfadebeats * sample_per_beat + 0.5);
-                int interval_samples = (int)((intervalbeats - crossfadebeats) * sample_per_beat + 0.5);
+                
 
                 for (int i = 0; i < pre_samples; i++)
                 {
-                    r.ReadSample(out smp);
+
+                    if (!r.ReadSample(out smp)) break;
                     w2.WriteSample(smp);
                     if (r.ChannelsCount >= 2)
                     {
-                        r.ReadSample(out smp);
+                        if (!r.ReadSample(out smp)) break;
                         w2.WriteSample(smp);
                     }
                 }
@@ -58,6 +70,27 @@ namespace Mid2BMS
                 int idx2 = 1;
                 while (true)
                 {
+                    int interval_samples = -1;
+                    // クロスフェードを含まない、現在の区間のwavのサンプル数
+
+                    if (cuttingPointBeatsEnumerator.MoveNext())
+                    {
+                        interval_samples = (int)((cuttingPointBeatsEnumerator.Current - lastCuttingPointBeats - crossfadebeats) * sample_per_beat + 0.5);
+                        // 四捨五入するせいで誤差が蓄積しそう
+
+                        if (interval_samples < 0)
+                        {
+                            throw new Exception("クロスフェードが長すぎるッピ！");
+                        }
+
+                        lastCuttingPointBeats = cuttingPointBeatsEnumerator.Current;
+                    }
+                    else
+                    {
+                        interval_samples = Int32.MaxValue;
+                        lastCuttingPointBeats = Int32.MaxValue;
+                    }
+                    
                     int i;
 
                     if (w1 != null) w1.Close();
@@ -65,11 +98,8 @@ namespace Mid2BMS
                     w2 = null;
                     Action makefile = () =>
                     {
-                        //int idx2 = idx;  // ←意味ない
                         w2 = new WaveFileWriter(
-                            //BasePath + @"waveknife\" + filenamebase + (idx / 10) + (idx % 10) + ".wav",
-                            //BasePath + @"waveknife\" + String.Format(filenamebase, idx),
-                             BasePath + @"waveknife\" + outFilename(idx2),
+                            BasePath + @"waveknife\" + outFilename(idx2),
                             r.ChannelsCount, r.SamplingRate, r.BitDepth);
                     };
                     idx2 = idx;

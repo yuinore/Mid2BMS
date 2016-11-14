@@ -135,6 +135,7 @@
             this.textBox_BasePath3 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.checkBox_useWos = new System.Windows.Forms.CheckBox();
             this.textBox_outfnformat = new System.Windows.Forms.TextBox();
             this.label59 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
@@ -148,7 +149,9 @@
             this.textBox_BPM4 = new System.Windows.Forms.TextBox();
             this.textBox_InputFile4 = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
+            this.label91 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.textBox_wosfile = new System.Windows.Forms.TextBox();
             this.textBox_BasePath4 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.tabPage8 = new System.Windows.Forms.TabPage();
@@ -1032,6 +1035,7 @@
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.checkBox_useWos);
             this.tabPage7.Controls.Add(this.textBox_outfnformat);
             this.tabPage7.Controls.Add(this.label59);
             this.tabPage7.Controls.Add(this.label27);
@@ -1045,12 +1049,21 @@
             this.tabPage7.Controls.Add(this.textBox_BPM4);
             this.tabPage7.Controls.Add(this.textBox_InputFile4);
             this.tabPage7.Controls.Add(this.label22);
+            this.tabPage7.Controls.Add(this.label91);
             this.tabPage7.Controls.Add(this.label21);
+            this.tabPage7.Controls.Add(this.textBox_wosfile);
             this.tabPage7.Controls.Add(this.textBox_BasePath4);
             this.tabPage7.Controls.Add(this.button7);
             resources.ApplyResources(this.tabPage7, "tabPage7");
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_useWos
+            // 
+            resources.ApplyResources(this.checkBox_useWos, "checkBox_useWos");
+            this.checkBox_useWos.Name = "checkBox_useWos";
+            this.checkBox_useWos.UseVisualStyleBackColor = true;
+            this.checkBox_useWos.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // textBox_outfnformat
             // 
@@ -1120,10 +1133,23 @@
             resources.ApplyResources(this.label22, "label22");
             this.label22.Name = "label22";
             // 
+            // label91
+            // 
+            resources.ApplyResources(this.label91, "label91");
+            this.label91.Name = "label91";
+            // 
             // label21
             // 
             resources.ApplyResources(this.label21, "label21");
             this.label21.Name = "label21";
+            // 
+            // textBox_wosfile
+            // 
+            this.textBox_wosfile.AllowDrop = true;
+            resources.ApplyResources(this.textBox_wosfile, "textBox_wosfile");
+            this.textBox_wosfile.Name = "textBox_wosfile";
+            this.textBox_wosfile.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBox_BasePath4_DragDrop);
+            this.textBox_wosfile.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBox_BasePath4_DragEnter);
             // 
             // textBox_BasePath4
             // 
@@ -2165,6 +2191,9 @@
         private System.Windows.Forms.RadioButton radioButton_horizontal;
         private System.Windows.Forms.Label label87;
         private System.Windows.Forms.Label label86;
+        private System.Windows.Forms.Label label91;
+        private System.Windows.Forms.TextBox textBox_wosfile;
+        private System.Windows.Forms.CheckBox checkBox_useWos;
     }
 }
 

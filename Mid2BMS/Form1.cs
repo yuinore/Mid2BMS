@@ -717,17 +717,38 @@ namespace Mid2BMS
         {
             try
             {
+                double crossfadeBeats = Convert.ToDouble(textBox_crossfadebeats.Text);
                 WaveKnife k = new WaveKnife();
-                k.crossfadebeats = Convert.ToDouble(textBox_crossfadebeats.Text);
+                k.crossfadebeats = crossfadeBeats;
+                IEnumerable<double> cutPoints;
+                double BPM;
+
+                if (!checkBox_useWos.Checked)
+                {
+                    double preBeats = Convert.ToDouble(textBox_prebeats.Text);
+                    double intervalBeats = Convert.ToDouble(textBox_intervalbeats.Text);
+
+                    cutPoints = Enumerable.Range(0, 0).Select(index => index * intervalBeats + preBeats - crossfadeBeats);
+
+                    BPM = Convert.ToDouble(textBox_BPM4.Text);
+                }
+                else
+                {
+                    Wos wosdata = new Wos(textBox_wosfile.Text);
+
+                    cutPoints = wosdata.CutPoints.Select(x => x / 48.0).Skip(1);
+
+                    BPM = wosdata.BPM;
+                }
+
                 k.Knife(
                     textBox_BasePath4.Text,
                     textBox_InputFile4.Text,
                     textBox_outfnformat.Text,
-                    Convert.ToDouble(textBox_BPM4.Text),
-                    Convert.ToDouble(textBox_prebeats.Text),
-                    Convert.ToDouble(textBox_intervalbeats.Text)
+                    BPM,
+                    cutPoints
                 );
-
+                // ↑ ToArray や ToList を決して入れては行けない（戒め）
             }
             catch (Exception exc)
             {
@@ -1775,6 +1796,15 @@ namespace Mid2BMS
                     textBox_renamedBMSPath.Text = File.Exists(s[0]) ? "【フォルダをドラッグしてください】" : s[0];
                 }
             }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            textBox_wosfile.Enabled = checkBox_useWos.Checked;
+
+            textBox_prebeats.Enabled = !checkBox_useWos.Checked;
+            textBox_intervalbeats.Enabled = !checkBox_useWos.Checked;
+            textBox_BPM4.Enabled = !checkBox_useWos.Checked;
         }
     }
 }

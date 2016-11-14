@@ -153,6 +153,7 @@
     <Compile Include="IO\WaveFileWriter.cs" />
     <Compile Include="WaveKnife.cs" />
     <Compile Include="WaveSplitter\WaveSplitter2.cs" />
+    <Compile Include="Wos.cs" />
     <EmbeddedResource Include="Form1.ja-JP.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
