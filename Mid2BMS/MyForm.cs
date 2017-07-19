@@ -540,14 +540,27 @@ namespace Mid2BMS
 
             if (RenameRequiredFilesCount == -1)
             {
-                MessageBox.Show(createdWavCount + " 個のwavを書き出しました。", "Split Result");
+                MessageBox.Show(
+                    createdWavCount + " 個のwavを書き出しました。" + 
+                    "もし、音切りに失敗していた場合は、「無音検出時間 (Silence Time)」の値を大きくしてみて下さい。",
+                    "Split Result");
             }
             else
             {
-                MessageBox.Show(RenameRequiredFilesCount + " 個のwavを書き出さなければならないのに対し、" + createdWavCount + " 個のwavを書き出しました。", "Renaming Result");
                 if (RenameRequiredFilesCount > createdWavCount)
                 {
-                    MessageBox.Show("つまり、正しく音切り出来ていない可能性があります。", "Split Failed?");
+                    MessageBox.Show(
+                        RenameRequiredFilesCount + " 個のwavを書き出さなければならないのに対し、" + createdWavCount + " 個のwavを書き出しました。" + 
+                        "つまり、正しく音切り出来ていない可能性があります。" +
+                        "その場合は、「無音検出時間 (Silence Time)」の値を大きくしてみて下さい。",
+                        "Split Failed?");
+                }
+                else
+                {
+                    MessageBox.Show(
+                        RenameRequiredFilesCount + " 個のwavを書き出さなければならないのに対し、" + createdWavCount + " 個のwavを書き出しました。" +
+                        "もし、音切りに失敗していた場合は、「無音検出時間 (Silence Time)」の値を大きくしてみて下さい。",
+                        "Renaming Result");
                 }
             }
         }
