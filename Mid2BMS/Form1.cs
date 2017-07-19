@@ -728,17 +728,26 @@ namespace Mid2BMS
                     double preBeats = Convert.ToDouble(textBox_prebeats.Text);
                     double intervalBeats = Convert.ToDouble(textBox_intervalbeats.Text);
 
-                    cutPoints = Enumerable.Range(0, 0).Select(index => index * intervalBeats + preBeats - crossfadeBeats);
+                    cutPoints = Enumerable.Range(0, 1145141919).Select(index => index * intervalBeats + preBeats);
 
                     BPM = Convert.ToDouble(textBox_BPM4.Text);
                 }
                 else
                 {
                     Wos wosdata = new Wos(textBox_wosfile.Text);
-
+                    
                     cutPoints = wosdata.CutPoints.Select(x => x / 48.0).Skip(1);
+                    // ↑ woslicerIII に関しては、ファイルの頭にカッティングポイントが入らないことがあるため要修正
 
+                    // というか連番も 1 から始まってしまっているのでその点は要修正かも
+                    
                     BPM = wosdata.BPM;
+                }
+
+                bool carryIn = false;  // 切り取り位置の繰り込み
+                if (carryIn)
+                {
+                    cutPoints = cutPoints.Select(x => Math.Max(x - crossfadeBeats, 0.0));
                 }
 
                 k.Knife(
