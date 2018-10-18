@@ -236,8 +236,8 @@ namespace Mid2BMS
                 MidiStruct ms = new MidiStruct(rf);
                 if (ms.resolution == null) throw new Exception("resolutionがnull #とは");
                 timebase = ms.resolution ?? 480;
-                double uspb = ms.InitalUSecondPerBeat ?? (600000000.0 / 120.0);
-                midi_bpm = 0.001m * (decimal)Math.Round(1000.0 * 60000000.0 / uspb);  // そこまで0.001単位にこだわる必要があったのかどうか
+                double uspb = ms.InitalUSecondPerBeat ?? (60.0 * 1.0e6 / 120.0);
+                midi_bpm = 0.001m * (decimal)Math.Round(1000.0 * 60.0 * 1.0e6 / uspb);  // そこまで0.001単位にこだわる必要があったのかどうか
 
                 bool messageShown = false;
 
