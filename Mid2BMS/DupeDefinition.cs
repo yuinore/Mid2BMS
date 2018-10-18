@@ -11,11 +11,10 @@ namespace Mid2BMS
     /// </summary>
     class DupeDefinition
     {
-        // これreadonlyじゃないぞ！！！！殺せーーー！！！
         struct DoubleBool : IComparable<DoubleBool>
         {
-            public double x;
-            public bool y;
+            public readonly double x;
+            public readonly bool y;
             public DoubleBool(double dbl, bool bl)
             {
                 x = dbl;
