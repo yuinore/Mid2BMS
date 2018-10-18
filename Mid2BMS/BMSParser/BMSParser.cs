@@ -20,12 +20,11 @@ namespace Mid2BMS
         Dictionary<int, int> isWavUsedInBMS = new Dictionary<int, int>();  // int wavid, bool isWavUsedInBMS
         Dictionary<int, string> WaveDef = new Dictionary<int, string>();  // int wavid, String wavfilename
 
-        public double BPM { get; set; }
+        public double? BPM { get; set; }
         public int LNOBJ { get; set; }
 
         public BMSParser(String bms)
         {
-            BPM = 120.0;
             LNOBJ = 0;
 
             List<String> lines = new List<string>(bms.Split(new String[] { NewLine }, StringSplitOptions.None));

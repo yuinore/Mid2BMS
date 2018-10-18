@@ -29,7 +29,7 @@ namespace Mid2BMS
             }
         }
 
-        public int Process(String bms, double bpm, double soundsInterval, String RenamedBasePath, out String[] textNames, out String[] text, ref double ProgressBarValue, double ProgressMin, double ProgressMax)
+        public int Process(String bms, double soundsInterval, String RenamedBasePath, out String[] textNames, out String[] text, ref double ProgressBarValue, double ProgressMin, double ProgressMax)
         {
             textNames = new String[5];
             text = new String[5];
@@ -41,8 +41,10 @@ namespace Mid2BMS
             List<int[]> wavidList = new List<int[]>();  // {元のid, 定義個数}
             List<DoubleBool> times;
 
-            //bp.SetBPM(bpm);  // マッチポンプか
-            //bp.BPM = bpm;
+            if (bp.BPM == null)
+            {
+                throw new Exception("BMSからBPMを判別できませんでした");
+            }
 
             ProgressBarValue = 10;
 
@@ -111,7 +113,7 @@ namespace Mid2BMS
 
                     for (int j = 0; j < obj.Count; j++)
                     {
-                        double exactTime = (60.0 / bp.BPM) * (obj[j].t.n * 4.0 / obj[j].t.d);
+                        double exactTime = (60.0 / (double)bp.BPM) * (obj[j].t.n * 4.0 / obj[j].t.d);
                         times.Add(new DoubleBool(exactTime, true));  // Start Point
                         times.Add(new DoubleBool(exactTime + waveFileLength, false));  // End Point (Terminal?)
                     }

@@ -584,23 +584,17 @@ namespace Mid2BMS
 
             DupeDefinition dd = new DupeDefinition();
             String bms = FileIO.ReadAllText(RenamedPathBase + FileName_BMSFile);  // @"renamed\text6_bms.bms"
-            double bpm;
+
+            try
             {
-                var match = Regex.Match(bms, @"#BPM\s+(\S+)", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-                //Console.WriteLine(
-                if (match.Groups.Count <= 1)
-                {
-                    MessageBox.Show("BMSからBPMを判別できませんでした");
-                    throw new Exception("BMSからBPMを判別できませんでした");
-                }
-                else
-                {
-                    bpm = Convert.ToDouble(match.Groups[1].ToString());
-                }
-                //.ToString());
+                dd.Process(bms, intervaltime, RenamedPathBase, out textNames, out text, ref ProgressBarValue, 0.0, 1.0);
             }
-            dd.Process(bms, bpm, intervaltime, RenamedPathBase, out textNames, out text, ref ProgressBarValue, 0.0, 1.0);
-            
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                return;
+            }
+
             if (outputExtraFiles)
             {
                 for (int i = 0; i < text.Length; i++)
