@@ -400,9 +400,26 @@ namespace Mid2BMS
         // dupedef
         private void button3_Click(object sender, EventArgs e)
         {
-            double intervaltime = Convert.ToDouble(textBox_intervaltime.Text) / 1000.0;
+            double intervaltime;
+            int maxLayerCount;
 
-            int maxLayerCount = 4;
+            try
+            {
+                intervaltime = Convert.ToDouble(textBox_intervaltime.Text) / 1000.0;
+
+                maxLayerCount = Convert.ToInt32(textBox_maxLayerCount.Text);
+
+                if(maxLayerCount <= 1)
+                {
+                    MessageBox.Show("最大重複定義数 (Max Layer Count) の値が適切ではありません。");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return;
+            }
 
             InitializeProgressBar();  // これを実行したら必ずanotherThreadが走るようにする
 

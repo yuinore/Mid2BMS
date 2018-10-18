@@ -258,6 +258,8 @@
             this.label32 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.textBox_maxLayerCount = new System.Windows.Forms.TextBox();
+            this.label92 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -955,6 +957,8 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.label92);
+            this.tabPage6.Controls.Add(this.textBox_maxLayerCount);
             this.tabPage6.Controls.Add(this.label39);
             this.tabPage6.Controls.Add(this.label38);
             this.tabPage6.Controls.Add(this.textBox_intervaltime);
@@ -1903,6 +1907,16 @@
             this.toolTip1.InitialDelay = 250;
             this.toolTip1.ReshowDelay = 50;
             // 
+            // textBox_maxLayerCount
+            // 
+            resources.ApplyResources(this.textBox_maxLayerCount, "textBox_maxLayerCount");
+            this.textBox_maxLayerCount.Name = "textBox_maxLayerCount";
+            // 
+            // label92
+            // 
+            resources.ApplyResources(this.label92, "label92");
+            this.label92.Name = "label92";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -2194,6 +2208,8 @@
         private System.Windows.Forms.Label label91;
         private System.Windows.Forms.TextBox textBox_wosfile;
         private System.Windows.Forms.CheckBox checkBox_useWos;
+        private System.Windows.Forms.Label label92;
+        private System.Windows.Forms.TextBox textBox_maxLayerCount;
     }
 }
 
