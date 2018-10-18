@@ -570,7 +570,7 @@ namespace Mid2BMS
         //***********************************************************************************
 
         // 誰かBMS界隈に詳しい英語の読める人、重複定義の英訳教えて
-        public void DupeDef_Process(double intervaltime, ref double ProgressBarValue, ref bool ProgressBarFinished)
+        public void DupeDef_Process(double intervaltime, int maxLayerCount, ref double ProgressBarValue, ref bool ProgressBarFinished)
         {
             /*if (!DupeDef_CheckHash())
             {
@@ -587,7 +587,7 @@ namespace Mid2BMS
 
             try
             {
-                dd.Process(bms, intervaltime, RenamedPathBase, out textNames, out text, ref ProgressBarValue, 0.0, 1.0);
+                dd.Process(bms, intervaltime, RenamedPathBase, maxLayerCount, out textNames, out text, ref ProgressBarValue, 0.0, 1.0);
             }
             catch (Exception e)
             {

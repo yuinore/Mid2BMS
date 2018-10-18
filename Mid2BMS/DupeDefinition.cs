@@ -28,7 +28,10 @@ namespace Mid2BMS
             }
         }
 
-        public int Process(String bms, double soundsInterval, String RenamedBasePath, out String[] textNames, out String[] text, ref double ProgressBarValue, double ProgressMin, double ProgressMax)
+        public int Process(
+            String bms, double soundsInterval, String RenamedBasePath, int maxLayerCount,
+            out String[] textNames, out String[] text,
+            ref double ProgressBarValue, double ProgressMin, double ProgressMax)
         {
             textNames = new String[5];
             text = new String[5];
@@ -136,7 +139,10 @@ namespace Mid2BMS
                     if (maxLayers >= 2)
                     {
                         s2.Append(BMSParser.IntToHex36Upper(i) + "," + maxLayers + "\r\n");
-                        wavidList.Add(new int[2] { i, maxLayers });
+                        wavidList.Add(new int[2] {
+                            i,
+                            Math.Min(maxLayers, maxLayerCount)  // 最大重複定義数を maxLayerCount 個に制限
+                        });
                     }
 
                     s.Append("\r\n\r\n");

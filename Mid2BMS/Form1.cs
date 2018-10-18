@@ -402,13 +402,15 @@ namespace Mid2BMS
         {
             double intervaltime = Convert.ToDouble(textBox_intervaltime.Text) / 1000.0;
 
+            int maxLayerCount = 4;
+
             InitializeProgressBar();  // これを実行したら必ずanotherThreadが走るようにする
 
             Thread anotherThread = new Thread(new ThreadStart(() =>
             {
                 try
                 {
-                    MyFormInstance.DupeDef_Process(intervaltime, ref ProgressBarValue, ref ProgressBarFinished);
+                    MyFormInstance.DupeDef_Process(intervaltime, maxLayerCount, ref ProgressBarValue, ref ProgressBarFinished);
                 }
                 catch (Exception exc)
                 {
